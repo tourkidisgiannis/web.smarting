@@ -48,6 +48,69 @@
 
 :root {
   --radius: 0.625rem;
+  
+  /* Custom Color Palette (Landing Page) */
+  --sky-blue-light-50: oklch(96.34% 0.013 226.56);
+  --sky-blue-light-100: oklch(92.72% 0.028 229.17);
+  --sky-blue-light-200: oklch(85.73% 0.055 228.06);
+  --sky-blue-light-300: oklch(78.72% 0.080 229.21);
+  --sky-blue-light-400: oklch(72.18% 0.104 230.48);
+  --sky-blue-light-500: oklch(65.82% 0.123 234);
+  --sky-blue-light-600: oklch(56.06% 0.103 233.29);
+  --sky-blue-light-700: oklch(45.59% 0.082 233.35);
+  --sky-blue-light-800: oklch(34.78% 0.060 232.69);
+  --sky-blue-light-900: oklch(22.74% 0.035 232.96);
+  --sky-blue-light-950: oklch(18.97% 0.026 228.10);
+
+  --blue-green-50: oklch(96.89% 0.016 211.04);
+  --blue-green-100: oklch(93.69% 0.031 214.46);
+  --blue-green-200: oklch(87.57% 0.062 215.75);
+  --blue-green-300: oklch(82% 0.088 215.22);
+  --blue-green-400: oklch(76.61% 0.109 216.82);
+  --blue-green-500: oklch(71.76% 0.123 220.15);
+  --blue-green-600: oklch(60.93% 0.103 219.32);
+  --blue-green-700: oklch(49.63% 0.083 218.90);
+  --blue-green-800: oklch(37.37% 0.061 219.91);
+  --blue-green-900: oklch(24.29% 0.036 217.31);
+  --blue-green-950: oklch(19.93% 0.028 216.15);
+
+  --deep-space-blue-50: oklch(96.36% 0.020 229.04);
+  --deep-space-blue-100: oklch(93.04% 0.041 228.62);
+  --deep-space-blue-200: oklch(86.25% 0.078 230.47);
+  --deep-space-blue-300: oklch(80.15% 0.114 232.12);
+  --deep-space-blue-400: oklch(74.53% 0.143 235.95);
+  --deep-space-blue-500: oklch(69.97% 0.163 241.25);
+  --deep-space-blue-600: oklch(59.26% 0.137 240.96);
+  --deep-space-blue-700: oklch(48.30% 0.109 239.74);
+  --deep-space-blue-800: oklch(36.40% 0.080 238.53);
+  --deep-space-blue-900: oklch(23.77% 0.049 234.08);
+  --deep-space-blue-950: oklch(19.63% 0.038 230.85);
+
+  --amber-flame-50: oklch(97.95% 0.026 90.09);
+  --amber-flame-100: oklch(95.99% 0.050 89.76);
+  --amber-flame-200: oklch(92.05% 0.097 88.72);
+  --amber-flame-300: oklch(88.61% 0.136 87.99);
+  --amber-flame-400: oklch(85.31% 0.162 85.01);
+  --amber-flame-500: oklch(82.53% 0.171 80.01);
+  --amber-flame-600: oklch(69.82% 0.145 80.24);
+  --amber-flame-700: oklch(56.71% 0.117 81.42);
+  --amber-flame-800: oklch(42.57% 0.088 82.44);
+  --amber-flame-900: oklch(27.35% 0.056 87.08);
+  --amber-flame-950: oklch(22.38% 0.046 89.07);
+
+  --princeton-orange-50: oklch(96.98% 0.023 71.79);
+  --princeton-orange-100: oklch(94.05% 0.044 70.53);
+  --princeton-orange-200: oklch(88.39% 0.088 69.59);
+  --princeton-orange-300: oklch(83.32% 0.129 68.39);
+  --princeton-orange-400: oklch(78.56% 0.161 64.14);
+  --princeton-orange-500: oklch(74.42% 0.181 56.46);
+  --princeton-orange-600: oklch(63.14% 0.152 57.26);
+  --princeton-orange-700: oklch(51.33% 0.122 58.58);
+  --princeton-orange-800: oklch(38.60% 0.091 60.02);
+  --princeton-orange-900: oklch(24.93% 0.056 65.91);
+  --princeton-orange-950: oklch(20.57% 0.045 69.93);
+
+  /* Shadcn Defaults (Light Mode) */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -128,4 +191,37 @@
   .container {
     @apply px-4 md:px-8 mx-auto;
   }
+
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    opacity: 0.05;
+    z-index: 9999;
+    pointer-events: none;
+    background: url("https://res.cloudinary.com/dzv9u7n7k/image/upload/v1674143411/noise_ovvwyw.png");
+  }
+
+  .glass {
+    @apply bg-background/60 backdrop-blur-md border border-white/10;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(var(--primary), 0.5);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary/60;
+  }
+
+  .orb {
+    @apply absolute rounded-full blur-[120px] mix-blend-screen pointer-events-none;
+  }
+}
+
+.dark .noise {
+  opacity: 0.08;
 }

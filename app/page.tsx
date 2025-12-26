@@ -2,6 +2,7 @@ import { Hero } from "@/components/agency/hero"
 import { Services } from "@/components/agency/services"
 import { DemoGrid } from "@/components/agency/demo-grid"
 import { ContactForm } from "@/components/agency/contact-form"
+import { SiteFooter } from "@/components/site-footer"
 
 export default function Home() {
   return (
@@ -10,10 +11,7 @@ export default function Home() {
       <Services />
       <DemoGrid />
       <ContactForm />
-      
-      <footer className="w-full border-t py-6 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} web2.smarting.gr. All rights reserved.
-      </footer>
+      <SiteFooter />
     </main>
   )
 }
