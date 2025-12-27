@@ -2,7 +2,10 @@
 
 import { useRef } from "react"
 import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
+
+gsap.registerPlugin(ScrollTrigger)
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
@@ -14,40 +17,13 @@ export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
   const buttonsRef = useRef<HTMLDivElement>(null)
-  const orb1Ref = useRef<HTMLDivElement>(null)
-  const orb2Ref = useRef<HTMLDivElement>(null)
-  const orb3Ref = useRef<HTMLDivElement>(null)
+
 
   useGSAP(
     () => {
-      // Floating Orbs Animation - Subtle and Elegant
-      gsap.to(orb1Ref.current, {
-        x: "15vw",
-        y: "10vh",
-        scale: 1.1,
-        duration: 35,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      })
-      gsap.to(orb2Ref.current, {
-        x: "-10vw",
-        y: "15vh",
-        scale: 0.9,
-        duration: 40,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      })
-      gsap.to(orb3Ref.current, {
-        x: "8vw",
-        y: "-12vh",
-        scale: 1.05,
-        duration: 30,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      })
+
+
+      const mm = gsap.matchMedia()
 
       // Content Entrance
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } })
@@ -78,17 +54,7 @@ export function Hero() {
           "-=0.8"
         )
 
-      // Card Stacking Effect - Scale down when scrolling past
-      gsap.to(containerRef.current, {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "bottom bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-        scale: 0.95,
-        borderRadius: "40px",
-      })
+      return () => mm.revert() // Cleanup matchMedia
     },
     { scope: containerRef }
   )
@@ -96,25 +62,27 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="sticky top-0 z-10 min-h-[200vh] flex flex-col items-center justify-start overflow-hidden bg-gradient-to-br from-[var(--sky-blue-light-50)] via-white to-[var(--blue-green-50)]"
+      className="relative z-10 min-h-screen w-full flex flex-col items-center justify-start overflow-hidden"
     >
-      <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 text-center md:px-6">
+      <div className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 text-center md:px-6">
+      {/* Video Background */}
+      <div className="absolute inset-0 -z-30 overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-30"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
       {/* Background Elements */}
       <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_50%_50%,var(--blue-green-200),transparent_70%)] opacity-30"></div>
-      <div 
-        ref={orb1Ref}
-        className="orb h-[400px] w-[400px] bg-[var(--blue-green-300)] opacity-20 top-[10%] left-[10%]" 
-      />
-      <div 
-        ref={orb2Ref}
-        className="orb h-[500px] w-[500px] bg-[var(--sky-blue-light-300)] opacity-15 bottom-[20%] right-[10%] [animation-delay:2s]" 
-      />
-      <div 
-        ref={orb3Ref}
-        className="orb h-[300px] w-[300px] bg-[var(--amber-flame-300)] opacity-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" 
-      />
 
-      <div className="container relative z-10 flex max-w-[64rem] flex-col items-center gap-6">
+
+      <div className="container relative z-10 flex flex-col items-center gap-6">
         <h1
           ref={titleRef}
           className="text-5xl font-bold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl perspective-[1000px] text-[var(--deep-space-blue-900)]"
@@ -132,7 +100,7 @@ export function Hero() {
         
         <p
           ref={textRef}
-          className="max-w-[42rem] mt-4 text-lg leading-relaxed text-[var(--deep-space-blue-700)] sm:text-2xl"
+          className="mt-4 text-lg leading-relaxed text-[var(--deep-space-blue-700)] sm:text-2xl"
         >
           Μετατρέψτε τους επισκέπτες σας σε 
           <span className="text-[var(--deep-space-blue-900)] font-medium"> πιστούς πελάτες</span> μέσα από στρατηγικά χτισμένες ιστοσελίδες που 

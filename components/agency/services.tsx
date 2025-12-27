@@ -20,26 +20,30 @@ const services = [
   {
     title: "Προσέγγιση Παντού",
     description:
-      "Προσεγγίστε το κοινό σας σε κάθε συσκευή. Εξασφαλίζουμε μια αψεγάδιαστη παρουσία που προσαρμόζεται στις ανάγκες των πελατών σας.",
+      "Προσεγγίστε το κοινό σας σε κάθε συσκευή. Εξασφαλίζουμε μια αψεγάδιαστη παρουσία.",
     icon: Smartphone,
+    tags: ["Responsive", "Mobile First", "Cross-browser", "UX/UI"],
   },
   {
     title: "Ταχύτητα Μετατροπής",
     description:
-      "Κερδίστε την εμπιστοσύνη των επισκεπτών με αστραπιαία φόρτωση. Η ταχύτητα είναι το κλειδί για υψηλότερα ποσοστά μετατροπής.",
+      "Κερδίστε την εμπιστοσύνη με αστραπιαία φόρτωση. Η ταχύτητα είναι το κλειδί.",
     icon: Zap,
+    tags: ["Performance", "Web Vitals", "Optimization", "SSR"],
   },
   {
     title: "Κύρος & Ορατότητα",
     description:
-      "Ανέβητε στην κορυφή των αναζητήσεων και χτίστε την αξιοπιστία της μάρκας σας με στρατηγικό SEO και σωστή δομή περιεχομένου.",
+      "Ανέβητε στην κορυφή των αναζητήσεων με στρατηγικό SEO και σωστή δομή.",
     icon: Search,
+    tags: ["SEO", "Content Strategy", "Analytics", "Visibility"],
   },
   {
     title: "Στρατηγική Ανάπτυξη",
     description:
-      "Λύσεις σχεδιασμένες αποκλειστικά για τους δικούς σας επιχειρηματικούς στόχους, χρησιμοποιώντας την τελευταία λέξη της τεχνολογίας.",
+      "Λύσεις σχεδιασμένες αποκλειστικά για τους δικούς σας επιχειρηματικούς στόχους.",
     icon: Monitor,
+    tags: ["Custom Solutions", "Tech Stack", "Scalability", "Security"],
   },
 ]
 
@@ -50,17 +54,7 @@ export function Services() {
 
   useGSAP(
     () => {
-      // Card Stacking Effect
-      gsap.to(containerRef.current, {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "bottom bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-        scale: 0.95,
-        borderRadius: "40px",
-      })
+      const mm = gsap.matchMedia()
 
       // Header Animation
       gsap.from(headerRef.current, {
@@ -91,41 +85,50 @@ export function Services() {
           ease: "power3.out",
         })
 
-        // 3D Tilt Effect
-        const handleCardMouseMove = (e: MouseEvent) => {
-          const { clientX, clientY } = e
-          const { left, top, width, height } = card.getBoundingClientRect()
-          const x = (clientX - left) / width - 0.5
-          const y = (clientY - top) / height - 0.5
+        // 3D Tilt Effect - Only on Desktop
+        mm.add("(min-width: 1024px)", () => {
+          const handleCardMouseMove = (e: MouseEvent) => {
+            const { clientX, clientY } = e
+            const { left, top, width, height } = card.getBoundingClientRect()
+            const x = (clientX - left) / width - 0.5
+            const y = (clientY - top) / height - 0.5
 
-          gsap.to(card, {
-            rotateY: x * 15,
-            rotateX: -y * 15,
-            transformPerspective: 1000,
-            duration: 0.5,
-            ease: "power2.out",
-          })
-        }
+            gsap.to(card, {
+              rotateY: x * 15,
+              rotateX: -y * 15,
+              transformPerspective: 1000,
+              duration: 0.5,
+              ease: "power2.out",
+            })
+          }
 
-        const handleCardMouseLeave = () => {
-          gsap.to(card, {
-            rotateY: 0,
-            rotateX: 0,
-            duration: 0.8,
-            ease: "elastic.out(1, 0.3)",
-          })
-        }
+          const handleCardMouseLeave = () => {
+            gsap.to(card, {
+              rotateY: 0,
+              rotateX: 0,
+              duration: 0.8,
+              ease: "elastic.out(1, 0.3)",
+            })
+          }
 
-        card.addEventListener("mousemove", handleCardMouseMove)
-        card.addEventListener("mouseleave", handleCardMouseLeave)
+          card.addEventListener("mousemove", handleCardMouseMove)
+          card.addEventListener("mouseleave", handleCardMouseLeave)
+          
+          return () => {
+            card.removeEventListener("mousemove", handleCardMouseMove)
+            card.removeEventListener("mouseleave", handleCardMouseLeave)
+          }
+        })
       })
+
+      return () => mm.revert()
     },
     { scope: containerRef }
   )
 
   return (
-    <section id="services" ref={containerRef} className="sticky top-0 z-20 min-h-[200vh] bg-gradient-to-br from-[var(--sky-blue-light-100)] via-white to-[var(--blue-green-50)] rounded-t-[40px] shadow-2xl">
-      <div className="min-h-screen py-32">
+    <section id="services" ref={containerRef} className="relative z-20 min-h-screen bg-gradient-to-br from-[var(--sky-blue-light-100)] via-white to-[var(--blue-green-50)] rounded-t-[40px] shadow-2xl">
+      <div className="py-24 md:py-32">
       <div className="container">
         <div ref={headerRef} className="mb-20 text-center max-w-3xl mx-auto">
         <h2 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-[var(--deep-space-blue-900)]">
@@ -155,9 +158,23 @@ export function Services() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base leading-relaxed text-[var(--deep-space-blue-700)] group-hover:text-[var(--deep-space-blue-800)] transition-colors">
+                <CardDescription className="text-base leading-relaxed text-[var(--deep-space-blue-700)] group-hover:text-[var(--deep-space-blue-800)] transition-colors mb-6">
                   {service.description}
                 </CardDescription>
+                
+                {/* Horizontal Scroll Tags */}
+                <div className="relative mt-auto">
+                  <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide no-scrollbar -mx-2 px-2 mask-linear-fade">
+                    {service.tags.map((tag, tagIndex) => (
+                      <span 
+                        key={tagIndex}
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--blue-green-50)] text-[var(--blue-green-700)] border border-[var(--blue-green-100)] whitespace-nowrap transition-colors group-hover:bg-[var(--blue-green-100)] group-hover:border-[var(--blue-green-200)]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </CardContent>
               {/* Decorative accent */}
               <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-20 transition-opacity">

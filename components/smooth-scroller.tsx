@@ -1,68 +1,78 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import Lenis from "lenis"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ReactNode, useRef, useEffect } from "react";
+import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 interface SmoothScrollerProps {
-  children: React.ReactNode
+  children: ReactNode;
 }
 
 export function SmoothScroller({ children }: SmoothScrollerProps) {
-  const lenisRef = useRef<Lenis | null>(null)
+  const lenisRef = useRef<Lenis | null>(null);
 
-  useEffect(() => {
-    // Initialize Lenis
+  useGSAP(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1, // Slightly faster duration
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      touchMultiplier: 2,
-    })
+      touchMultiplier: 1.5, // Reduced from 2 for better touch control
+      lerp: 0.1, // Added lerp for smoother interpolation
+    });
 
-    lenisRef.current = lenis
+    lenisRef.current = lenis;
 
-    // Sync Lenis with GSAP's ticker
-    lenis.on("scroll", ScrollTrigger.update)
+    // Sync Lenis with ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000)
-    })
+    const raf = (time: number) => {
+      lenis.raf(time * 1000);
+    };
 
-    gsap.ticker.lagSmoothing(0)
-
-    // Handle anchor links with smooth scroll
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      const anchor = target.closest('a[href^="#"]')
-      if (anchor) {
-        const href = anchor.getAttribute("href")
-        if (href && href !== "#") {
-          e.preventDefault()
-          const targetElement = document.querySelector(href)
-          if (targetElement) {
-            lenis.scrollTo(targetElement as HTMLElement, {
-              offset: -80,
-              duration: 1.2,
-            })
-          }
-        }
-      }
-    }
-
-    document.addEventListener("click", handleAnchorClick)
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      document.removeEventListener("click", handleAnchorClick)
-      lenis.destroy()
-      gsap.ticker.remove((time) => lenis.raf(time * 1000))
-    }
-  }, [])
+      gsap.ticker.remove(raf);
+      lenis.destroy();
+    };
+  }, []);
 
-  return <>{children}</>
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest<HTMLAnchorElement>('a[href^="#"]');
+
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const targetElement = document.querySelector(href);
+
+      if (!(targetElement instanceof HTMLElement)) return;
+      if (!lenisRef.current) return;
+
+      e.preventDefault();
+
+      lenisRef.current.scrollTo(targetElement, {
+        offset: -80,
+        duration: 1.2,
+      });
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+
+    return () => {
+      document.removeEventListener("click", handleAnchorClick);
+    };
+  }, []);
+
+  return <>{children}</>;
 }

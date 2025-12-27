@@ -13,7 +13,7 @@ export function SiteFooter() {
           {/* Column 1: Company info */}
           <div className="space-y-6">
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold bg-gradient-to-r from-[var(--blue-green-600)] to-[var(--deep-space-blue-500)] bg-clip-text text-transparent">
+              <span className="text-2xl font-bold font-bbh-bartle bg-gradient-to-r from-[var(--blue-green-600)] to-[var(--deep-space-blue-500)] bg-clip-text text-transparent">
                 web2.smarting.gr
               </span>
             </Link>

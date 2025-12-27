@@ -5,6 +5,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, Stethoscope, Scale, Briefcase, Palette, Utensils, Dumbbell } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -16,6 +17,8 @@ const demos = [
     icon: Stethoscope,
     href: "/demos/medical",
     color: "bg-blue-500/10 text-blue-500",
+    bgGradient: "from-blue-900/40 to-blue-950/80",
+    image: "/demos/medical.png",
   },
   {
     title: "Νομικό",
@@ -23,6 +26,8 @@ const demos = [
     icon: Scale,
     href: "/demos/legal",
     color: "bg-slate-800/10 text-slate-800 dark:text-slate-200",
+    bgGradient: "from-slate-900/40 to-slate-950/80",
+    image: "/demos/legal.png",
   },
   {
     title: "Συμβουλευτική",
@@ -30,6 +35,8 @@ const demos = [
     icon: Briefcase,
     href: "/demos/consultant",
     color: "bg-emerald-500/10 text-emerald-600",
+    bgGradient: "from-emerald-900/40 to-emerald-950/80",
+    image: "/demos/consulting.png",
   },
   {
     title: "Personal Trainer",
@@ -37,6 +44,8 @@ const demos = [
     icon: Dumbbell,
     href: "/demos/personal-trainer",
     color: "bg-lime-500/10 text-lime-600",
+    bgGradient: "from-lime-900/40 to-lime-950/80",
+    image: "/demos/fitness.png",
   },
   {
     title: "Δημιουργικό",
@@ -44,6 +53,8 @@ const demos = [
     icon: Palette,
     href: "/demos/creative",
     color: "bg-purple-500/10 text-purple-600",
+    bgGradient: "from-purple-900/40 to-purple-950/80",
+    image: "/demos/creative.png",
   },
   {
     title: "Εστίαση",
@@ -51,105 +62,168 @@ const demos = [
     icon: Utensils,
     href: "/demos/restaurant",
     color: "bg-orange-500/10 text-orange-600",
+    bgGradient: "from-orange-900/40 to-orange-950/80",
+    image: "/demos/restaurant.png",
   },
 ]
 
 export function DemoGrid() {
   const containerRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<(HTMLAnchorElement | null)[]>([])
+  const cardsRef = useRef<(HTMLElement | null)[]>([])
 
   useGSAP(
     () => {
+      const mm = gsap.matchMedia()
+
       // Header Animation
       gsap.from(headerRef.current, {
         scrollTrigger: {
           trigger: headerRef.current,
           start: "top 80%",
         },
-        y: 60,
+        y: 30,
         opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
+        duration: 0.8,
+        ease: "power2.out",
       })
 
-      // Cards Entrance - Staggered from bottom
-      cardsRef.current.forEach((card, index) => {
-        if (!card) return
+      // Mobile: Card Stacking Effect - each card stacks exactly above previous
+      mm.add("(max-width: 767px)", () => {
+        cardsRef.current.forEach((card, index) => {
+          if (!card) return
 
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 90%",
-          },
-          y: 100,
-          opacity: 0,
-          duration: 1,
-          delay: index * 0.15,
-          ease: "power3.out",
+          // Card entrance animation
+          gsap.fromTo(card,
+            {
+              y: 100,
+              opacity: 0,
+              scale: 0.95
+            },
+            {
+              scrollTrigger: {
+                trigger: card,
+                start: "top bottom",
+                end: "top top",
+                scrub: 0.8,
+              },
+              y: - (index * 100), // Each card moves up by 100px times its index
+              opacity: 1,
+              scale: 1,
+              ease: "power2.out",
+            }
+          )
         })
       })
+
+      // Desktop: Card Stacking Effect - each card stacks exactly above previous
+      mm.add("(min-width: 768px)", () => {
+        cardsRef.current.forEach((card, index) => {
+          if (!card) return
+
+          // Card entrance animation
+          gsap.fromTo(card,
+            {
+              y: 100,
+              opacity: 0,
+              scale: 0.95
+            },
+            {
+              scrollTrigger: {
+                trigger: card,
+                start: "top bottom",
+                end: "top top",
+                scrub: 0.8,
+              },
+              y: - (index * 100), // Each card moves up by 100px times its index
+              opacity: 1,
+              scale: 1,
+              ease: "power2.out",
+            }
+          )
+        })
+      })
+
+      return () => mm.revert()
     },
     { scope: containerRef }
   )
 
   return (
-    <section id="demos" ref={containerRef} className="relative z-30 min-h-screen bg-gradient-to-br from-[var(--blue-green-50)] via-white to-[var(--sky-blue-light-100)] rounded-t-[40px] shadow-2xl">
-      <div className="min-h-screen py-32">
-      <div className="container">
-        <div ref={headerRef} className="mb-20 text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-[var(--deep-space-blue-900)]">
-            Λύσεις για τον Κλάδο σας
-          </h2>
-          <p className="mt-6 text-[var(--deep-space-blue-700)] text-lg md:text-xl">
-            Εξερευνήστε πώς προσαρμόζουμε την τεχνολογία στις ανάγκες του δικού σας επαγγέλματος για μέγιστα αποτελέσματα.
-          </p>
+    <div id="demos" ref={containerRef} className="relative">
+      {/* Header Section */}
+      <section className="relative z-10 min-h-[50vh] bg-gradient-to-br from-[var(--blue-green-50)] via-white to-[var(--sky-blue-light-100)] rounded-t-[40px] shadow-2xl flex items-center justify-center">
+        <div className="container py-16 md:py-24">
+          <div ref={headerRef} className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-[var(--deep-space-blue-900)]">
+              Λύσεις για τον Κλάδο σας
+            </h2>
+            <p className="mt-4 text-[var(--deep-space-blue-700)] text-base md:text-lg">
+              Εξερευνήστε πώς προσαρμόζουμε την τεχνολογία στις ανάγκες του δικού σας επαγγέλματος για μέγιστα αποτελέσματα.
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* Modern Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-          {demos.map((demo, index) => (
+      {/* Individual Stacked Cards */}
+      {demos.map((demo, index) => (
+        <section
+          key={index}
+          ref={(el) => { if (el) cardsRef.current[index] = el }}
+          className="relative h-screen rounded-t-[40px] shadow-2xl overflow-hidden"
+          style={{ zIndex: 20 + index }}
+        >
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={demo.image}
+              alt={demo.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              priority={index < 2}
+            />
+            <div className={`absolute inset-0 bg-gradient-to-br ${demo.bgGradient} mix-blend-multiply opacity-80`} />
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+
+          <div className="container relative z-10 h-full min-h-screen flex items-center justify-center py-12 md:py-16 px-4 sm:px-6">
             <Link 
-              key={index}
               href={demo.href}
-              ref={(el) => { if (el) cardsRef.current[index] = el }}
-              className={`group relative overflow-hidden rounded-3xl bg-white shadow-lg shadow-[var(--sky-blue-light-200)]/50 border border-[var(--sky-blue-light-200)] transition-all duration-500 hover:scale-[1.02] hover:border-[var(--blue-green-400)] hover:shadow-xl hover:shadow-[var(--blue-green-300)]/30 ${
-                index === 0 || index === 5 ? "md:col-span-1 lg:row-span-2" : ""
-              }`}
+              className="group w-full max-w-3xl"
             >
-              {/* Gradient Overlay on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[var(--blue-green-100)]/0 via-transparent to-[var(--amber-flame-100)]/0 opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-              
-              {/* Content */}
-              <div className="relative p-8 h-full flex flex-col justify-between">
-                {/* Icon and Title */}
-                <div>
-                  <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl ${demo.color} mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
-                    <demo.icon className="h-8 w-8" />
+              <div className="relative overflow-hidden rounded-[40px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-[var(--blue-green-400)]/50">
+                {/* Content */}
+                <div className="relative p-8 md:p-14 lg:p-20 text-center">
+                  {/* Icon */}
+                  <div className={`inline-flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-white mb-8 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
+                    <demo.icon className="h-10 w-10 md:h-12 md:w-12 shadow-2xl" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-[var(--deep-space-blue-900)] group-hover:text-[var(--blue-green-600)] transition-colors">
+                  
+                  {/* Title */}
+                  <h3 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 text-white tracking-tight group-hover:text-[var(--blue-green-300)] transition-colors">
                     {demo.title}
                   </h3>
-                  <p className="text-[var(--deep-space-blue-700)] leading-relaxed">
-                    {demo.description}
-                  </p>
+                  
+                  {/* Description */}
+                  <div className="max-w-2xl mx-auto">
+                    <p className="text-white/80 text-lg md:text-xl lg:text-2xl leading-relaxed mb-10 font-medium">
+                      {demo.description}
+                    </p>
+                  </div>
+
+                  {/* CTA Button Style Link */}
+                  <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-[var(--deep-space-blue-900)] font-bold text-lg md:text-xl transition-all duration-300 group-hover:bg-[var(--blue-green-500)] group-hover:text-white group-hover:shadow-[0_0_30px_rgba(var(--blue-green-rgb),0.5)]">
+                    Εξερεύνηση <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-2" />
+                  </div>
                 </div>
 
-                {/* CTA Arrow */}
-                <div className="mt-8 flex items-center text-sm font-semibold text-[var(--princeton-orange-500)] opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2">
-                  Εξερεύνηση <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
+                {/* Decorative Inner Glow */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
               </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--blue-green-200)] rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-700" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-[var(--amber-flame-200)] rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-700 delay-100" />
             </Link>
-          ))}
-        </div>
-      </div>
-      </div>
-    </section>
+          </div>
+        </section>
+      ))}
+    </div>
   )
 }
-

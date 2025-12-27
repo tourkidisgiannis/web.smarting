@@ -7,10 +7,12 @@ import { SiteFooter } from "@/components/site-footer"
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center">
-      <Hero />
-      <Services />
-      <DemoGrid />
-      <ContactForm />
+      <div className="w-full relative">
+        <Hero />
+        <Services />
+        <DemoGrid />
+        <ContactForm />
+      </div>
       <SiteFooter />
     </main>
   )

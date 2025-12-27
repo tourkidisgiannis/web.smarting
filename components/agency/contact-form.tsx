@@ -1,8 +1,11 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
+
+gsap.registerPlugin(ScrollTrigger)
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -19,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
+import { useTypewriter } from "@/hooks/use-typewriter"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -34,8 +38,16 @@ export function ContactForm() {
   const formRef = useRef<HTMLDivElement>(null)
   const shape1Ref = useRef<HTMLDivElement>(null)
   const shape2Ref = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
+  const [startTyping, setStartTyping] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   
   useGSAP(() => {
+    const mm = gsap.matchMedia()
+
     // Content Entrance
     gsap.from(formRef.current, {
       scrollTrigger: {
@@ -66,6 +78,20 @@ export function ContactForm() {
       yoyo: true,
       ease: "sine.inOut"
     })
+
+    // Trigger typewriter when section is in view
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top 70%",
+      once: true,
+      onEnter: () => setStartTyping(true),
+    })
+
+
+
+
+
+    return () => mm.revert()
   }, { scope: containerRef })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -82,71 +108,119 @@ export function ContactForm() {
     form.reset()
   }
 
-  return (
-    <section id="contact" ref={containerRef} className="relative z-40 bg-gradient-to-br from-[var(--sky-blue-light-50)] via-white to-[var(--blue-green-50)] rounded-t-[40px] shadow-2xl">
-      <div className="py-32">
-      <div className="container relative overflow-hidden">
-        {/* Decorative Shapes */}
-      <div ref={shape1Ref} className="absolute top-20 right-[10%] h-32 w-32 rounded-full bg-[var(--blue-green-400)]/15 blur-3xl -z-10" />
-      <div ref={shape2Ref} className="absolute bottom-20 left-[10%] h-48 w-48 rounded-full bg-[var(--sky-blue-light-300)]/15 blur-3xl -z-10" />
+  const typewriterText = useTypewriter("Ξεκινήστε την Επιτυχία σας", 70, startTyping)
 
-      <div 
-        ref={formRef}
-        className="mx-auto max-w-2xl bg-white border border-[var(--sky-blue-light-200)] rounded-3xl p-8 shadow-xl shadow-[var(--sky-blue-light-200)]/30 sm:p-10 relative z-10"
-        suppressHydrationWarning
-      >
-        <div className="mb-10 text-center">
-          <h2 className="text-4xl font-bold tracking-tight text-[var(--deep-space-blue-900)]">Ξεκινήστε την Επιτυχία σας</h2>
-          <p className="mt-4 text-[var(--deep-space-blue-700)] text-lg">
-            Είστε έτοιμοι να <span className="text-[var(--blue-green-600)] font-medium">μεταμορφώσετε</span> την ψηφιακή σας παρουσία; Ας συζητήσουμε τους στόχους σας.
-          </p>
+  return (
+    <section id="contact" ref={containerRef} className="relative z-40 bg-gradient-to-br from-[var(--sky-blue-light-50)] via-white to-[var(--blue-green-50)] rounded-t-[40px] shadow-2xl min-h-screen flex items-center">
+      <div className="py-20 md:py-32 w-full">
+        <div className="container relative overflow-visible">
+          {/* Decorative Shapes */}
+          <div ref={shape1Ref} className="absolute -top-20 right-0 lg:right-[10%] h-64 w-64 rounded-full bg-[var(--blue-green-400)]/20 blur-[80px] -z-10" />
+          <div ref={shape2Ref} className="absolute bottom-0 left-0 lg:left-[10%] h-80 w-80 rounded-full bg-[var(--sky-blue-light-300)]/20 blur-[80px] -z-10" />
+
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            {/* Left Column: Text & Info */}
+            <div className="text-center lg:text-left relative z-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--blue-green-50)] border border-[var(--blue-green-100)] text-[var(--blue-green-700)] text-sm font-medium mb-8 animate-fade-in">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--blue-green-500)] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--blue-green-600)]"></span>
+                </span>
+                Ας συνεργαστούμε
+              </div>
+              
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--deep-space-blue-900)] mb-6 min-h-[1.2em]">
+                {typewriterText}
+                <span className="animate-pulse text-[var(--blue-green-500)]">|</span>
+              </h2>
+              
+              <p className="text-[var(--deep-space-blue-700)] text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10">
+                Είστε έτοιμοι να <span className="text-[var(--blue-green-600)] font-medium">μεταμορφώσετε</span> την ψηφιακή σας παρουσία; 
+                Συμπληρώστε τη φόρμα και η ομάδα μας θα επικοινωνήσει μαζί σας σύντομα για να σχεδιάσουμε το μέλλον της επιχείρησής σας.
+              </p>
+
+              {/* Contact Info Pills */}
+              <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                <div className="flex items-center gap-3 px-5 py-3 bg-white rounded-2xl shadow-sm border border-[var(--sky-blue-light-100)] text-[var(--deep-space-blue-800)]">
+                  <div className="p-2 bg-[var(--sky-blue-light-50)] rounded-full text-[var(--blue-green-600)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  </div>
+                  <span className="font-medium">contact@smarting.gr</span>
+                </div>
+                <div className="flex items-center gap-3 px-5 py-3 bg-white rounded-2xl shadow-sm border border-[var(--sky-blue-light-100)] text-[var(--deep-space-blue-800)]">
+                  <div className="p-2 bg-[var(--sky-blue-light-50)] rounded-full text-[var(--blue-green-600)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  </div>
+                  <span className="font-medium">+30 210 1234567</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Form */}
+            <div 
+              ref={formRef}
+              className="bg-white/80 backdrop-blur-md border border-[var(--sky-blue-light-200)] rounded-[32px] p-8 shadow-2xl shadow-[var(--sky-blue-light-200)]/20 sm:p-10 relative z-20 group hover:shadow-[var(--blue-green-300)]/10 transition-all duration-500"
+              suppressHydrationWarning
+            >
+              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                 <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M0 0V60H60V0H0ZM58 58H2V2H58V58Z" fill="currentColor" className="text-[var(--blue-green-500)]"/>
+                 </svg>
+              </div>
+
+              {mounted && (
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="col-span-2">
+                          <FormLabel className="text-[var(--deep-space-blue-700)] font-semibold tracking-wider uppercase text-xs ml-1">Email</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="john@example.com" 
+                              {...field} 
+                              className="bg-white/50 border-[var(--sky-blue-light-200)] h-14 rounded-2xl focus:ring-[var(--blue-green-400)]/30 focus:border-[var(--blue-green-500)] transition-all text-base"
+                              suppressHydrationWarning 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-[var(--deep-space-blue-700)] font-semibold tracking-wider uppercase text-xs ml-1">Μήνυμα</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Πείτε μας για το project σας..."
+                            className="min-h-[160px] bg-white/50 border-[var(--sky-blue-light-200)] rounded-2xl focus:ring-[var(--blue-green-400)]/30 focus:border-[var(--blue-green-500)] transition-all resize-none text-base p-4"
+                            {...field}
+                            suppressHydrationWarning
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <Button type="submit" size="xl" className="w-full h-14 rounded-2xl bg-[var(--blue-green-500)] hover:bg-[var(--blue-green-600)] text-white text-lg font-medium shadow-lg shadow-[var(--blue-green-500)]/20 hover:scale-[1.02] hover:shadow-[var(--blue-green-500)]/30 transition-all duration-300 group/btn" disabled={form.formState.isSubmitting}>
+                    Αποστολή Μηνύματος
+                    <svg className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </Button>
+                </form>
+              </Form>
+              )}
+            </div>
+          </div>
         </div>
-        
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-[var(--deep-space-blue-700)] font-semibold tracking-wider uppercase text-xs">Email</FormLabel>
-                  <FormControl>
-                    <Input 
-                      placeholder="john@example.com" 
-                      {...field} 
-                      className="bg-[var(--sky-blue-light-50)] border-[var(--sky-blue-light-200)] h-12 rounded-xl focus:ring-[var(--blue-green-400)]/50 focus:border-[var(--blue-green-500)] transition-all"
-                      suppressHydrationWarning 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-[var(--deep-space-blue-700)] font-semibold tracking-wider uppercase text-xs">Μήνυμα</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Πείτε μας για το project σας..."
-                      className="min-h-[150px] bg-[var(--sky-blue-light-50)] border-[var(--sky-blue-light-200)] rounded-xl focus:ring-[var(--blue-green-400)]/50 focus:border-[var(--blue-green-500)] transition-all"
-                      {...field}
-                      suppressHydrationWarning
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" size="xl" className="w-full rounded-xl bg-[var(--blue-green-500)] hover:bg-[var(--blue-green-600)] text-white shadow-xl shadow-[var(--blue-green-500)]/20 hover:scale-[1.02] transition-transform active:scale-[0.98]" disabled={form.formState.isSubmitting}>
-              Αποστολή Μηνύματος
-            </Button>
-          </form>
-        </Form>
-      </div>
-      </div>
       </div>
     </section>
   )
