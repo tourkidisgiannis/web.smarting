@@ -15,39 +15,50 @@ export function NavbarHide({ children }: NavbarHideProps) {
     if (!navbar) return;
 
     let lastScrollY = window.scrollY;
-    let isScrolling = false;
+    let ticking = false;
 
     const tl = gsap.timeline({ paused: true });
 
-    // Animation to hide navbar
+    // Improved animation to hide navbar with smoother transitions
     tl.to(navbar, {
       y: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-      opacity: 0,
+      duration: 0.4,
+      ease: "power2.out",
+      opacity: 0.8,
+      scale: 0.98,
+      onComplete: () => {
+        navbar.style.visibility = 'hidden';
+      },
+      onReverseComplete: () => {
+        navbar.style.visibility = 'visible';
+      }
     });
 
     const handleScroll = () => {
-      if (isScrolling) return;
-      isScrolling = true;
+      if (ticking) return;
+      ticking = true;
 
       requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
 
         if (currentScrollY > lastScrollY && currentScrollY > 100) {
           // Scrolling down - hide navbar
-          tl.play();
-        } else if (currentScrollY < lastScrollY) {
+          if (tl.progress() < 1) tl.play();
+        } else if (currentScrollY < lastScrollY && currentScrollY > 10) {
           // Scrolling up - show navbar
-          tl.reverse();
+          if (tl.progress() > 0) tl.reverse();
         }
 
         lastScrollY = currentScrollY;
-        isScrolling = false;
+        ticking = false;
       });
     };
 
+    // Add scroll event listener with passive option
     window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Initial setup
+    navbar.style.visibility = 'visible';
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -56,7 +67,10 @@ export function NavbarHide({ children }: NavbarHideProps) {
   }, []);
 
   return (
-    <header ref={navbarRef} className="sticky top-0 z-50 transition-transform duration-300">
+    <header
+      ref={navbarRef}
+      className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-[var(--sky-blue-light-200)] transition-all duration-300"
+    >
       {children}
     </header>
   );

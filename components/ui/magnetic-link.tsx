@@ -53,12 +53,29 @@ export function MagneticLink({ children, href, className = "", onClick }: Magnet
     };
   }, []);
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetElement = document.querySelector(href);
+      if (targetElement) {
+        const offsetTop = (targetElement as HTMLElement).offsetTop - 80; // Account for fixed header
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    }
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <a
       ref={linkRef}
       href={href}
       className={className}
-      onClick={onClick}
+      onClick={handleClick}
     >
       {children}
     </a>

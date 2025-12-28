@@ -108,15 +108,15 @@ export function ContactForm() {
     form.reset()
   }
 
-  const typewriterText = useTypewriter("Ξεκινήστε την Επιτυχία σας", 70, startTyping)
+  const typewriterText = useTypewriter("Ξεκινήστε χωρίς ρίσκο", 70, startTyping)
 
   return (
-    <section id="contact" ref={containerRef} className="relative z-40 bg-gradient-to-br from-[var(--sky-blue-light-50)] via-white to-[var(--blue-green-50)] rounded-t-[40px] shadow-2xl min-h-screen flex items-center">
+    <section id="contact" ref={containerRef} className="relative z-40 min-h-screen flex items-center">
       <div className="py-20 md:py-32 w-full">
         <div className="container relative overflow-visible">
           {/* Decorative Shapes */}
-          <div ref={shape1Ref} className="absolute -top-20 right-0 lg:right-[10%] h-64 w-64 rounded-full bg-[var(--blue-green-400)]/20 blur-[80px] -z-10" />
-          <div ref={shape2Ref} className="absolute bottom-0 left-0 lg:left-[10%] h-80 w-80 rounded-full bg-[var(--sky-blue-light-300)]/20 blur-[80px] -z-10" />
+          <div ref={shape1Ref} className="absolute -top-20 right-0 lg:right-[10%] h-64 w-64 bg-[var(--blue-green-400)]/20 blur-[80px] -z-10" />
+          <div ref={shape2Ref} className="absolute bottom-0 left-0 lg:left-[10%] h-80 w-80 bg-[var(--sky-blue-light-300)]/20 blur-[80px] -z-10" />
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
             {/* Left Column: Text & Info */}
@@ -126,17 +126,18 @@ export function ContactForm() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--blue-green-500)] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--blue-green-600)]"></span>
                 </span>
-                Ας συνεργαστούμε
+                Ζητήστε Ιδιωτική Αξιολόγηση
               </div>
-              
+
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--deep-space-blue-900)] mb-6 min-h-[1.2em]">
                 {typewriterText}
                 <span className="animate-pulse text-[var(--blue-green-500)]">|</span>
               </h2>
-              
+
               <p className="text-[var(--deep-space-blue-700)] text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10">
-                Είστε έτοιμοι να <span className="text-[var(--blue-green-600)] font-medium">μεταμορφώσετε</span> την ψηφιακή σας παρουσία; 
-                Συμπληρώστε τη φόρμα και η ομάδα μας θα επικοινωνήσει μαζί σας σύντομα για να σχεδιάσουμε το μέλλον της επιχείρησής σας.
+                Μια σύντομη, ιδιωτική αξιολόγηση της ιστοσελίδας σας.
+                Χωρίς δεσμεύσεις.
+                Χωρίς περίπλοκες διαδικασίες.
               </p>
 
               {/* Contact Info Pills */}
@@ -157,9 +158,9 @@ export function ContactForm() {
             </div>
 
             {/* Right Column: Form */}
-            <div 
+            <div
               ref={formRef}
-              className="bg-white/80 backdrop-blur-md border border-[var(--sky-blue-light-200)] rounded-[32px] p-8 shadow-2xl shadow-[var(--sky-blue-light-200)]/20 sm:p-10 relative z-20 group hover:shadow-[var(--blue-green-300)]/10 transition-all duration-500"
+              className="bg-white/80 backdrop-blur-md border border-[var(--sky-blue-light-200)] p-8 shadow-[var(--sky-blue-light-200)]/20 sm:p-10 relative z-20 group hover:shadow-[var(--blue-green-300)]/10 transition-all duration-500"
               suppressHydrationWarning
             >
               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -171,19 +172,19 @@ export function ContactForm() {
               {mounted && (
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid gap-6 md:grid-cols-2">
+                  <div className="grid gap-6">
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
-                        <FormItem className="col-span-2">
+                        <FormItem>
                           <FormLabel className="text-[var(--deep-space-blue-700)] font-semibold tracking-wider uppercase text-xs ml-1">Email</FormLabel>
                           <FormControl>
-                            <Input 
-                              placeholder="john@example.com" 
-                              {...field} 
-                              className="bg-white/50 border-[var(--sky-blue-light-200)] h-14 rounded-2xl focus:ring-[var(--blue-green-400)]/30 focus:border-[var(--blue-green-500)] transition-all text-base"
-                              suppressHydrationWarning 
+                            <Input
+                              placeholder="john@example.com"
+                              {...field}
+                              className="bg-white/50 border-[var(--sky-blue-light-200)] h-14 focus:ring-[var(--blue-green-400)]/30 focus:border-[var(--blue-green-500)] transition-all text-base"
+                              suppressHydrationWarning
                             />
                           </FormControl>
                           <FormMessage />
@@ -191,28 +192,9 @@ export function ContactForm() {
                       )}
                     />
                   </div>
-                  
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-[var(--deep-space-blue-700)] font-semibold tracking-wider uppercase text-xs ml-1">Μήνυμα</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Πείτε μας για το project σας..."
-                            className="min-h-[160px] bg-white/50 border-[var(--sky-blue-light-200)] rounded-2xl focus:ring-[var(--blue-green-400)]/30 focus:border-[var(--blue-green-500)] transition-all resize-none text-base p-4"
-                            {...field}
-                            suppressHydrationWarning
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <Button type="submit" size="xl" className="w-full h-14 rounded-2xl bg-[var(--blue-green-500)] hover:bg-[var(--blue-green-600)] text-white text-lg font-medium shadow-lg shadow-[var(--blue-green-500)]/20 hover:scale-[1.02] hover:shadow-[var(--blue-green-500)]/30 transition-all duration-300 group/btn" disabled={form.formState.isSubmitting}>
-                    Αποστολή Μηνύματος
+
+                  <Button type="submit" size="xl" className="w-full h-14 bg-[var(--blue-green-500)] hover:bg-[var(--blue-green-600)] text-white text-lg font-medium shadow-lg shadow-[var(--blue-green-500)]/20 hover:scale-[1.02] hover:shadow-[var(--blue-green-500)]/30 transition-all duration-300 group/btn" disabled={form.formState.isSubmitting}>
+                    Ζητήστε Ιδιωτική Αξιολόγηση
                     <svg className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   </Button>
                 </form>
