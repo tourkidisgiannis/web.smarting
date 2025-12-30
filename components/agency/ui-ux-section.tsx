@@ -43,31 +43,37 @@ export function UIUXSection() {
   useGSAP(
     () => {
       // Header animation
-      gsap.from(headerRef.current, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: "top 80%",
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
-      })
+      if (headerRef.current) {
+        gsap.from(headerRef.current, {
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 80%",
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power4.out",
+        })
+      }
 
       // Benefits entrance animation with stagger
-      gsap.from(benefitsRef.current, {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-        },
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-      })
+      if (benefitsRef.current && benefitsRef.current.length > 0) {
+        gsap.from(benefitsRef.current.filter(Boolean), {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+          },
+          y: 100,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+        })
+      }
 
       // Interactive elements
+      const cleanupFunctions: (() => void)[] = [];
+
       benefitsRef.current.forEach((benefit, index) => {
         if (!benefit) return
 
@@ -80,8 +86,17 @@ export function UIUXSection() {
           ease: "power2.out",
         })
 
-        benefit.addEventListener('mouseenter', () => hoverTl.play())
-        benefit.addEventListener('mouseleave', () => hoverTl.reverse())
+        const handleMouseEnter = () => hoverTl.play();
+        const handleMouseLeave = () => hoverTl.reverse();
+
+        benefit.addEventListener('mouseenter', handleMouseEnter)
+        benefit.addEventListener('mouseleave', handleMouseLeave)
+
+        // Store cleanup functions for hover events
+        cleanupFunctions.push(() => {
+          benefit.removeEventListener('mouseenter', handleMouseEnter);
+          benefit.removeEventListener('mouseleave', handleMouseLeave);
+        });
 
         // 3D Tilt Effect - Only on Desktop
         const mm = gsap.matchMedia()
@@ -118,18 +133,12 @@ export function UIUXSection() {
             benefit.removeEventListener("mouseleave", handleBenefitMouseLeave)
           }
         })
-
-        // Cleanup
-        return () => {
-          if (benefit) {
-            benefit.removeEventListener('mouseenter', () => {})
-            benefit.removeEventListener('mouseleave', () => {})
-          }
-          mm.revert()
-        }
       })
 
-      // Background gradient animation would go here but is handled via CSS animation
+      // Return cleanup function
+      return () => {
+        cleanupFunctions.forEach(cleanup => cleanup());
+      }
     },
     { scope: containerRef }
   )
@@ -138,11 +147,15 @@ export function UIUXSection() {
     <section
       id="ui-ux"
       ref={containerRef}
-      className="relative z-20 min-h-screen ui-ux-bg"
+      className="relative z-20 min-h-screen"
     >
       <div className="py-24 md:py-32">
         <div className="container">
-          <div ref={headerRef} className="mb-20 text-center max-w-3xl mx-auto">
+          <div
+            ref={headerRef}
+            className="mb-20 text-center max-w-3xl mx-auto"
+            style={{ opacity: 1, transform: 'translateY(0px)' }}
+          >
             <h2 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-[var(--deep-space-blue-900)]">
               Τι αλλάζει όταν η ιστοσελίδα δουλεύει υπέρ σας
             </h2>
@@ -157,6 +170,7 @@ export function UIUXSection() {
                 key={index}
                 ref={(el) => { if (el) benefitsRef.current[index] = el }}
                 className="group relative bg-white p-6 shadow-[var(--sky-blue-light-200)]/50 border border-[var(--sky-blue-light-200)] transition-all duration-300 overflow-hidden"
+                style={{ opacity: 1, transform: 'translateY(0px)' }}
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-br from-[var(--blue-green-400)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
                 <div className="relative">

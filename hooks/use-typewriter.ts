@@ -1,30 +1,32 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react";
 
-export function useTypewriter(text: string, speed: number = 50, shouldStart: boolean = false) {
-  const [displayText, setDisplayText] = useState("")
+export function useTypewriter(
+  text: string,
+  speed: number = 50,
+  shouldStart: boolean = false
+) {
+  const [displayText, setDisplayText] = useState("");
+  const [index, setIndex] = useState(0);
+
+  // Reset derived state when inputs change
+  if (!shouldStart && (displayText !== "" || index !== 0)) {
+    setDisplayText("");
+    setIndex(0);
+  }
 
   useEffect(() => {
-    if (!shouldStart) {
-      setDisplayText("")
-      return
-    }
+    if (!shouldStart) return;
+    if (index >= text.length) return;
 
-    let i = 0
-    const timer = setInterval(() => {
-      if (i < text.length) {
-        setDisplayText((prev) => prev + text.charAt(i))
-        i++
-      } else {
-        clearInterval(timer)
-      }
-    }, speed)
+    const timeout = setTimeout(() => {
+      setDisplayText((prev) => prev + text[index]);
+      setIndex((i) => i + 1);
+    }, speed);
 
-    return () => {
-      clearInterval(timer)
-    }
-  }, [text, speed, shouldStart])
+    return () => clearTimeout(timeout);
+  }, [shouldStart, index, text, speed]);
 
-  return displayText
+  return displayText;
 }

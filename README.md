@@ -1,5 +1,33 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## SEO Metadata
+
+This project includes comprehensive SEO metadata configuration to improve search engine visibility and social media sharing:
+
+- **Page titles and descriptions**: Optimized with Greek language content
+- **Open Graph tags**: For proper display when sharing on social media
+- **Twitter Cards**: Optimized Twitter sharing experience
+- **Structured data (JSON-LD)**: For better search engine understanding
+- **Favicon and icon formats**: Multiple sizes for all devices
+- **Web app manifest**: For progressive web app capabilities
+
+### Using SEO Metadata in Pages
+
+To extend the base metadata in individual pages, you can use the `createMetadata` helper function:
+
+```typescript
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata = createMetadata({
+  title: "Services | Smarting.gr",
+  description: "Our professional web development services...",
+  openGraph: {
+    title: "Our Services - Smarting.gr",
+    description: "Professional web development services...",
+  },
+});
+```
+
 ## Getting Started
 
 First, run the development server:

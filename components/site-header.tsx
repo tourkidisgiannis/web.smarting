@@ -1,184 +1,117 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { MagneticLink } from "@/components/ui/magnetic-link";
 import { NavbarHide } from "@/components/ui/navbar-hide";
+import { Logo } from "@/components/ui/logo";
+
+const navItems = [
+  { href: "/#services", label: "Υπηρεσίες" },
+  { href: "/#ui-ux", label: "Λύσεις" },
+  { href: "/#why-matters", label: "Γιατί" },
+  { href: "/#clients-see", label: "Πελάτες" },
+  { href: "/#who-we-are", label: "Ποιοι Είμαστε" },
+  { href: "/#demos", label: "Παραδείγματα" },
+  { href: "/#contact", label: "Επικοινωνία" },
+];
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   useEffect(() => {
-    // Trigger entrance animation after component mounts
     setHasLoaded(true);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
   return (
     <NavbarHide>
-      <div
-        className="w-full border-b border-[var(--sky-blue-light-200)] bg-white"
+      <header
+        className="w-full border-b border-(--sky-blue-light-200) bg-white"
         style={{
-          animation: hasLoaded ? 'fadeInUp 0.6s ease-out forwards' : 'none',
+          animation: hasLoaded ? "fadeInUp 0.6s ease-out forwards" : "none",
           opacity: hasLoaded ? 1 : 0,
-          transform: hasLoaded ? 'translateY(0)' : 'translateY(-20px)'
+          transform: hasLoaded ? "translateY(0)" : "translateY(-20px)",
         }}
       >
-        <div className="container flex h-14 items-center justify-between">
-          {/* Logo - Visible on all screens */}
-          <div className="flex items-center gap-2">
-            <Link className="flex items-center space-x-2" href="/">
-              <span className="font-bold font-bbh-bartle inline-block bg-linear-to-r from-[var(--blue-green-600)] to-[var(--deep-space-blue-500)] bg-clip-text text-transparent">
-                web.smarting.gr
-              </span>
-            </Link>
-          </div>
+        <div className="flex h-14 items-center justify-between px-4 md:px-8">
+          <Logo width={300} height={15} priority />
 
-          {/* Desktop Nav - Now at the end (right side) with enhanced animations */}
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <nav className="flex items-center space-x-6">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex  gap-6 text-sm font-medium">
+            {navItems.map((item) => (
               <MagneticLink
-                href="/#services"
-                className="transition-colors hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
+                key={item.href}
+                href={item.href}
+                className="relative group cursor-pointer text-(--deep-space-blue-700) transition-colors hover:text-(--blue-green-600)"
               >
-                <span className="relative z-10">Πρόβλημα</span>
-                <span className="absolute inset-0 bg-[var(--blue-green-500)] opacity-0 group-hover:opacity-100 rounded-full transition-all duration-500 -z-10 scale-75 group-hover:scale-100"></span>
+                <span className="relative z-10">{item.label}</span>
+                <span className="absolute inset-0 -z-10 rounded-full bg-(--blue-green-500) opacity-0 scale-75 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100" />
               </MagneticLink>
-              <MagneticLink
-                href="/#ui-ux"
-                className="transition-colors hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-              >
-                <span className="relative z-10">Οφέλη</span>
-                <span className="absolute inset-0 bg-[var(--blue-green-500)] opacity-0 group-hover:opacity-100 rounded-full transition-all duration-500 -z-10 scale-75 group-hover:scale-100"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#why-matters"
-                className="transition-colors hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-              >
-                <span className="relative z-10">Σημασία</span>
-                <span className="absolute inset-0 bg-[var(--blue-green-500)] opacity-0 group-hover:opacity-100 rounded-full transition-all duration-500 -z-10 scale-75 group-hover:scale-100"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#clients-see"
-                className="transition-colors hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-              >
-                <span className="relative z-10">Αποτελέσματα</span>
-                <span className="absolute inset-0 bg-[var(--blue-green-500)] opacity-0 group-hover:opacity-100 rounded-full transition-all duration-500 -z-10 scale-75 group-hover:scale-100"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#who-we-are"
-                className="transition-colors hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-              >
-                <span className="relative z-10">Ποιοι Είμαστε</span>
-                <span className="absolute inset-0 bg-[var(--blue-green-500)] opacity-0 group-hover:opacity-100 rounded-full transition-all duration-500 -z-10 scale-75 group-hover:scale-100"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#demos"
-                className="transition-colors hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-              >
-                <span className="relative z-10">Παραδείγματα</span>
-                <span className="absolute inset-0 bg-[var(--blue-green-500)] opacity-0 group-hover:opacity-100 rounded-full transition-all duration-500 -z-10 scale-75 group-hover:scale-100"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#contact"
-                className="transition-colors hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-              >
-                <span className="relative z-10">Επικοινωνία</span>
-                <span className="absolute inset-0 bg-[var(--blue-green-500)] opacity-0 group-hover:opacity-100 rounded-full transition-all duration-500 -z-10 scale-75 group-hover:scale-100"></span>
-              </MagneticLink>
-            </nav>
-          </div>
+            ))}
+          </nav>
 
-          <div className="flex items-center gap-4">
-            {/* Mobile Menu Toggle */}
-            <Button
-              variant="ghost"
-              className={`md:hidden text-[var(--deep-space-blue-700)] hover:bg-[var(--sky-blue-light-100)] transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`}
-              size="icon"
-              onClick={toggleMenu}
-            >
-              {isMenuOpen ? (
-                <X className="h-5 w-5 transition-all duration-300" />
-              ) : (
-                <Menu className="h-5 w-5 transition-all duration-300" />
-              )}
-            </Button>
-          </div>
+          {/* Mobile Toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleMenu}
+            aria-label={
+              isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            className={`md:hidden text-(--deep-space-blue-700) transition-transform duration-300 hover:bg-(--sky-blue-light-100) ${
+              isMenuOpen ? "rotate-90" : ""
+            }`}
+          >
+            {isMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
         </div>
 
-        {/* Mobile Menu Overlay */}
+        {/* Mobile Navigation */}
         {isMenuOpen && (
           <div
-            className="md:hidden border-b border-[var(--sky-blue-light-200)] bg-white overflow-hidden"
+            id="mobile-navigation"
+            className="md:hidden overflow-hidden border-b border-(--sky-blue-light-200) bg-white"
             style={{
-              animation: 'slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards'
+              animation:
+                "slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
             }}
           >
-            <div className="container py-5 flex flex-col space-y-3">
-              <MagneticLink
-                href="/#services"
-                className="text-base font-medium py-3 transition-all duration-300 hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-                onClick={toggleMenu}
-              >
-                <span className="relative z-10">Πρόβλημα</span>
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--blue-green-500)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#ui-ux"
-                className="text-base font-medium py-3 transition-all duration-300 hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-                onClick={toggleMenu}
-              >
-                <span className="relative z-10">Οφέλη</span>
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--blue-green-500)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#why-matters"
-                className="text-base font-medium py-3 transition-all duration-300 hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-                onClick={toggleMenu}
-              >
-                <span className="relative z-10">Σημασία</span>
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--blue-green-500)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#clients-see"
-                className="text-base font-medium py-3 transition-all duration-300 hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-                onClick={toggleMenu}
-              >
-                <span className="relative z-10">Αποτελέσματα</span>
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--blue-green-500)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#who-we-are"
-                className="text-base font-medium py-3 transition-all duration-300 hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-                onClick={toggleMenu}
-              >
-                <span className="relative z-10">Ποιοι Είμαστε</span>
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--blue-green-500)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#demos"
-                className="text-base font-medium py-3 transition-all duration-300 hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-                onClick={toggleMenu}
-              >
-                <span className="relative z-10">Παραδείγματα</span>
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--blue-green-500)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </MagneticLink>
-              <MagneticLink
-                href="/#contact"
-                className="text-base font-medium py-3 transition-all duration-300 hover:text-[var(--blue-green-600)] text-[var(--deep-space-blue-700)] cursor-pointer relative group"
-                onClick={toggleMenu}
-              >
-                <span className="relative z-10">Επικοινωνία</span>
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[var(--blue-green-500)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </MagneticLink>
-            </div>
+            <nav className="container flex flex-col space-y-3 py-5">
+              {navItems.map((item) => (
+                <MagneticLink
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="relative cursor-pointer py-3 text-base font-medium text-(--deep-space-blue-700) transition-colors hover:text-(--blue-green-600)"
+                >
+                  <span className="relative z-10">{item.label}</span>
+                  <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-(--blue-green-500) transition-transform duration-300 group-hover:scale-x-100" />
+                </MagneticLink>
+              ))}
+            </nav>
           </div>
         )}
-      </div>
+      </header>
     </NavbarHide>
   );
 }

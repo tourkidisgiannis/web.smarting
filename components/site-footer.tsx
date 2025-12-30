@@ -13,20 +13,17 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Logo } from "@/components/ui/logo";
 
 export function SiteFooter() {
   return (
-    <footer className="relative z-50  border-t border-[var(--sky-blue-light-200)] pb-12 pt-16">
+    <footer className="relative z-50  border-t border-(--sky-blue-light-200) pb-12 pt-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Column 1: Company info */}
           <div className="space-y-6">
-            <Link href="/" className="inline-block">
-              <span className="text-lg font-bold font-bbh-bartle bg-gradient-to-r from-[var(--blue-green-600)] to-[var(--deep-space-blue-500)] bg-clip-text text-transparent">
-                web.smarting.gr
-              </span>
-            </Link>
-            <p className="text-[var(--deep-space-blue-700)] leading-relaxed max-w-xs">
+            <Logo width={140} height={35} />
+            <p className="text-(--deep-space-blue-700) leading-relaxed max-w-xs">
               Δημιουργούμε υψηλής αισθητικής ψηφιακές εμπειρίες που βοηθούν την
               επιχείρησή σας να ξεχωρίσει στην ψηφιακή εποχή.
             </p>
@@ -34,7 +31,7 @@ export function SiteFooter() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full hover:bg-[var(--blue-green-100)] hover:text-[var(--blue-green-600)] transition-colors"
+                className="rounded-full hover:bg-(--blue-green-100) hover:text-(--blue-green-600) transition-colors"
               >
                 <Twitter className="h-5 w-5" />
               </Button>
