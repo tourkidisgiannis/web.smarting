@@ -25,7 +25,7 @@ export function Logo({
         width={width}
         height={height}
         priority={priority}
-        className="object-contain"
+        className="object-contain max-w-full"
       />
     </Link>
   );

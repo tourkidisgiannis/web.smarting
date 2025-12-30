@@ -22,8 +22,8 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Column 1: Company info */}
           <div className="space-y-6">
-            <Logo width={140} height={35} />
-            <p className="text-(--deep-space-blue-700) leading-relaxed max-w-xs">
+            <Logo width={120} height={30} className="max-w-[80%] md:max-w-[140px]" />
+            <p className="text-(--deep-space-blue-700) leading-relaxed max-w-full">
               Δημιουργούμε υψηλής αισθητικής ψηφιακές εμπειρίες που βοηθούν την
               επιχείρησή σας να ξεχωρίσει στην ψηφιακή εποχή.
             </p>
@@ -145,14 +145,14 @@ export function SiteFooter() {
             <p className="text-[var(--deep-space-blue-700)] text-sm mb-4">
               Εγγραφείτε για να λαμβάνετε τα τελευταία νέα και ενημερώσεις.
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Input
                 placeholder="Email address"
-                className="bg-white border-[var(--sky-blue-light-200)] focus:ring-[var(--blue-green-400)]"
+                className="bg-white border-[var(--sky-blue-light-200)] focus:ring-[var(--blue-green-400)] min-w-0 flex-1"
               />
               <Button
                 size="icon"
-                className="bg-[var(--blue-green-500)] hover:bg-[var(--blue-green-600)] text-white"
+                className="bg-[var(--blue-green-500)] hover:bg-[var(--blue-green-600)] text-white flex-shrink-0"
               >
                 <Send className="h-4 w-4" />
               </Button>
@@ -162,11 +162,11 @@ export function SiteFooter() {
 
         {/* Copyright */}
         <div className="pt-8 border-t border-[var(--sky-blue-light-200)] flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[var(--deep-space-blue-700)]">
-          <p>
+          <p className="text-center md:text-left">
             Online παρουσία για επαγγελματίες που δεν μπορούν να ρισκάρουν την
             εικόνα τους.
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <span className="text-[var(--blue-green-600)] font-medium">
               Εμπιστοσύνη
             </span>

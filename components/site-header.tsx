@@ -1,41 +1,47 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { MagneticLink } from "@/components/ui/magnetic-link";
 import { NavbarHide } from "@/components/ui/navbar-hide";
 import { Logo } from "@/components/ui/logo";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import Link from "next/link";
+
+import {
+  Menu,
+  Wrench,
+  Palette,
+  Heart,
+  Users,
+  User,
+  Monitor,
+  Mail,
+} from "lucide-react";
 
 const navItems = [
-  { href: "/#services", label: "Υπηρεσίες" },
-  { href: "/#ui-ux", label: "Λύσεις" },
-  { href: "/#why-matters", label: "Γιατί" },
-  { href: "/#clients-see", label: "Πελάτες" },
-  { href: "/#who-we-are", label: "Ποιοι Είμαστε" },
-  { href: "/#demos", label: "Παραδείγματα" },
-  { href: "/#contact", label: "Επικοινωνία" },
+  { href: "/#services", label: "Υπηρεσίες", icon: Wrench },
+  { href: "/#ui-ux", label: "Λύσεις", icon: Palette },
+  { href: "/#why-matters", label: "Γιατί", icon: Heart },
+  { href: "/#clients-see", label: "Πελάτες", icon: Users },
+  // { href: "/#who-we-are", label: "Ποιοι Είμαστε", icon: User },
+  { href: "/#demos", label: "Παραδείγματα", icon: Monitor },
+  { href: "/#contact", label: "Επικοινωνία", icon: Mail },
 ];
 
 export function SiteHeader() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
 
   useEffect(() => {
     setHasLoaded(true);
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
 
   return (
     <NavbarHide>
@@ -48,7 +54,12 @@ export function SiteHeader() {
         }}
       >
         <div className="flex h-14 items-center justify-between px-4 md:px-8">
-          <Logo width={300} height={15} priority />
+          <Logo
+            width={200}
+            height={15}
+            priority
+            className="max-w-[80%] md:max-w-[300px]"
+          />
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex  gap-6 text-sm font-medium">
@@ -64,53 +75,43 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* Mobile Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleMenu}
-            aria-label={
-              isMenuOpen ? "Close navigation menu" : "Open navigation menu"
-            }
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-            className={`md:hidden text-(--deep-space-blue-700) transition-transform duration-300 hover:bg-(--sky-blue-light-100) ${
-              isMenuOpen ? "rotate-90" : ""
-            }`}
-          >
-            {isMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
+          {/* Mobile Sheet */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden text-(--deep-space-blue-700) hover:bg-(--sky-blue-light-100)"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="left"
+              className="p-0 bg-gradient-to-br from-white to-(--sky-blue-light-50)"
+            >
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+              <div className="p-6 pt-16">
+                <nav className="flex flex-col space-y-8">
+                  {navItems.map((item) => {
+                    const IconComponent = item.icon;
+                    return (
+                      <SheetClose asChild key={item.href}>
+                        <Link
+                          href={item.href}
+                          className="cursor-pointer py-4 text-3xl font-black text-(--deep-space-blue-900) transition-colors hover:text-(--blue-green-600) text-center tracking-tight flex items-center justify-center gap-4"
+                        >
+                          <IconComponent className="h-8 w-8" />
+                          <span>{item.label}</span>
+                        </Link>
+                      </SheetClose>
+                    );
+                  })}
+                </nav>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div
-            id="mobile-navigation"
-            className="md:hidden overflow-hidden border-b border-(--sky-blue-light-200) bg-white"
-            style={{
-              animation:
-                "slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
-            }}
-          >
-            <nav className="container flex flex-col space-y-3 py-5">
-              {navItems.map((item) => (
-                <MagneticLink
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="relative cursor-pointer py-3 text-base font-medium text-(--deep-space-blue-700) transition-colors hover:text-(--blue-green-600)"
-                >
-                  <span className="relative z-10">{item.label}</span>
-                  <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-(--blue-green-500) transition-transform duration-300 group-hover:scale-x-100" />
-                </MagneticLink>
-              ))}
-            </nav>
-          </div>
-        )}
       </header>
     </NavbarHide>
   );

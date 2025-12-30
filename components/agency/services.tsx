@@ -4,47 +4,41 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import {
-  Monitor,
-  Smartphone,
-  Zap,
-  Search,
-  Eye,
-  Heart,
-  Users,
-  Shield,
-} from "lucide-react";
+import { Zap, Users, ShieldAlert, Fingerprint, ArrowRight } from "lucide-react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const problems = [
   {
-    title: "Χαμένη Εμπιστοσύνη",
-    description: "Η ιστοσελίδα σας δεν καταφέρνει να εμπνεύσει εμπιστοσύνη από την πρώτη στιγμή.",
-    icon: Heart,
+    title: "Ψηφιακό Έλλειμμα Εμπιστοσύνης",
+    description:
+      "Όταν η πρώτη εντύπωση δεν εκπέμπει τη δέουσα σοβαρότητα, η εμπιστοσύνη του πελάτη χάνεται πριν καν ξεκινήσει η συζήτηση.",
+    icon: Fingerprint,
+    tag: "Brand Identity",
   },
   {
-    title: "Λανθασμένο Κοινό",
-    description: "Προσελκύετε τύπους που δεν ταιριάζουν με το επίπεδό σας και τις υπηρεσίες σας.",
+    title: "Αναντιστοιχία Κοινού",
+    description:
+      "Μια μέτρια παρουσία προσελκύει πελάτες που αναζητούν τη χαμηλότερη τιμή, αντί για εκείνους που εκτιμούν την υψηλή αξία.",
     icon: Users,
+    tag: "Targeting",
   },
   {
-    title: "Συνεχής Πειθώ",
-    description: "Χρειάζεται να πείθετε συνεχώς για την αξία της δουλειάς σας.",
+    title: "Οικονομία της Πειθούς",
+    description:
+      "Αναγκάζεστε να καταβάλλετε διπλάσια προσπάθεια για να αποδείξετε την αυθεντία σας, επειδή η ιστοσελίδα σας δεν το κάνει για εσάς.",
     icon: Zap,
+    tag: "Efficiency",
   },
   {
-    title: "Κίνδυνος Φήμης",
-    description: "Η online παρουσία σας δεν ανταποκρίνεται στο επίπεδο της πραγματικής δουλειάς σας.",
-    icon: Shield,
+    title: "Διάβρωση Επαγγελματικής Φήμης",
+    description:
+      "Η online εικόνα σας λειτουργεί ως εμπόδιο, αδικώντας την πραγματική ποιότητα των υπηρεσιών και του κύρους σας.",
+    icon: ShieldAlert,
+    tag: "Reputation",
   },
 ];
 
@@ -61,63 +55,59 @@ export function Services() {
       gsap.from(headerRef.current, {
         scrollTrigger: {
           trigger: headerRef.current,
-          start: "top 80%",
+          start: "top 85%",
         },
-        y: 60,
+        y: 40,
         opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
+        duration: 1,
+        ease: "expo.out",
       });
 
-      // Cards Animation
+      // Cards Staggered Entrance
       cardsRef.current.forEach((card, index) => {
         if (!card) return;
-
-        // Entrance
         gsap.from(card, {
           scrollTrigger: {
             trigger: card,
-            start: "top 85%",
+            start: "top 90%",
           },
-          y: 70,
+          y: 50,
           opacity: 0,
-          duration: 1,
-          delay: index * 0.1,
-          ease: "power3.out",
+          duration: 0.8,
+          delay: index * 0.15,
+          ease: "power2.out",
         });
 
-        // 3D Tilt Effect - Only on Desktop
+        // Desktop 3D Hover Effect
         mm.add("(min-width: 1024px)", () => {
-          const handleCardMouseMove = (e: MouseEvent) => {
-            const { clientX, clientY } = e;
+          const handleMouseMove = (e: MouseEvent) => {
             const { left, top, width, height } = card.getBoundingClientRect();
-            const x = (clientX - left) / width - 0.5;
-            const y = (clientY - top) / height - 0.5;
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
 
             gsap.to(card, {
-              rotateY: x * 15,
-              rotateX: -y * 15,
-              transformPerspective: 1000,
-              duration: 0.5,
+              rotateY: x * 8,
+              rotateX: -y * 8,
+              transformPerspective: 1200,
+              duration: 0.4,
               ease: "power2.out",
             });
           };
 
-          const handleCardMouseLeave = () => {
+          const handleMouseLeave = () => {
             gsap.to(card, {
               rotateY: 0,
               rotateX: 0,
-              duration: 0.8,
-              ease: "elastic.out(1, 0.3)",
+              duration: 0.7,
+              ease: "back.out(1.7)",
             });
           };
 
-          card.addEventListener("mousemove", handleCardMouseMove);
-          card.addEventListener("mouseleave", handleCardMouseLeave);
-
+          card.addEventListener("mousemove", handleMouseMove);
+          card.addEventListener("mouseleave", handleMouseLeave);
           return () => {
-            card.removeEventListener("mousemove", handleCardMouseMove);
-            card.removeEventListener("mouseleave", handleCardMouseLeave);
+            card.removeEventListener("mousemove", handleMouseMove);
+            card.removeEventListener("mouseleave", handleMouseLeave);
           };
         });
       });
@@ -131,62 +121,95 @@ export function Services() {
     <section
       id="services"
       ref={containerRef}
-      className="relative z-20 min-h-screen"
+      className="relative bg-linear-to-br from-(--sky-blue-light-50) via-white to-(--blue-green-50) py-24 md:py-40 overflow-hidden"
     >
-      <div className="py-24 md:py-32">
-        <div className="container">
-          <div ref={headerRef} className="mb-20 text-center max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-(--deep-space-blue-900)">
-              Όταν η ιστοσελίδα δεν βοηθά, σας κοστίζει
-            </h2>
-            <p className="mt-6 text-(--deep-space-blue-700) text-lg md:text-xl leading-relaxed">
-              Ακόμη και μια «απλή» ιστοσελίδα μπορεί να λειτουργεί εναντίον σας.
-              Αν η online παρουσία σας:
-            </p>
-            <ul className="mt-4 text-[var(--deep-space-blue-700)] text-lg md:text-xl leading-relaxed list-disc list-inside space-y-2">
-              <li>Δεν σας κάνει να φαίνεστε όσο σοβαρός είστε</li>
-              <li>Δεν προσελκύει τους πελάτες που θέλετε</li>
-              <li>Δημιουργεί αμφιβολία από την πρώτη επαφή</li>
-            </ul>
-            <p className="mt-4 text-[var(--deep-space-blue-700)] text-lg md:text-xl leading-relaxed">
-              τότε χάνετε ευκαιρίες χωρίς να το καταλαβαίνετε.
-            </p>
-          </div>
+      {/* Subtle background decoration */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" />
 
-          <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-[var(--deep-space-blue-900)] mb-4">
-              Λιγότερη αμφιβολία = περισσότερες σωστές επαφές.
-            </h3>
-          </div>
+      <div className="container relative z-10">
+        <div
+          ref={headerRef}
+          className="max-w-4xl mx-auto text-center mb-24 md:mb-32"
+        >
+          <span className="inline-block py-1 px-3 mb-6 text-xs font-bold tracking-[0.2em] uppercase text-(--blue-green-600) bg-(--blue-green-50) rounded-full">
+            Strategic Insight
+          </span>
+          <h2 className="text-4xl md:text-7xl font-bold text-(--deep-space-blue-900) mb-8 tracking-tight">
+            Όταν η ιστοσελίδα δεν βοηθά,{" "}
+            <span className="text-(--blue-green-600)">σας κοστίζει.</span>
+          </h2>
+          <p className="text-xl md:text-2xl text-(--deep-space-blue-700) font-medium mb-12">
+            Μια μέτρια online παρουσία δεν είναι απλώς «παθητική» – λειτουργεί
+            ενεργά εναντίον σας.
+          </p>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
-            {problems.map((problem, index) => (
-              <div
-                key={index}
-                ref={(el) => {
-                  if (el) cardsRef.current[index] = el;
-                }}
-                className="group relative"
-              >
-                <div className="absolute -inset-0.5 bg-gradient-to-br from-[var(--blue-green-400)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                <Card className="relative h-full border-[var(--sky-blue-light-200)] bg-white shadow-[var(--sky-blue-light-200)]/50 p-6 transition-all group-hover:shadow-[var(--blue-green-300)]/30 overflow-hidden">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 mt-1 inline-flex h-12 w-12 items-center justify-center bg-[var(--blue-green-100)] text-[var(--blue-green-600)] group-hover:scale-110 group-hover:bg-[var(--blue-green-500)] group-hover:text-white transition-all duration-500">
-                      <problem.icon className="h-6 w-6" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left border-t border-slate-100 pt-12">
+            {["Υπονόμευση Κύρους", "Διαφυγόντα Κέρδη", "Αμφισβήτηση Αξίας"].map(
+              (item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="h-1.5 w-1.5 rounded-full bg-(--blue-green-500)" />
+                  <span className="text-(--deep-space-blue-800) font-semibold">
+                    {item}
+                  </span>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+
+        <div className="grid gap-6 md:gap-10 sm:grid-cols-2">
+          {problems.map((problem, index) => (
+            <div
+              key={index}
+              ref={(el) => {
+                if (el) cardsRef.current[index] = el;
+              }}
+              className="group"
+            >
+              <Card className="h-full bg-slate-50/50 border-slate-100 p-8 md:p-12 transition-all duration-500 hover:bg-white hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border-none relative overflow-hidden">
+                {/* Accent line on hover */}
+                <div className="absolute top-0 left-0 w-0 h-1 bg-(--blue-green-500) transition-all duration-500 group-hover:w-full" />
+
+                <div className="flex flex-col h-full">
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="h-14 w-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-(--blue-green-600) group-hover:bg-(--blue-green-600) group-hover:text-white transition-all duration-500">
+                      <problem.icon size={28} />
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-[var(--deep-space-blue-900)] group-hover:text-[var(--blue-green-600)] transition-colors duration-300 mb-2">
-                        {problem.title}
-                      </h3>
-                      <p className="text-base leading-relaxed text-[var(--deep-space-blue-700)] group-hover:text-[var(--deep-space-blue-800)] transition-colors">
-                        {problem.description}
-                      </p>
-                    </div>
+                    <span className="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-(--blue-green-600) transition-colors">
+                      {problem.tag}
+                    </span>
                   </div>
-                </Card>
-              </div>
-            ))}
-          </div>
+
+                  <h3 className="text-2xl md:text-3xl font-bold text-(--deep-space-blue-900) mb-4">
+                    {problem.title}
+                  </h3>
+                  <p className="text-lg text-(--deep-space-blue-700) leading-relaxed mb-8 flex-grow">
+                    {problem.description}
+                  </p>
+
+                  <div className="flex items-center gap-2 text-sm font-bold text-(--blue-green-600) opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-[-10px] group-hover:translate-x-0">
+                    Ανάλυση Λύσης <ArrowRight size={16} />
+                  </div>
+                </div>
+              </Card>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-24 text-center">
+          <p className="text-(--deep-space-blue-600) font-medium mb-6">
+            Λιγότερη αμφιβολία σημαίνει περισσότερες σωστές επαφές.
+          </p>
+          <Link
+            href="#contact"
+            className="group relative px-8 py-4 bg-(--deep-space-blue-900) text-white rounded-full font-bold transition-all duration-300 hover:bg-(--blue-green-600) shadow-lg hover:shadow-xl overflow-hidden inline-block"
+          >
+            <span className="relative z-10">
+              Επανασχεδιάστε την Παρουσία σας
+            </span>
+            <span className="absolute inset-0 bg-(--blue-green-500) transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-0" />
+            <ArrowRight className="ml-2 h-5 w-5 relative z-10 inline-block transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>

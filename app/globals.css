@@ -185,6 +185,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 
@@ -234,6 +235,9 @@
       black calc(100% - 1rem),
       transparent
     );
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   @keyframes slideIn {

@@ -7,17 +7,19 @@ import { WhoWeAre } from "@/components/agency/who-we-are";
 import { DemoGrid } from "@/components/agency/demo-grid";
 import { ContactForm } from "@/components/agency/contact-form";
 import { SiteFooter } from "@/components/site-footer";
+import { OnboardingTimeline } from "@/components/agency/OnboardingTimeline";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center bg-linear-to-br from-(--sky-blue-light-50) via-white to-(--blue-green-50)">
-      <div className="w-full relative">
+      <div className="w-full relative overflow-x-hidden">
         <Hero />
         <Services />
         <UIUXSection />
         <WhyThisMatters />
         <WhatOurClientsSee />
-        <WhoWeAre />
+        <OnboardingTimeline />
+        {/* <WhoWeAre /> */}
         <DemoGrid />
         <ContactForm />
       </div>

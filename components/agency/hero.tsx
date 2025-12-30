@@ -81,14 +81,14 @@ export function Hero() {
         <div className="container relative z-10 flex flex-col items-center gap-6">
           <h1
             ref={titleRef}
-            className="text-5xl font-bold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl perspective-[1000px] text-(--deep-space-blue-900)"
+            className="text-5xl font-bold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl perspective-[1000px] text-(--deep-space-blue-900) max-w-full"
           >
             <span className="block overflow-hidden">
-              <span className="block">Ιστοσελίδες που σας</span>
+              <span className="block">Εμπιστοσύνη με την πρώτη</span>
             </span>
             <span className="block overflow-hidden">
-              <span className="block bg-linear-to-r from-(--blue-green-500) via-(--deep-space-blue-500) to-(--blue-green-600) bg-clip-text text-transparent">
-                κάνουν να επιλέγεστε
+              <span className="block bg-linear-to-r from-(--blue-green-500) via-(--deep-space-blue-500) to-(--blue-green-600) bg-clip-text text-transparent break-words">
+                ματιά.
               </span>
             </span>
           </h1>
@@ -97,12 +97,13 @@ export function Hero() {
             ref={textRef}
             className="mt-4 text-lg leading-relaxed text-[var(--deep-space-blue-700)] sm:text-2xl"
           >
-            Για γιατρούς, δικηγόρους και επαγγελματίες που θέλουν να
+            Εξειδικευμένες ψηφιακές λύσεις για επιστήμονες και επαγγελματίες που
+            δεν συμβιβάζονται
             <span className="text-[var(--deep-space-blue-900)] font-medium">
               {" "}
-              εμπνέουν εμπιστοσύνη
+              με τίποτα λιγότερο
             </span>{" "}
-            πριν καν μιλήσουν.
+            από την κορυφή.
           </p>
 
           <div
