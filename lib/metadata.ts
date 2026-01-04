@@ -3,39 +3,49 @@ import { Metadata } from "next";
 // Base metadata that can be extended by individual pages
 export const baseMetadata: Metadata = {
   title: {
-    default: "Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
-    template: "%s | Smarting.gr"
+    default: "web.smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
+    template: "%s | web.smarting.gr",
   },
-  description: "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
-  keywords: ["ανάπτυξη ιστοσελίδων", "ψηφιακές λύσεις", "σχεδιασμός ιστοσελίδων", "ιστοσελιδικές εφαρμογές", "ανάπτυξη επιχείρησης", "ψηφιακό μάρκετινγκ"],
-  authors: [{ name: "Smarting.gr", url: "https://web2.smarting.gr" }],
-  creator: "Smarting.gr",
-  publisher: "Smarting.gr",
+  description:
+    "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
+  keywords: [
+    "ανάπτυξη ιστοσελίδων",
+    "ψηφιακές λύσεις",
+    "σχεδιασμός ιστοσελίδων",
+    "ιστοσελιδικές εφαρμογές",
+    "ανάπτυξη επιχείρησης",
+    "ψηφιακό μάρκετινγκ",
+  ],
+  authors: [{ name: "web.smarting.gr", url: "https://web2.smarting.gr" }],
+  creator: "web.smarting.gr",
+  publisher: "web.smarting.gr",
   formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
+    email: true,
+    address: true,
+    telephone: true,
   },
   openGraph: {
     type: "website",
     locale: "el_GR",
-    url: "https://web2.smarting.gr",
-    title: "Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
-    description: "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
-    siteName: "Smarting.gr",
+    url: "https://web.smarting.gr",
+    title: "web.smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
+    description:
+      "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
+    siteName: "web.smarting.gr",
     images: [
       {
         url: "/og-image.jpg", // You should create this image
         width: 1200,
         height: 630,
-        alt: "Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
+        alt: "web.smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
-    description: "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
+    title: "web.smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
+    description:
+      "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
     images: ["/og-image.jpg"], // You should create this image
   },
   robots: {
@@ -44,19 +54,19 @@ export const baseMetadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   alternates: {
-    canonical: "https://web2.smarting.gr",
+    canonical: "https://web.smarting.gr",
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
-  }
+  },
 };
 
 /**

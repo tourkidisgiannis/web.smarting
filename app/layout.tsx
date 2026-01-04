@@ -32,18 +32,18 @@ export const metadata: Metadata = {
     "ανάπτυξη επιχείρησης",
     "ψηφιακό μάρκετινγκ",
   ],
-  authors: [{ name: "Smarting.gr", url: "https://web2.smarting.gr" }],
-  creator: "Smarting.gr",
-  publisher: "Smarting.gr",
+  authors: [{ name: "web.smarting.gr", url: "https://web.smarting.gr" }],
+  creator: "web.smarting.gr",
+  publisher: "web.smarting.gr",
   formatDetection: {
-    email: false,
+    email: true,
     address: false,
     telephone: false,
   },
   openGraph: {
     type: "website",
     locale: "el_GR",
-    url: "https://web2.smarting.gr",
+    url: "https://web.smarting.gr",
     title: "Web.Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
     description:
       "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
+    title: "web.smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
     description:
       "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
     images: ["/og-image.jpg"], // You should create this image
