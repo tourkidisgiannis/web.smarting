@@ -11,7 +11,7 @@ import { OnboardingTimeline } from "@/components/agency/OnboardingTimeline";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center bg-linear-to-br from-(--sky-blue-light-50) via-white to-(--blue-green-50)">
+    <main className="grainy-bg flex min-h-screen flex-col items-center bg-linear-to-br from-(--sky-blue-light-100) via-(--sky-blue-light-50) to-(--blue-green-100)">
       <div className="w-full relative overflow-x-hidden">
         <Hero />
         <Services />
@@ -19,7 +19,6 @@ export default function Home() {
         <WhyThisMatters />
         <WhatOurClientsSee />
         <OnboardingTimeline />
-        {/* <WhoWeAre /> */}
         <DemoGrid />
         <ContactForm />
       </div>

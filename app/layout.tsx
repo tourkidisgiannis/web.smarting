@@ -6,6 +6,9 @@ import { SiteHeader } from "@/components/site-header";
 import { SmoothScroller } from "@/components/smooth-scroller";
 import Script from "next/script";
 
+// Import business information
+import businessInfo from "./mocks/business-info.json";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,22 +22,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://web.smarting.gr"),
   title: {
-    default: "Web.Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
-    template: "%s | Web.Smarting.gr",
+    default: `${businessInfo.name} - ${businessInfo.tagline}`,
+    template: "%s | " + businessInfo.name,
   },
-  description:
-    "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
+  description: businessInfo.description,
   keywords: [
     "ανάπτυξη ιστοσελίδων",
     "ψηφιακές λύσεις",
     "σχεδιασμός ιστοσελίδων",
     "ιστοσελιδικές εφαρμογές",
-    "ανάπτυξη επιχείρησης",
+    "ανάπτυξη επιχειρήσης",
     "ψηφιακό μάρκετινγκ",
   ],
-  authors: [{ name: "web.smarting.gr", url: "https://web.smarting.gr" }],
-  creator: "web.smarting.gr",
-  publisher: "web.smarting.gr",
+  authors: [{ name: businessInfo.name, url: "https://web.smarting.gr" }],
+  creator: businessInfo.name,
+  publisher: businessInfo.name,
   formatDetection: {
     email: true,
     address: false,
@@ -44,25 +46,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "el_GR",
     url: "https://web.smarting.gr",
-    title: "Web.Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
-    description:
-      "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
-    siteName: "Web.Smarting.gr",
+    title: `${businessInfo.name} - ${businessInfo.tagline}`,
+    description: businessInfo.description,
+    siteName: businessInfo.name,
     images: [
       {
         url: "/og-image.jpg", // You should create this image
         width: 1200,
         height: 630,
-        alt: "Web.Smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
+        alt: `${businessInfo.name} - ${businessInfo.tagline}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "web.smarting.gr - Ψηφιακές Λύσεις & Ανάπτυξη Ιστοσελίδων",
-    description:
-      "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
-    images: ["/og-image.jpg"], // You should create this image
+    title: `${businessInfo.name} - ${businessInfo.tagline}`,
+    description: businessInfo.description,
+    images: ["/og-image.png"], // You should create this image
   },
   robots: {
     index: true,
@@ -97,16 +97,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap"
-          rel="stylesheet"
-        />
         <Script
           id="structured-data"
           type="application/ld+json"
@@ -114,21 +104,39 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Smarting.gr",
+              name: businessInfo.name,
               url: "https://web.smarting.gr",
               logo: "https://web.smarting.gr/logo.png", // You should update this with your actual logo URL
-              description:
-                "Επαγγελματική ανάπτυξη ιστοσελίδων και ψηφιακές λύσεις για επιχειρήσεις. Δημιουργούμε εντυπωσιακές, λειτουργικές ιστοσελίδες και εφαρμογές που βοηθούν την επιχείρησή σας να αναπτυχθεί.",
+              description: businessInfo.description,
               address: {
                 "@type": "PostalAddress",
-                // Add your actual address here
+                streetAddress: businessInfo.address.street,
+                addressLocality: businessInfo.address.city,
+                postalCode: businessInfo.address.postalCode,
+                addressCountry: businessInfo.address.country,
               },
-              contactPoint: {
-                "@type": "ContactPoint",
-                // Add your contact information here
-              },
+              contactPoint: [
+                {
+                  "@type": "ContactPoint",
+                  telephone: businessInfo.phone,
+                  contactType: "customer service",
+                  areaServed: "GR",
+                  availableLanguage: "Greek",
+                },
+                {
+                  "@type": "ContactPoint",
+                  telephone: businessInfo.mobile,
+                  contactType: "customer service",
+                  areaServed: "GR",
+                  availableLanguage: "Greek",
+                },
+              ],
+              email: businessInfo.email,
+              foundingDate: "2025", // Assuming a founding date - you may want to update this
+              identifier: businessInfo["business-registry-number"],
               sameAs: [
-                // Add your social media profiles here
+                businessInfo.socials.facebook,
+                businessInfo.socials.instagram,
               ],
             }),
           }}

@@ -121,7 +121,7 @@ export function Services() {
     <section
       id="services"
       ref={containerRef}
-      className="relative bg-linear-to-br from-(--sky-blue-light-50) via-white to-(--blue-green-50) py-24 md:py-40 overflow-hidden"
+      className="relative  py-24 md:py-40 overflow-hidden"
     >
       {/* Subtle background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" />

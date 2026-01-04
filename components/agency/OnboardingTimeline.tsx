@@ -102,7 +102,10 @@ export function OnboardingTimeline() {
   );
 
   return (
-    <section ref={containerRef} className="py-32 px-6 relative overflow-hidden bg-linear-to-br from-(--sky-blue-light-50) via-white to-(--blue-green-50)">
+    <section
+      ref={containerRef}
+      className="py-32 px-6 relative overflow-hidden "
+    >
       <div className="container mx-auto max-w-5xl relative z-10">
         <div className="text-center mb-24">
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4 text-[var(--deep-space-blue-900)]">
