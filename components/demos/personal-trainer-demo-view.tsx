@@ -14,8 +14,17 @@ import {
   Facebook,
   Menu,
   X,
-  Check
+  Check,
+  Star,
+  Quote
 } from "lucide-react"
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -51,23 +60,32 @@ export function PersonalTrainerDemoView() {
     }, "-=0.5")
 
     // Stats Counter - Running Numbers
-    gsap.utils.toArray<HTMLElement>(".stat-number").forEach((stat) => {
-        gsap.from(stat, {
+    gsap.utils.toArray<HTMLElement>(".stat-counter").forEach((stat) => {
+        const targetValue = parseInt(stat.getAttribute("data-target") || "0")
+        
+        gsap.to(stat, {
             scrollTrigger: {
                 trigger: stat,
                 start: "top 85%",
             },
-            textContent: 0,
-            duration: 2,
-            ease: "power1.out",
+            textContent: targetValue,
+            duration: 2.5,
+            ease: "power2.out",
             snap: { textContent: 1 },
-            stagger: 1, 
-             // Note: basic textContent tweening might need more setup for pure numbers, 
-             // but here we just animate opacity/y for the 'creative' feel if complex generic tweening fails.
-             // Let's stick to standard transforms for reliability.
-             y: 50,
-             opacity: 0
+            stagger: 0.2,
         })
+    })
+
+    gsap.from(".stat-item", {
+         scrollTrigger: {
+             trigger: "#stats-section",
+             start: "top 80%"
+         },
+         y: 50,
+         opacity: 0,
+         duration: 1,
+         stagger: 0.2,
+         ease: "power3.out"
     })
 
     // Program Cards - Staggered Entry with 3D tilt feel
@@ -122,7 +140,9 @@ export function PersonalTrainerDemoView() {
             <div className="hidden md:flex gap-8 font-bold text-xs tracking-widest uppercase">
                 <Link href="#about" className="hover:text-lime-400 transition-colors">Φιλοσοφία</Link>
                 <Link href="#programs" className="hover:text-lime-400 transition-colors">Προγράμματα</Link>
+                <Link href="#pricing" className="hover:text-lime-400 transition-colors">Τιμές</Link>
                 <Link href="#results" className="hover:text-lime-400 transition-colors">Αποτελέσματα</Link>
+                <Link href="#faq" className="hover:text-lime-400 transition-colors">FAQ</Link>
                 <Link href="#contact" className="hover:text-lime-400 transition-colors">Επικοινωνία</Link>
             </div>
 
@@ -141,7 +161,9 @@ export function PersonalTrainerDemoView() {
                 <div className="flex flex-col gap-8 text-center text-3xl font-black uppercase italic">
                     <Link href="#about" onClick={() => setIsMenuOpen(false)}>Φιλοσοφία</Link>
                     <Link href="#programs" onClick={() => setIsMenuOpen(false)}>Προγράμματα</Link>
+                    <Link href="#pricing" onClick={() => setIsMenuOpen(false)}>Τιμές</Link>
                     <Link href="#results" onClick={() => setIsMenuOpen(false)}>Αποτελέσματα</Link>
+                    <Link href="#faq" onClick={() => setIsMenuOpen(false)}>FAQ</Link>
                     <Link href="#contact" onClick={() => setIsMenuOpen(false)}>Επικοινωνία</Link>
                 </div>
             </div>
@@ -167,7 +189,7 @@ export function PersonalTrainerDemoView() {
                     <Button className="bg-lime-400 text-black hover:bg-lime-500 h-16 px-10 rounded-none font-black uppercase tracking-widest text-lg transition-transform hover:scale-105 active:scale-95">
                         Ξεκίνησε Τώρα
                     </Button>
-                    <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black h-16 px-10 rounded-none font-black uppercase tracking-widest text-lg transition-all">
+                    <Button variant="outline" className="text-white border-white bg-black/40 backdrop-blur-md hover:bg-white hover:text-black h-16 px-10 rounded-none font-black uppercase tracking-widest text-lg transition-all">
                         Success Stories
                     </Button>
                 </div>
@@ -184,26 +206,44 @@ export function PersonalTrainerDemoView() {
          </div>
       </section>
 
-      {/* Stats - Brutalist Bar */}
-      <section className="bg-lime-400 text-black py-12 md:py-20">
-          <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:divide-x md:divide-black/10">
-              <div className="stat-number">
-                  <h3 className="text-4xl md:text-6xl font-black">500+</h3>
-                  <p className="font-bold uppercase tracking-widest text-xs md:text-sm mt-2">Ζωές που Άλλαξαν</p>
-              </div>
-              <div className="stat-number">
-                  <h3 className="text-4xl md:text-6xl font-black">10k</h3>
-                  <p className="font-bold uppercase tracking-widest text-xs md:text-sm mt-2">Ώρες Προπόνησης</p>
-              </div>
-              <div className="stat-number">
-                  <h3 className="text-4xl md:text-6xl font-black">100%</h3>
-                  <p className="font-bold uppercase tracking-widest text-xs md:text-sm mt-2">Αφοσίωση</p>
-              </div>
-              <div className="stat-number">
-                  <h3 className="text-4xl md:text-6xl font-black">24/7</h3>
-                  <p className="font-bold uppercase tracking-widest text-xs md:text-sm mt-2">Υποστήριξη</p>
+      {/* Stats - Brutalist Grid */}
+      <section id="stats-section" className="py-20 border-y border-white/5 bg-neutral-900/30 backdrop-blur-sm">
+          <div className="container">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 overflow-hidden">
+                  {[
+                      { val: 500, suffix: "+", label: "Ζωές που Άλλαξαν" },
+                      { val: 10, suffix: "k", label: "Ώρες Προπόνησης" },
+                      { val: 100, suffix: "%", label: "Αφοσίωση" },
+                      { val: 24, suffix: "/7", label: "Υποστήριξη" }
+                  ].map((stat, i) => (
+                      <div key={i} className="stat-item group bg-neutral-950 p-8 text-center hover:bg-neutral-900 transition-colors duration-500 relative overflow-hidden">
+                          <div className="absolute top-0 left-0 w-full h-1 bg-lime-400 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                          <h3 className="text-4xl md:text-6xl font-black text-white group-hover:text-lime-400 transition-colors flex justify-center items-baseline">
+                              <span className="stat-counter" data-target={stat.val}>0</span>
+                              <span>{stat.suffix}</span>
+                          </h3>
+                          <p className="font-bold uppercase tracking-widest text-xs md:text-sm mt-2 text-neutral-500 group-hover:text-white transition-colors">{stat.label}</p>
+                      </div>
+                  ))}
               </div>
           </div>
+      </section>
+
+      {/* Partners / Trusted By */}
+      <section className="py-12 border-b border-white/5 bg-neutral-950">
+        <div className="container">
+            <p className="text-center text-neutral-500 uppercase text-xs font-black tracking-[0.3em] mb-8">
+                Εξοπλισμός & Συνεργάτες
+            </p>
+            <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                {/* Text-based Logos for simplicity, could be SVGs */}
+                <h3 className="text-2xl font-black italic text-white/40 hover:text-white transition-colors cursor-default">ROGUE</h3>
+                <h3 className="text-2xl font-black italic text-white/40 hover:text-white transition-colors cursor-default">NIKE</h3>
+                <h3 className="text-2xl font-black italic text-white/40 hover:text-white transition-colors cursor-default">GYMSHARK</h3>
+                <h3 className="text-2xl font-black italic text-white/40 hover:text-white transition-colors cursor-default">WHOOP</h3>
+                <h3 className="text-2xl font-black italic text-white/40 hover:text-white transition-colors cursor-default">UNDER ARMOUR</h3>
+            </div>
+        </div>
       </section>
 
       {/* About Section */}
@@ -315,6 +355,87 @@ export function PersonalTrainerDemoView() {
           </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 md:py-40 bg-neutral-950 relative border-b border-white/5">
+         <div className="container">
+            <div className="text-center mb-24 max-w-3xl mx-auto">
+                 <h2 className="text-5xl md:text-8xl font-black uppercase italic leading-none mb-8">
+                    Επενδυσε στον <span className="text-lime-400">Εαυτο</span> σου
+                 </h2>
+                 <p className="text-neutral-400 text-lg font-medium">
+                    Δεν είναι έξοδο. Είναι η καλύτερη επένδυση που θα κάνεις ποτέ. Ξεκάθαρες τιμές, χωρίς κρυφές χρεώσεις.
+                 </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 items-start">
+                
+                {/* Tier 1 */}
+                <div className="border border-white/10 bg-neutral-900/50 p-8 md:p-12 hover:border-lime-400/30 transition-all group">
+                    <div className="mb-6">
+                        <h3 className="text-xl font-black uppercase tracking-widest text-neutral-300">Online Coaching</h3>
+                        <div className="mt-4 flex items-baseline gap-1">
+                            <span className="text-4xl font-black text-white">€120</span>
+                            <span className="text-neutral-500 font-bold">/μήνα</span>
+                        </div>
+                    </div>
+                    <ul className="space-y-4 mb-10 text-sm text-neutral-400 font-bold">
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Εξατομικευμένο Πρόγραμμα</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Εβδομαδιαίο Check-in</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Προσαρμογή Διατροφής</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Υποστήριξη μέσω App</li>
+                    </ul>
+                    <Button className="w-full h-14 border border-white/20 bg-transparent hover:bg-white hover:text-black font-black uppercase rounded-none tracking-widest transition-all">
+                        Επιλογή
+                    </Button>
+                </div>
+
+                {/* Tier 2 - Highlighted */}
+                <div className="border-2 border-lime-400 bg-neutral-900/80 p-8 md:p-12 transform md:-translate-y-8 relative shadow-[0_0_40px_rgba(163,230,53,0.15)]">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-lime-400 text-black px-4 py-1 font-black uppercase text-xs tracking-widest whitespace-nowrap">
+                        Best Value
+                    </div>
+                    <div className="mb-6">
+                        <h3 className="text-xl font-black uppercase tracking-widest text-lime-400">Hybrid System</h3>
+                        <div className="mt-4 flex items-baseline gap-1">
+                            <span className="text-5xl font-black text-white">€250</span>
+                            <span className="text-neutral-500 font-bold">/μήνα</span>
+                        </div>
+                    </div>
+                    <ul className="space-y-4 mb-10 text-sm text-white font-bold">
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Όλα του Online Coaching</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> 2x Προπονήσεις / Μήνα (Live)</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Λιπομέτρηση & Μετρήσεις</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Άμεση πρόσβαση WhatsApp</li>
+                    </ul>
+                    <Button className="w-full h-14 bg-lime-400 hover:bg-lime-500 text-black font-black uppercase rounded-none tracking-widest transition-all hover:shadow-[0_0_20px_rgba(163,230,53,0.4)]">
+                        Ξεκίνα Τώρα
+                    </Button>
+                </div>
+
+                {/* Tier 3 */}
+                <div className="border border-white/10 bg-neutral-900/50 p-8 md:p-12 hover:border-lime-400/30 transition-all group">
+                    <div className="mb-6">
+                        <h3 className="text-xl font-black uppercase tracking-widest text-neutral-300">1-on-1 Elite</h3>
+                        <div className="mt-4 flex items-baseline gap-1">
+                            <span className="text-4xl font-black text-white">€500</span>
+                            <span className="text-neutral-500 font-bold">/μήνα</span>
+                        </div>
+                    </div>
+                    <ul className="space-y-4 mb-10 text-sm text-neutral-400 font-bold">
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> 12x Προπονήσεις / Μήνα</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Πλήρης Διατροφική Παρακολούθηση</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> Physio Assessment</li>
+                        <li className="flex items-center gap-3"><Check className="w-4 h-4 text-lime-400"/> 24/7 VIP Υποστήριξη</li>
+                    </ul>
+                    <Button className="w-full h-14 border border-white/20 bg-transparent hover:bg-white hover:text-black font-black uppercase rounded-none tracking-widest transition-all">
+                        Αίτηση
+                    </Button>
+                </div>
+
+            </div>
+         </div>
+      </section>
+
       {/* Results / Transformations */}
       <section id="results" className="py-24 md:py-40 bg-black overflow-hidden">
           <div className="container">
@@ -363,6 +484,62 @@ export function PersonalTrainerDemoView() {
                     </Button>
                </div>
           </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-24 border-b border-white/5 bg-neutral-900/20">
+        <div className="container">
+            <h2 className="text-4xl md:text-6xl font-black uppercase italic text-center mb-16">Iron <span className="text-lime-400">Voices</span></h2>
+            <div className="grid md:grid-cols-3 gap-8">
+                {[
+                    {name: "Γιώργος Κ.", role: "Επιχειρηματίας", text: "Η πειθαρχία που έχτισα εδώ μεταφέρθηκε και στην επιχείρησή μου. Δεν είναι απλά γυμναστική, είναι σχολείο ζωής."},
+                    {name: "Άννα Μ.", role: "Αρχιτέκτων", text: "Ποτέ δεν πίστευα ότι θα μπορούσα να σηκώσω αυτά τα κιλά. Ο Alex με έκανε να πιστέψω στον εαυτό μου ξανά."},
+                    {name: "Δημήτρης Σ.", role: "Αθλητής", text: "Η μεθοδολογία είναι σε άλλο επίπεδο. Αν θες σοβαρά αποτελέσματα και είσαι διατεθειμένος να πονέσεις, εδώ είναι το μέρος σου."}
+                ].map((testimonial, i) => (
+                    <div key={i} className="bg-neutral-950 p-8 border border-white/5 relative group hover:-translate-y-2 transition-transform duration-300">
+                        <Quote className="absolute top-6 right-6 text-lime-400/20 w-10 h-10 group-hover:text-lime-400/40 transition-colors" />
+                        <div className="flex gap-1 text-lime-400 mb-6">
+                            {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
+                        </div>
+                        <p className="text-neutral-300 font-medium mb-8 leading-relaxed">
+                            &quot;{testimonial.text}&quot;
+                        </p>
+                        <div>
+                            <h4 className="font-black uppercase text-white">{testimonial.name}</h4>
+                            <p className="text-xs text-neutral-500 font-bold uppercase tracking-wider">{testimonial.role}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-24 bg-black">
+        <div className="container max-w-3xl">
+            <div className="text-center mb-16">
+                 <h2 className="text-4xl md:text-6xl font-black uppercase italic mb-6">Συχνές <span className="text-lime-400">Ερωτήσεις</span></h2>
+            </div>
+            
+            <Accordion type="single" collapsible className="space-y-4">
+                {[
+                    {q: "Είναι το πρόγραμμα κατάλληλο για αρχάριους;", a: "Ναι, αλλά απαιτεί αφοσίωση. Κάθε πρόγραμμα προσαρμόζεται στο επίπεδό σου, αλλά η ένταση και η απαίτηση για πειθαρχία είναι αδιαπραγμάτευτες."},
+                    {q: "Παρέχετε διατροφικό πλάνο;", a: "Φυσικά. Η προπόνηση είναι μόνο το 40% της εξίσωσης. Παρέχουμε πλήρη καθοδήγηση macronutrients και στρατηγική γευμάτων βασισμένη στους στόχους σου."},
+                    {q: "Μπορώ να κάνω το πρόγραμμα από το σπίτι;", a: "Το Online Coaching μπορεί να προσαρμοστεί για εξοπλισμό σπιτιού, αρκεί να υπάρχει ο βασικός εξοπλισμός (αλτήρες, πάγκος). Για βέλτιστα αποτελέσματα, προτείνουμε συνδρομή σε γυμναστήριο."},
+                    {q: "Τι συμβαίνει αν χάσω μια προπόνηση;", a: "Η συνέπεια είναι το κλειδί. Αν χάσεις μια, την αναπληρώνουμε. Αν γίνει συνήθεια, δεν είμαστε το κατάλληλο fit για σένα."},
+                    {q: "Επιστροφή χρημάτων;", a: "Πιστεύουμε στο έργο μας. Αν ακολουθήσεις το πρόγραμμα 100% και δεν δεις αποτελέσματα σε 30 μέρες, επιστρέφουμε τα χρήματά σου."}
+                ].map((faq, i) => (
+                    <AccordionItem key={i} value={`item-${i}`} className="border border-white/10 bg-neutral-900/30 px-6">
+                        <AccordionTrigger className="text-lg font-bold text-white uppercase hover:text-lime-400 hover:no-underline text-left">
+                            {faq.q}
+                        </AccordionTrigger>
+                        <AccordionContent className="text-neutral-400 text-base leading-relaxed">
+                            {faq.a}
+                        </AccordionContent>
+                    </AccordionItem>
+                ))}
+            </Accordion>
+        </div>
       </section>
 
       {/* CTA / Contact */}
