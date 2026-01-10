@@ -103,7 +103,10 @@ export function DemoGrid() {
   );
 
   return (
-    <div ref={containerRef} className="relative bg-slate-950 overflow-x-hidden">
+    <div
+      ref={containerRef}
+      className="  relative bg-slate-950 overflow-x-hidden"
+    >
       {/* Header */}
       <section
         className="relative h-[60vh] flex flex-col items-center justify-center text-center px-4"

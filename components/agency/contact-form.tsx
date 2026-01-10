@@ -146,7 +146,7 @@ export function ContactForm() {
     <section
       id="contact"
       ref={containerRef}
-      className="relative z-40 min-h-screen flex items-center"
+      className="relative container z-40 min-h-screen flex items-center"
     >
       <div className="py-20 md:py-32 w-full">
         <div className="container relative overflow-visible">

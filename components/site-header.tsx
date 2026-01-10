@@ -31,8 +31,7 @@ const navItems = [
   { href: "/#ui-ux", label: "Λύσεις", icon: Palette },
   { href: "/#why-matters", label: "Γιατί", icon: Heart },
   { href: "/#clients-see", label: "Πελάτες", icon: Users },
-  // { href: "/#who-we-are", label: "Ποιοι Είμαστε", icon: User },
-  { href: "/#demos", label: "Παραδείγματα", icon: Monitor },
+  { href: "/#demos", label: "Demos", icon: Monitor },
   { href: "/#contact", label: "Επικοινωνία", icon: Mail },
 ];
 
@@ -62,15 +61,26 @@ export function SiteHeader() {
           />
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex  gap-6 text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             {navItems.map((item) => (
               <MagneticLink
                 key={item.href}
                 href={item.href}
-                className="relative group cursor-pointer text-(--deep-space-blue-700) transition-colors hover:text-(--blue-green-600)"
+                className="relative group cursor-pointer text-(--deep-space-blue-700) transition-colors hover:text-(--blue-green-100)"
               >
                 <span className="relative z-10">{item.label}</span>
-                <span className="absolute inset-0 -z-10 rounded-full bg-(--blue-green-500) opacity-0 scale-75 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100" />
+                <span
+                  className="
+    absolute -inset-x-3 -inset-y-2
+    rounded-full
+    bg-[var(--blue-green-500)]
+    opacity-0 scale-75
+    transition-all duration-500
+    group-hover:opacity-100
+    group-hover:scale-100
+   
+  "
+                />
               </MagneticLink>
             ))}
           </nav>

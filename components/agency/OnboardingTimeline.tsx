@@ -18,33 +18,33 @@ gsap.registerPlugin(ScrollTrigger);
 const steps = [
   {
     icon: MessageSquare,
-    title: "1. Στρατηγική Ανάλυση",
+    title: "1. Η Γνωριμία",
     description:
-      "Εμβαθύνουμε στο όραμά σας και καθορίζουμε τους στόχους που θα φέρουν πραγματικά αποτελέσματα.",
+      "Συζητάμε τις ιδέες σας και βάζουμε κάτω το πλάνο. Στόχος μας; Να καταλάβουμε ακριβώς τι χρειάζεστε.",
   },
   {
     icon: PenTool,
-    title: "2. Σχεδιασμός Εμπειρίας",
+    title: "2. Ο Σχεδιασμός",
     description:
-      "Δημιουργούμε μια μοναδική αισθητική ταυτότητα που αποπνέει κύρος και επαγγελματισμό.",
+      "Δίνουμε μορφή στο όραμά σας. Φτιάχνουμε κάτι που όχι μόνο δείχνει υπέροχο, αλλά λειτουργεί και τέλεια.",
   },
   {
     icon: Code2,
-    title: "3. High-End Ανάπτυξη",
+    title: "3. Η Κατασκευή",
     description:
-      "Μετατρέπουμε το σχέδιο σε μια ταχύτατη ιστοσελίδα χρησιμοποιώντας Next.js για κορυφαίες επιδόσεις.",
+      "Ώρα για δράση. Χτίζουμε την ιστοσελίδα σας με τις καλύτερες τεχνολογίες για να έχετε ταχύτητα και ασφάλεια.",
   },
   {
     icon: SearchCheck,
-    title: "4. Διασφάλιση Ποιότητας",
+    title: "4. Ο Έλεγχος",
     description:
-      "Εξαλείφουμε κάθε τεχνικό σφάλμα, διασφαλίζοντας άψογη εμπειρία σε κάθε συσκευή και browser.",
+      "Δεν μας αρέσουν τα λάθη. Τσεκάρουμε τα πάντα διπλά για να είμαστε σίγουροι ότι όλα είναι στην εντέλεια.",
   },
   {
     icon: Rocket,
-    title: "5. Go-Live & Υποστήριξη",
+    title: "5. Η Πρεμιέρα",
     description:
-      "Το project σας εκτοξεύεται. Παραμένουμε δίπλα σας για τη συνεχή εξέλιξη της παρουσίας σας.",
+      "Είμαστε στον αέρα! Και αφού ξεκινήσουμε, παραμένουμε δίπλα σας για να το εξελίξουμε κι άλλο.",
   },
 ];
 
@@ -104,16 +104,16 @@ export function OnboardingTimeline() {
   return (
     <section
       ref={containerRef}
-      className="py-32 px-6 relative overflow-hidden "
+      className="py-32 container px-6 relative overflow-hidden "
     >
       <div className="container mx-auto max-w-5xl relative z-10">
         <div className="text-center mb-24">
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4 text-[var(--deep-space-blue-900)]">
-            Η Διαδικασία μας
+            Πώς Δουλεύουμε
           </h2>
           <p className="text-[var(--deep-space-blue-700)] text-lg max-w-2xl mx-auto">
-            Από την ιδέα στην υλοποίηση, πιστεύουμε στη διαφάνεια και την
-            ποιότητα σε κάθε βήμα.
+            Απλά βήματα, χωρίς μπερδεμένους όρους. Από την πρώτη καλημέρα μέχρι
+            το τελικό αποτέλεσμα.
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export function OnboardingTimeline() {
             className="absolute left-4 md:left-1/2 top-0 w-[2px] bg-gradient-to-b from-[var(--blue-green-500)] to-[var(--deep-space-blue-500)] md:-translate-x-1/2 origin-top"
           />
 
-          <div className="space-y-12 md:space-y-24">
+          <div className="     space-y-12 md:space-y-24">
             {steps.map((step, index) => (
               <div
                 key={index}
@@ -152,7 +152,7 @@ export function OnboardingTimeline() {
                     <h3 className="text-2xl mb-3 flex items-center md:inline-flex gap-3">
                       <span
                         className={cn(
-                          "md:hidden inline-flex items-center justify-center w-8 h-8 rounded-full bg-[var(--blue-green-100)] text-[var(--blue-green-600)]"
+                          "inline-flex items-center justify-center w-8 h-8 rounded-full bg-[var(--blue-green-100)] text-[var(--blue-green-600)]"
                         )}
                       >
                         <step.icon size={16} />

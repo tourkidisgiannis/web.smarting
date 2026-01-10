@@ -13,31 +13,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const problems = [
   {
-    title: "Ψηφιακό Έλλειμμα Εμπιστοσύνης",
+    title: "Κερδίστε την Εμπιστοσύνη",
     description:
-      "Όταν η πρώτη εντύπωση δεν εκπέμπει τη δέουσα σοβαρότητα, η εμπιστοσύνη του πελάτη χάνεται πριν καν ξεκινήσει η συζήτηση.",
-    icon: Fingerprint,
-    tag: "Brand Identity",
+      "Μια επαγγελματική εικόνα εμπνέει ασφάλεια και σιγουριά από την πρώτη στιγμή, θέτοντας τα θεμέλια για μια επιτυχημένη συνεργασία.",
+    icon: ShieldAlert,
+    tag: "Trust",
   },
   {
-    title: "Αναντιστοιχία Κοινού",
+    title: "Προσελκύστε το Ιδανικό Κοινό",
     description:
-      "Μια μέτρια παρουσία προσελκύει πελάτες που αναζητούν τη χαμηλότερη τιμή, αντί για εκείνους που εκτιμούν την υψηλή αξία.",
+      "Η στοχευμένη παρουσία φέρνει κοντά σας πελάτες που εκτιμούν την ποιότητα και ταιριάζουν απόλυτα με τη φιλοσοφία σας.",
     icon: Users,
     tag: "Targeting",
   },
   {
-    title: "Οικονομία της Πειθούς",
+    title: "Αναδείξτε την Αυθεντία σας",
     description:
-      "Αναγκάζεστε να καταβάλλετε διπλάσια προσπάθεια για να αποδείξετε την αυθεντία σας, επειδή η ιστοσελίδα σας δεν το κάνει για εσάς.",
+      "Αφήστε την ιστοσελίδα σας να μιλήσει για την εμπειρία σας, αποδεικνύοντας την αξία σας χωρίς να χρειάζεται να πείτε λέξη.",
     icon: Zap,
-    tag: "Efficiency",
+    tag: "Authority",
   },
   {
-    title: "Διάβρωση Επαγγελματικής Φήμης",
+    title: "Η Εικόνα που σας Αξίζει",
     description:
-      "Η online εικόνα σας λειτουργεί ως εμπόδιο, αδικώντας την πραγματική ποιότητα των υπηρεσιών και του κύρους σας.",
-    icon: ShieldAlert,
+      "Ευθυγραμμίστε την ψηφιακή σας ταυτότητα με την πραγματική ποιότητα των υπηρεσιών σας, ενισχύοντας τη φήμη σας στην αγορά.",
+    icon: Fingerprint,
     tag: "Reputation",
   },
 ];
@@ -121,7 +121,7 @@ export function Services() {
     <section
       id="services"
       ref={containerRef}
-      className="relative  py-24 md:py-40 overflow-hidden"
+      className="relative container  py-24 md:py-40 overflow-hidden"
     >
       {/* Subtle background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" />
@@ -132,19 +132,21 @@ export function Services() {
           className="max-w-4xl mx-auto text-center mb-24 md:mb-32"
         >
           <span className="inline-block py-1 px-3 mb-6 text-xs font-bold tracking-[0.2em] uppercase text-(--blue-green-600) bg-(--blue-green-50) rounded-full">
-            Strategic Insight
+            Digital Growth
           </span>
           <h2 className="text-4xl md:text-7xl font-bold text-(--deep-space-blue-900) mb-8 tracking-tight">
-            Όταν η ιστοσελίδα δεν βοηθά,{" "}
-            <span className="text-(--blue-green-600)">σας κοστίζει.</span>
+            Η Ιστοσελίδα σας,{" "}
+            <span className="text-(--blue-green-600)">
+              ο Καλύτερος Σύμμαχός σας.
+            </span>
           </h2>
           <p className="text-xl md:text-2xl text-(--deep-space-blue-700) font-medium mb-12">
-            Μια μέτρια online παρουσία δεν είναι απλώς «παθητική» – λειτουργεί
-            ενεργά εναντίον σας.
+            Μια προσεγμένη online παρουσία εργάζεται για εσάς 24/7, ανοίγοντας
+            δρόμους για νέες ευκαιρίες.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left border-t border-slate-100 pt-12">
-            {["Υπονόμευση Κύρους", "Διαφυγόντα Κέρδη", "Αμφισβήτηση Αξίας"].map(
+            {["Αύξηση Κύρους", "Περισσότεροι Πελάτες", "Ανάδειξη Αξίας"].map(
               (item, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="h-1.5 w-1.5 rounded-full bg-(--blue-green-500)" />
@@ -198,15 +200,13 @@ export function Services() {
 
         <div className="mt-24 text-center">
           <p className="text-(--deep-space-blue-600) font-medium mb-6">
-            Λιγότερη αμφιβολία σημαίνει περισσότερες σωστές επαφές.
+            Δώστε στην επιχείρησή σας την ώθηση που της αξίζει.
           </p>
           <Link
             href="#contact"
             className="group relative px-8 py-4 bg-(--deep-space-blue-900) text-white rounded-full font-bold transition-all duration-300 hover:bg-(--blue-green-600) shadow-lg hover:shadow-xl overflow-hidden inline-block"
           >
-            <span className="relative z-10">
-              Επανασχεδιάστε την Παρουσία σας
-            </span>
+            <span className="relative z-10">Ξεκινήστε την Αλλαγή</span>
             <span className="absolute inset-0 bg-(--blue-green-500) transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-0" />
             <ArrowRight className="ml-2 h-5 w-5 relative z-10 inline-block transition-transform group-hover:translate-x-1" />
           </Link>

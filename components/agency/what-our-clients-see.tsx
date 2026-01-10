@@ -61,7 +61,7 @@ export function WhatOurClientsSee() {
     <section
       id="clients-see"
       ref={containerRef}
-      className="relative z-20 py-24 md:py-32 clients-see-bg overflow-hidden"
+      className="relative container z-20 py-24 md:py-32 clients-see-bg overflow-hidden"
     >
       <div className="container px-4">
         <div className="max-w-4xl mx-auto">

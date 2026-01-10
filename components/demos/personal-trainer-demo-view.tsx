@@ -28,6 +28,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import Image from "next/image"
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -255,7 +256,7 @@ export function PersonalTrainerDemoView() {
           <div className="container grid md:grid-cols-2 gap-12 md:gap-24 items-center">
               <div className="relative">
                   <div className="aspect-[4/5] bg-neutral-800 relative z-10 grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden shadow-2xl">
-                       <img 
+                       <Image 
                         src="https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=2787&auto=format&fit=crop" 
                         alt="Trainer" 
                         className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-1000"

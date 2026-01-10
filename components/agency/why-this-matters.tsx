@@ -76,7 +76,7 @@ export function WhyThisMatters() {
     <section
       id="why-matters"
       ref={containerRef}
-      className="relative z-20 min-h-screen why-matters-bg"
+      className="relative container z-20 min-h-screen why-matters-bg"
     >
       <div className="py-24 md:py-32">
         <div className="container px-4">
