@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SmoothScroller } from "@/components/smooth-scroller";
 import Script from "next/script";
+import { Toaster } from "react-hot-toast";
 
 // Import business information
 import businessInfo from "./mocks/business-info.json";
@@ -155,6 +156,7 @@ export default function RootLayout({
           <SmoothScroller>
             <SiteHeader />
             {children}
+            <Toaster position="top-right" />
           </SmoothScroller>
         </ThemeProvider>
       </body>

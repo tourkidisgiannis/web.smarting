@@ -140,7 +140,7 @@ export function Services() {
               ο Καλύτερος Σύμμαχός σας.
             </span>
           </h2>
-          <p className="text-xl md:text-2xl text-(--deep-space-blue-700) font-medium mb-12">
+          <p className="text-xl md:text-2xl text-(--deep-space-blue-900) font-medium mb-12">
             Μια προσεγμένη online παρουσία εργάζεται για εσάς 24/7, ανοίγοντας
             δρόμους για νέες ευκαιρίες.
           </p>
@@ -150,7 +150,7 @@ export function Services() {
               (item, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="h-1.5 w-1.5 rounded-full bg-(--blue-green-500)" />
-                  <span className="text-(--deep-space-blue-800) font-semibold">
+                  <span className="text-(--deep-space-blue-900) font-semibold">
                     {item}
                   </span>
                 </div>
@@ -185,13 +185,9 @@ export function Services() {
                   <h3 className="text-2xl md:text-3xl font-bold text-(--deep-space-blue-900) mb-4">
                     {problem.title}
                   </h3>
-                  <p className="text-lg text-(--deep-space-blue-700) leading-relaxed mb-8 flex-grow">
+                  <p className="text-lg text-(--deep-space-blue-900) leading-relaxed mb-8 flex-grow">
                     {problem.description}
                   </p>
-
-                  <div className="flex items-center gap-2 text-sm font-bold text-(--blue-green-600) opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-[-10px] group-hover:translate-x-0">
-                    Ανάλυση Λύσης <ArrowRight size={16} />
-                  </div>
                 </div>
               </Card>
             </div>
@@ -199,7 +195,7 @@ export function Services() {
         </div>
 
         <div className="mt-24 text-center">
-          <p className="text-(--deep-space-blue-600) font-medium mb-6">
+          <p className="text-(--deep-space-blue-900) font-medium mb-6">
             Δώστε στην επιχείρησή σας την ώθηση που της αξίζει.
           </p>
           <Link

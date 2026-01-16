@@ -70,7 +70,7 @@ export function WhatOurClientsSee() {
             <h2 className="text-4xl font-bold tracking-tight sm:text-5xl text-[var(--deep-space-blue-900)] mb-6">
               Αποτελέσματα στην πράξη
             </h2>
-            <p className="text-[var(--deep-space-blue-700)] text-lg md:text-xl leading-relaxed">
+            <p className="text-[var(--deep-space-blue-900)] text-lg md:text-xl leading-relaxed">
               Μετά τη σωστή αναβάθμιση της online παρουσίας τους, οι πελάτες μας
               αναφέρουν:
             </p>
@@ -86,7 +86,7 @@ export function WhatOurClientsSee() {
               ].map((text, index) => (
                 <li
                   key={index}
-                  className="flex items-center gap-4 text-[var(--deep-space-blue-800)] text-xl md:text-2xl font-medium"
+                  className="flex items-center gap-4 text-[var(--deep-space-blue-900)] text-xl md:text-2xl font-medium"
                 >
                   <span className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                     <svg
@@ -120,7 +120,7 @@ export function WhatOurClientsSee() {
             <p className="relative z-10 text-2xl md:text-3xl italic text-[var(--deep-space-blue-900)] font-semibold leading-snug text-center">
               «Οι πελάτες καταλαβαίνουν το επίπεδό μας πριν καν μιλήσουμε.»
             </p>
-            <div className="mt-6 flex justify-center items-center gap-2 text-[var(--deep-space-blue-500)] font-semibold uppercase tracking-widest text-sm">
+            <div className="mt-6 flex justify-center items-center gap-2 text-[var(--deep-space-blue-900)] font-semibold uppercase tracking-widest text-sm">
               <span className="h-px w-8 bg-[var(--deep-space-blue-200)]"></span>
               Feedback Πελάτη
               <span className="h-px w-8 bg-[var(--deep-space-blue-200)]"></span>

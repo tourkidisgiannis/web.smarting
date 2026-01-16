@@ -51,7 +51,7 @@ export function ServicesBento() {
             Υπηρεσίες που{" "}
             <span className="text-(--blue-green-600)">Ξεχωρίζουν</span>
           </h2>
-          <p className="text-xl text-(--deep-space-blue-700) max-w-2xl mx-auto">
+          <p className="text-xl text-(--deep-space-blue-900) max-w-2xl mx-auto">
             Ολοκληρωμένες λύσεις για την ψηφιακή σας ανάπτυξη, από τον σχεδιασμό
             μέχρι την υποστήριξη.
           </p>
@@ -68,7 +68,7 @@ export function ServicesBento() {
                 <h3 className="text-3xl md:text-4xl font-bold text-(--deep-space-blue-900) mb-4">
                   Κυριαρχία στην Google (SEO)
                 </h3>
-                <p className="text-lg text-(--deep-space-blue-800) leading-relaxed max-w-md">
+                <p className="text-lg text-(--deep-space-blue-900) leading-relaxed max-w-md">
                   Στρατηγικές SEO που φέρνουν την ιστοσελίδα σας στην πρώτη
                   σελίδα. Αυξήστε την οργανική επισκεψιμότητα και κερδίστε
                   πελάτες χωρίς διαφημίσεις.
@@ -122,7 +122,7 @@ export function ServicesBento() {
               <h3 className="text-2xl font-bold text-(--deep-space-blue-900) mb-4">
                 Responsive & Modern
               </h3>
-              <p className="text-(--deep-space-blue-700) mb-8">
+              <p className="text-(--deep-space-blue-900) mb-8">
                 Σχεδιασμός που μαγνητίζει και προσαρμόζεται άψογα σε κινητά,
                 tablets και desktops.
               </p>
@@ -159,7 +159,7 @@ export function ServicesBento() {
               <h3 className="text-xl font-bold text-(--deep-space-blue-900) mb-2">
                 Αστραπιαία Ταχύτητα
               </h3>
-              <p className="text-sm text-(--deep-space-blue-700)">
+              <p className="text-sm text-(--deep-space-blue-900)">
                 Core Web Vitals Optimized. Γιατί κανείς δεν περιμένει.
               </p>
             </div>
@@ -177,7 +177,7 @@ export function ServicesBento() {
               <h3 className="text-xl font-bold text-(--deep-space-blue-900) mb-2">
                 E-shop & Πωλήσεις
               </h3>
-              <p className="text-sm text-(--deep-space-blue-700)">
+              <p className="text-sm text-(--deep-space-blue-900)">
                 Σύγχρονα ηλεκτρονικά καταστήματα, σχεδιασμένα για μετατροπές.
               </p>
             </div>
@@ -197,7 +197,7 @@ export function ServicesBento() {
               <h3 className="text-xl font-bold text-(--deep-space-blue-900) mb-2">
                 Τεχνική Υποστήριξη
               </h3>
-              <p className="text-sm text-(--deep-space-blue-700)">
+              <p className="text-sm text-(--deep-space-blue-900)">
                 Δίπλα σας και μετά την παράδοση. Ασφάλεια ότι όλα λειτουργούν
                 ρολόι.
               </p>
@@ -214,7 +214,7 @@ export function ServicesBento() {
               <h3 className="text-2xl font-bold text-(--deep-space-blue-900) mb-2">
                 Ασφάλεια & Hosting
               </h3>
-              <p className="text-(--deep-space-blue-700)">
+              <p className="text-(--deep-space-blue-900)">
                 Πιστοποιητικά SSL, καθημερινά backups και hosting σε ταχύτατους
                 servers για μέγιστη ασφάλεια και uptime 99.9%.
               </p>
@@ -249,7 +249,7 @@ export function ServicesBento() {
               <h3 className="text-xl font-bold text-(--deep-space-blue-900) mb-2">
                 Custom Εφαρμογές
               </h3>
-              <p className="text-sm text-(--deep-space-blue-700)">
+              <p className="text-sm text-(--deep-space-blue-900)">
                 Εξειδικευμένες λύσεις λογισμικού για τις μοναδικές ανάγκες της
                 επιχείρησής σας.
               </p>

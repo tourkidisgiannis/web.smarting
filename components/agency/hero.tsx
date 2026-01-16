@@ -95,7 +95,7 @@ export function Hero() {
 
           <p
             ref={textRef}
-            className="mt-4 text-lg leading-relaxed text-[var(--deep-space-blue-700)] sm:text-2xl"
+            className="mt-4 text-lg leading-relaxed text-[var(--deep-space-blue-900)] sm:text-2xl"
           >
             Εξειδικευμένες ψηφιακές λύσεις για επιστήμονες και επαγγελματίες που
             δεν συμβιβάζονται
@@ -127,11 +127,11 @@ export function Hero() {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-70">
-          <span className="text-xs font-semibold tracking-widest uppercase mb-1">
+          <span className="text-xs font-semibold tracking-widest uppercase mb-1 text-[var(--deep-space-blue-900)]">
             Scroll
           </span>
           <svg
-            className="w-5 h-5 text-[var(--deep-space-blue-700)]"
+            className="w-5 h-5 text-[var(--deep-space-blue-900)]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

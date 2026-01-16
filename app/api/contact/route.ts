@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       html: `
   <div style="
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-    background-color: #f4f6f8;
+    background-color: #f0f9ff;
     padding: 24px;
   ">
     <div style="
@@ -89,7 +89,7 @@ export async function POST(req: Request) {
       overflow: hidden;
     ">
       <div style="
-        background: linear-gradient(135deg, #2563eb, #1e40af);
+        background: linear-gradient(135deg, #0ea5e9, #0284c7);
         padding: 20px 24px;
       ">
         <h2 style="
@@ -102,7 +102,7 @@ export async function POST(req: Request) {
         </h2>
         <p style="
           margin: 4px 0 0;
-          color: #dbeafe;
+          color: #cffafe;
           font-size: 14px;
         ">
           web.smarting.gr
@@ -111,24 +111,24 @@ export async function POST(req: Request) {
 
       <div style="padding: 24px;">
         <div style="margin-bottom: 12px;">
-          <strong style="color: #374151;">Email:</strong>
-          <span style="color: #111827;"> ${email}</span>
+          <strong style="color: #1e3a8a;">Email:</strong>
+          <span style="color: #0c4a6e;"> ${email}</span>
         </div>
 
         <div style="
-          border-top: 1px solid #e5e7eb;
+          border-top: 1px solid #bae6fd;
           padding-top: 16px;
         ">
           <p style="
             margin: 0 0 8px;
             font-weight: 600;
-            color: #374151;
+            color: #1e3a8a;
           ">
             Message
           </p>
           <p style="
             margin: 0;
-            color: #111827;
+            color: #0c4a6e;
             line-height: 1.6;
             white-space: normal;
           ">
@@ -142,7 +142,7 @@ export async function POST(req: Request) {
       text-align: center;
       margin-top: 16px;
       font-size: 12px;
-      color: #6b7280;
+      color: #0c4a6e;
     ">
       This email was generated automatically from web.smarting.gr
     </p>
@@ -169,26 +169,26 @@ export async function POST(req: Request) {
         Αυτό είναι ένα αυτόματο μήνυμα επιβεβαίωσης. Παρακαλούμε μην απαντήσετε σε αυτό το email.
       `,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
-          <div style="background-color: #0B3D59; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
-            <h1 style="color: #00ADB5; margin: 0;">web.smarting.gr</h1>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f0f9ff;">
+          <div style="background: linear-gradient(135deg, #0ea5e9, #0284c7); padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+            <h1 style="color: #ffffff; margin: 0; font-size: 24px;">web.smarting.gr</h1>
           </div>
-          <div style="background-color: white; padding: 30px; border-radius: 0 0 8px 8px;">
-            <h2 style="color: #0B3D59;">Αγαπητέ/ή ${email},</h2>
-            <p style="color: #333; line-height: 1.6;">
+          <div style="background-color: white; padding: 30px; border-radius: 0 0 8px 8px; border: 1px solid #bae6fd;">
+            <h2 style="color: #1e3a8a;">Αγαπητέ/ή ${email},</h2>
+            <p style="color: #1e408a; line-height: 1.6;">
               Σας ευχαριστούμε για το ενδιαφέρον σας!
             </p>
-            <p style="color: #333; line-height: 1.6;">
+            <p style="color: #1e408a; line-height: 1.6;">
               Θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατό.
             </p>
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-              <p style="color: #666; font-size: 14px; margin: 0;">
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #bae6fd;">
+              <p style="color: #1e3a8a; font-size: 14px; margin: 0;">
                 Με εκτίμηση,<br/>
                 Η ομάδα της web.smarting.gr
               </p>
             </div>
-            <div style="margin-top: 20px; padding: 15px; background-color: #f9f9f9; border-left: 4px solid #00ADB5; border-radius: 4px;">
-              <p style="color: #666; font-size: 12px; margin: 0;">
+            <div style="margin-top: 20px; padding: 15px; background-color: #eff6ff; border-left: 4px solid #0ea5e9; border-radius: 4px;">
+              <p style="color: #1e3a8a; font-size: 12px; margin: 0;">
                 <em>Αυτό είναι ένα αυτόματο μήνυμα επιβεβαίωσης. Παρακαλούμε μην απαντήσετε σε αυτό το email.</em>
               </p>
             </div>

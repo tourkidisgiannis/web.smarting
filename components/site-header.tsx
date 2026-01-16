@@ -68,7 +68,7 @@ export function SiteHeader() {
                 href={item.href}
                 className="relative group cursor-pointer text-(--deep-space-blue-700) transition-colors hover:text-(--blue-green-100)"
               >
-                <span className="relative z-10">{item.label}</span>
+                <span className="relative z-10 text-(--deep-space-blue-900)">{item.label}</span>
                 <span
                   className="
     absolute -inset-x-3 -inset-y-2

@@ -86,17 +86,17 @@ export function WhyThisMatters() {
               Για επαγγελματίες, η πρώτη εντύπωση δεν επιτρέπει περιθώρια
               σφάλματος.
             </h2>
-            <p className="text-[var(--deep-space-blue-700)] text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+            <p className="text-[var(--deep-space-blue-900)] text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
               Οι πελάτες σας δεν επιλέγουν απλώς μια υπηρεσία· αναζητούν τη
               βεβαιότητα ότι εμπιστεύονται τον κατάλληλο άνθρωπο.
             </p>
 
             <div className="inline-block bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-[var(--deep-space-blue-100)] text-left shadow-sm">
-              <p className="text-[var(--deep-space-blue-800)] font-medium mb-4">
+              <p className="text-[var(--deep-space-blue-900)] font-medium mb-4">
                 Η ιστοσελίδα σας είτε:
               </p>
               <ul className="space-y-3 mb-6">
-                <li className="flex items-center text-[var(--deep-space-blue-700)]">
+                <li className="flex items-center text-[var(--deep-space-blue-900)]">
                   <span className="w-1.5 h-1.5 rounded-full bg-red-400 mr-3" />
                   Ενισχύει την αβεβαιότητα της επιλογής
                 </li>
@@ -110,39 +110,6 @@ export function WhyThisMatters() {
               </p>
             </div>
           </div>
-
-          {/* Detailed Benefits Grid */}
-          {/* <div className="mt-24">
-            <h3 className="text-2xl font-bold text-center text-[var(--deep-space-blue-900)] mb-12">
-              Τι αλλάζει όταν η ιστοσελίδα δουλεύει υπέρ σας
-            </h3>
-            <div
-              ref={cardsRef}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
-            >
-              {benefits.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-8 rounded-xl border border-[var(--deep-space-blue-50)] shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <h4 className="text-xl font-bold text-[var(--deep-space-blue-900)] mb-3">
-                    {item.title}
-                  </h4>
-                  <p className="text-[var(--deep-space-blue-600)] mb-4 leading-relaxed">
-                    {item.description}
-                  </p>
-                  <div className="pt-4 border-t border-[var(--deep-space-blue-50)]">
-                    <p className="text-sm font-semibold uppercase tracking-wider text-[var(--deep-space-blue-400)] mb-1">
-                      Όφελος:
-                    </p>
-                    <p className="text-[var(--deep-space-blue-800)] font-medium">
-                      {item.benefit}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div> */}
         </div>
       </div>
     </section>

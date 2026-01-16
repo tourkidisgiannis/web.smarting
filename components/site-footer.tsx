@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Github,
@@ -29,7 +31,7 @@ export function SiteFooter() {
               height={80}
               className="max-w-[80%] md:max-w-[140px]"
             />
-            <p className="text-(--deep-space-blue-700) leading-relaxed max-w-full text-sm">
+            <p className="text-(--deep-space-blue-900) leading-relaxed max-w-full text-sm">
               {businessInfo?.description}
             </p>
             <div className="flex gap-3">
@@ -61,7 +63,7 @@ export function SiteFooter() {
             <h3 className="text-[var(--deep-space-blue-900)] font-bold mb-4 md:mb-6 text-base md:text-lg">
               Υπηρεσίες
             </h3>
-            <ul className="space-y-2 md:space-y-3 text-[var(--deep-space-blue-700)] text-sm">
+            <ul className="space-y-2 md:space-y-3 text-[var(--deep-space-blue-900)] text-sm">
               <li>
                 <Link
                   href="#services"
@@ -118,7 +120,7 @@ export function SiteFooter() {
             <h3 className="text-[var(--deep-space-blue-900)] font-bold mb-4 md:mb-6 text-base md:text-lg">
               Επικοινωνία
             </h3>
-            <ul className="space-y-3 text-[var(--deep-space-blue-700)] text-sm">
+            <ul className="space-y-3 text-[var(--deep-space-blue-900)] text-sm">
               <li className="flex items-start gap-3">
                 <Mail className="h-4 w-4 text-[var(--blue-green-500)] mt-0.5 flex-shrink-0" />
                 <a
@@ -219,11 +221,7 @@ export function SiteFooter() {
         </div>
 
         {/* Copyright */}
-        <div className="pt-6 border-t border-[var(--sky-blue-light-200)] flex flex-col items-center gap-4 text-xs md:text-sm text-[var(--deep-space-blue-700)]">
-          <p className="text-center">
-            Online παρουσία για επαγγελματίες που δεν μπορούν να ρισκάρουν την
-            εικόνα τους.
-          </p>
+        <div className="pt-6 border-t border-[var(--sky-blue-light-200)] flex flex-col items-center gap-4 text-xs md:text-sm text-[var(--deep-space-blue-900)]">
           <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             <span className="text-[var(--blue-green-600)] font-medium">
               Εμπιστοσύνη
@@ -237,6 +235,10 @@ export function SiteFooter() {
               Αποτελέσματα
             </span>
           </div>
+          <p className="text-center">Created with ❤️ by web.smarting.gr</p>
+          <p>
+            © {new Date().getFullYear()} {businessInfo?.name || "SMARTING.GR"}
+          </p>
         </div>
       </div>
     </footer>

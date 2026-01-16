@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useTypewriter } from "@/hooks/use-typewriter";
 import businessInfo from "@/app/mocks/business-info.json";
 
@@ -122,17 +122,14 @@ export function ContactForm() {
         throw new Error(data.error || data.message || "Something went wrong");
       }
 
-      toast.success("Το μήνυμα στάλθηκε επιτυχώς!", {
-        description: "Θα επικοινωνήσουμε μαζί σας σύντομα.",
-      });
+      toast.success("Το μήνυμα στάλθηκε επιτυχώς!\nΘα επικοινωνήσουμε μαζί σας σύντομα.");
       form.reset();
     } catch (error: any) {
       console.error("Submission error:", error);
-      toast.error("Σφάλμα αποστολής", {
-        description:
-          error.message ||
-          "Υπήρξε πρόβλημα κατά την αποστολή του μηνύματος. Παρακαλώ δοκιμάστε ξανά.",
-      });
+      toast.error(
+        error.message ||
+        "Υπήρξε πρόβλημα κατά την αποστολή του μηνύματος. Παρακαλώ δοκιμάστε ξανά."
+      );
     }
   }
 
@@ -178,7 +175,7 @@ export function ContactForm() {
                 </span>
               </h2>
 
-              <p className="text-[var(--deep-space-blue-700)] text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
+              <p className="text-[var(--deep-space-blue-900)] text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
                 Μια σύντομη, ιδιωτική αξιολόγηση της ιστοσελίδας σας. Χωρίς
                 δεσμεύσεις. Χωρίς περίπλοκες διαδικασίες.
               </p>
@@ -187,7 +184,7 @@ export function ContactForm() {
               <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-3 max-w-full">
                 <a
                   href={`mailto:${businessInfo.email}`}
-                  className="flex items-center gap-3 px-4 py-2.5 bg-white rounded-2xl shadow-sm border border-[var(--sky-blue-light-100)] text-[var(--deep-space-blue-800)] min-w-0 hover:text-[var(--blue-green-600)] transition-colors"
+                  className="flex items-center gap-3 px-4 py-2.5 bg-white rounded-2xl shadow-sm border border-[var(--sky-blue-light-100)] text-[var(--deep-space-blue-900)] min-w-0 hover:text-[var(--blue-green-600)] transition-colors"
                 >
                   <div className="p-1.5 bg-[var(--sky-blue-light-50)] rounded-full text-[var(--blue-green-600)]">
                     <svg
@@ -211,7 +208,7 @@ export function ContactForm() {
                 </a>
                 <a
                   href={`tel:${businessInfo.phone}`}
-                  className="flex items-center gap-3 px-4 py-2.5 bg-white rounded-2xl shadow-sm border border-[var(--sky-blue-light-100)] text-[var(--deep-space-blue-800)] min-w-0 hover:text-[var(--blue-green-600)] transition-colors"
+                  className="flex items-center gap-3 px-4 py-2.5 bg-white rounded-2xl shadow-sm border border-[var(--sky-blue-light-100)] text-[var(--deep-space-blue-900)] min-w-0 hover:text-[var(--blue-green-600)] transition-colors"
                 >
                   <div className="p-1.5 bg-[var(--sky-blue-light-50)] rounded-full text-[var(--blue-green-600)]">
                     <svg
@@ -269,7 +266,7 @@ export function ContactForm() {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-[var(--deep-space-blue-700)] font-semibold tracking-wider uppercase text-xs ml-1">
+                            <FormLabel className="text-[var(--deep-space-blue-900)] font-semibold tracking-wider uppercase text-xs ml-1">
                               Email
                             </FormLabel>
                             <FormControl>
@@ -289,7 +286,7 @@ export function ContactForm() {
                         name="message"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-[var(--deep-space-blue-700)] font-semibold tracking-wider uppercase text-xs ml-1">
+                            <FormLabel className="text-[var(--deep-space-blue-900)] font-semibold tracking-wider uppercase text-xs ml-1">
                               Μήνυμα
                             </FormLabel>
                             <FormControl>

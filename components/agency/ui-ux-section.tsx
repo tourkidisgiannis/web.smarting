@@ -118,7 +118,7 @@ export function UIUXSection() {
                   <h3 className="text-2xl font-bold text-[var(--deep-space-blue-900)] mb-4 group-hover:text-[var(--blue-green-700)] transition-colors duration-300">
                     {benefit.title}
                   </h3>
-                  <p className="text-[var(--deep-space-blue-700)] leading-relaxed mb-6">
+                  <p className="text-[var(--deep-space-blue-900)] leading-relaxed mb-6">
                     {benefit.description}
                   </p>
                   <div className="pt-4 border-t border-[var(--sky-blue-light-100)]">

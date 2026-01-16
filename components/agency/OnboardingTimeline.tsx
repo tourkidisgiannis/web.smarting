@@ -111,7 +111,7 @@ export function OnboardingTimeline() {
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4 text-[var(--deep-space-blue-900)]">
             Πώς Δουλεύουμε
           </h2>
-          <p className="text-[var(--deep-space-blue-700)] text-lg max-w-2xl mx-auto">
+          <p className="text-[var(--deep-space-blue-900)] text-lg max-w-2xl mx-auto">
             Απλά βήματα, χωρίς μπερδεμένους όρους. Από την πρώτη καλημέρα μέχρι
             το τελικό αποτέλεσμα.
           </p>
@@ -159,7 +159,7 @@ export function OnboardingTimeline() {
                       </span>
                       {step.title}
                     </h3>
-                    <p className="text-[var(--deep-space-blue-700)] leading-relaxed">
+                    <p className="text-[var(--deep-space-blue-900)] leading-relaxed">
                       {step.description}
                     </p>
                   </div>
