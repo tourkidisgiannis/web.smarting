@@ -82,30 +82,30 @@ export function WhyThisMatters() {
         <div className="container px-4">
           {/* Main Content Header */}
           <div ref={headerRef} className="mb-20 text-center max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-[var(--deep-space-blue-900)] mb-8">
+            <h2 className="font-mono text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-[var(--landing-text)] mb-8">
               Για επαγγελματίες, η πρώτη εντύπωση δεν επιτρέπει περιθώρια
               σφάλματος.
             </h2>
-            <p className="text-[var(--deep-space-blue-900)] text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+            <p className="font-sans text-[var(--landing-text)]/80 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
               Οι πελάτες σας δεν επιλέγουν απλώς μια υπηρεσία· αναζητούν τη
               βεβαιότητα ότι εμπιστεύονται τον κατάλληλο άνθρωπο.
             </p>
 
             <div className="inline-block bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-[var(--deep-space-blue-100)] text-left shadow-sm">
-              <p className="text-[var(--deep-space-blue-900)] font-medium mb-4">
+              <p className="font-sans text-[var(--landing-text)] font-semibold mb-4">
                 Η ιστοσελίδα σας είτε:
               </p>
               <ul className="space-y-3 mb-6">
-                <li className="flex items-center text-[var(--deep-space-blue-900)]">
+                <li className="font-sans flex items-center text-[var(--landing-text)]">
                   <span className="w-1.5 h-1.5 rounded-full bg-red-400 mr-3" />
                   Ενισχύει την αβεβαιότητα της επιλογής
                 </li>
-                <li className="flex items-center text-[var(--deep-space-blue-900)] font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 mr-3" />
+                <li className="font-sans flex items-center text-[var(--landing-text)] font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--landing-cta)] mr-3" />
                   Περιορίζει το ρίσκο και εδραιώνει την εμπιστοσύνη
                 </li>
               </ul>
-              <p className="text-[var(--deep-space-blue-900)] font-bold italic">
+              <p className="font-sans text-[var(--landing-text)] font-bold italic">
                 Εμείς διασφαλίζουμε το δεύτερο.
               </p>
             </div>

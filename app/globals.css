@@ -6,8 +6,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-space-grotesk);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -109,6 +109,13 @@
   --princeton-orange-800: oklch(38.6% 0.091 60.02);
   --princeton-orange-900: oklch(24.93% 0.056 65.91);
   --princeton-orange-950: oklch(20.57% 0.045 69.93);
+
+  /* Recommended Indigo Palette */
+  --landing-primary: oklch(0.639 0.217 266.368);
+  --landing-secondary: oklch(0.704 0.191 266.368);
+  --landing-cta: oklch(0.686 0.208 143.16);
+  --landing-bg: oklch(0.962 0.018 272.314);
+  --landing-text: oklch(0.306 0.125 266.368);
 
   /* Shadcn Defaults (Light Mode) */
   --background: oklch(1 0 0);

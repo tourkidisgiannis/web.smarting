@@ -7,11 +7,31 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const testimonials = [
+  {
+    quote:
+      "Η νέα ιστοσελίδα μας έφερε αύξηση 40% στα οργανικά ραντεβού μέσα στους πρώτους 3 μήνες. Η ποιότητα των πελατών είναι πλέον κορυφαία.",
+    name: "Dr. Eleni Papadopoulou",
+    role: "Ιατρός Δερματολόγος",
+  },
+  {
+    quote:
+      "Δεν χάνω πλέον χρόνο να πείθω για την αξία της δουλειάς μου. Οι πελάτες έρχονται ενημερωμένοι και έτοιμοι να συνεργαστούν. Αύξηση 25% στα έσοδα το πρώτο εξάμηνο.",
+    name: "George Konstantinou",
+    role: "Νομικός Σύμβουλος",
+  },
+  {
+    quote:
+      "Η online εικόνα μου επιτέλους αντικατοπτρίζει το επίπεδο των υπηρεσιών μου. Το rebranding μας έφερε 2 μεγάλα εταιρικά συμβόλαια.",
+    name: "Maria Sotiropoulou",
+    role: "Creative Director",
+  },
+];
+
 export function WhatOurClientsSee() {
   const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
-  const quoteRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -27,32 +47,20 @@ export function WhatOurClientsSee() {
         ease: "power3.out",
       });
 
-      // Staggered List Animation
-      if (listRef.current) {
-        gsap.from(listRef.current.children, {
+      // Staggered Testimonials Animation
+      if (testimonialsRef.current) {
+        gsap.from(testimonialsRef.current.children, {
           scrollTrigger: {
-            trigger: listRef.current,
+            trigger: testimonialsRef.current,
             start: "top 80%",
           },
-          x: -20,
+          y: 50,
           opacity: 0,
           duration: 0.8,
           stagger: 0.2,
           ease: "power2.out",
         });
       }
-
-      // Quote Pop-in
-      gsap.from(quoteRef.current, {
-        scrollTrigger: {
-          trigger: quoteRef.current,
-          start: "top 90%",
-        },
-        scale: 0.95,
-        opacity: 0,
-        duration: 1.2,
-        ease: "elastic.out(1, 0.8)",
-      });
     },
     { scope: containerRef }
   );
@@ -67,64 +75,40 @@ export function WhatOurClientsSee() {
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
           <div ref={headerRef} className="text-center mb-16">
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl text-[var(--deep-space-blue-900)] mb-6">
-              Αποτελέσματα στην πράξη
+            <h2 className="font-mono text-4xl font-bold tracking-tight sm:text-5xl text-[var(--landing-text)] mb-6">
+              Τι βλέπουν οι πελάτες μας
             </h2>
-            <p className="text-[var(--deep-space-blue-900)] text-lg md:text-xl leading-relaxed">
-              Μετά τη σωστή αναβάθμιση της online παρουσίας τους, οι πελάτες μας
-              αναφέρουν:
+            <p className="font-sans text-[var(--landing-text)]/80 text-lg md:text-xl leading-relaxed">
+              Αποτελέσματα που μιλούν από μόνα τους.
             </p>
           </div>
 
-          {/* Results List */}
-          <div className="max-w-2xl mx-auto mb-16">
-            <ul ref={listRef} className="space-y-6">
-              {[
-                "Περισσότερα σοβαρά αιτήματα",
-                "Πελάτες που έρχονται ήδη πεισμένοι",
-                "Λιγότερο χαμένο χρόνο σε εξηγήσεις",
-              ].map((text, index) => (
-                <li
-                  key={index}
-                  className="flex items-center gap-4 text-[var(--deep-space-blue-900)] text-xl md:text-2xl font-medium"
-                >
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 text-green-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={3}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </span>
-                  {text}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Featured Quote */}
+          {/* Testimonials Grid */}
           <div
-            ref={quoteRef}
-            className="relative p-8 md:p-12 bg-white/60 backdrop-blur-md rounded-3xl border border-[var(--sky-blue-light-200)] shadow-xl max-w-3xl mx-auto"
+            ref={testimonialsRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            <span className="absolute -top-6 left-10 text-8xl text-[var(--sky-blue-light-300)] font-serif opacity-50 block h-10 leading-none select-none">
-              “
-            </span>
-            <p className="relative z-10 text-2xl md:text-3xl italic text-[var(--deep-space-blue-900)] font-semibold leading-snug text-center">
-              «Οι πελάτες καταλαβαίνουν το επίπεδό μας πριν καν μιλήσουμε.»
-            </p>
-            <div className="mt-6 flex justify-center items-center gap-2 text-[var(--deep-space-blue-900)] font-semibold uppercase tracking-widest text-sm">
-              <span className="h-px w-8 bg-[var(--deep-space-blue-200)]"></span>
-              Feedback Πελάτη
-              <span className="h-px w-8 bg-[var(--deep-space-blue-200)]"></span>
-            </div>
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="relative p-8 bg-white/60 backdrop-blur-md rounded-3xl border border-[var(--landing-secondary)]/50 shadow-lg"
+              >
+                <span className="absolute -top-6 left-6 text-8xl text-[var(--landing-secondary)]/50 font-serif opacity-50 block h-10 leading-none select-none">
+                  “
+                </span>
+                <p className="font-sans relative z-10 text-lg italic text-[var(--landing-text)] font-medium leading-relaxed">
+                  {testimonial.quote}
+                </p>
+                <div className="mt-6 pt-6 border-t border-[var(--landing-secondary)]/30 text-right">
+                  <p className="font-mono font-semibold text-[var(--landing-text)]">
+                    {testimonial.name}
+                  </p>
+                  <p className="font-sans text-sm text-[var(--landing-text)]/70">
+                    {testimonial.role}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -47,11 +47,11 @@ export function ServicesBento() {
     <section ref={containerRef} className="py-24 container px-6 relative">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-(--deep-space-blue-900) mb-6">
+          <h2 className="font-mono text-4xl md:text-5xl font-bold text-[var(--landing-text)] mb-6">
             Υπηρεσίες που{" "}
-            <span className="text-(--blue-green-600)">Ξεχωρίζουν</span>
+            <span className="text-[var(--landing-primary)]">Ξεχωρίζουν</span>
           </h2>
-          <p className="text-xl text-(--deep-space-blue-900) max-w-2xl mx-auto">
+          <p className="font-sans text-xl text-[var(--landing-text)]/80 max-w-2xl mx-auto">
             Ολοκληρωμένες λύσεις για την ψηφιακή σας ανάπτυξη, από τον σχεδιασμό
             μέχρι την υποστήριξη.
           </p>
@@ -59,23 +59,23 @@ export function ServicesBento() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(180px,auto)]">
           {/* 1. SEO - Large Card (Top Left) */}
-          <div className="bento-card group col-span-1 md:col-span-2 row-span-2 bg-gradient-to-br from-[#f0f9ff] to-[#e0f2fe] rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div className="bento-card group col-span-1 md:col-span-2 row-span-2 bg-gradient-to-br from-[#f0f9ff] to-[#e0f2fe] rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-blue-100">
             <div className="relative z-10 h-full flex flex-col justify-between">
               <div>
                 <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center text-blue-600 mb-6">
                   <Search size={32} strokeWidth={2.5} />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-(--deep-space-blue-900) mb-4">
+                <h3 className="font-mono text-3xl md:text-4xl font-bold text-[var(--landing-text)] mb-4">
                   Κυριαρχία στην Google (SEO)
                 </h3>
-                <p className="text-lg text-(--deep-space-blue-900) leading-relaxed max-w-md">
+                <p className="font-sans text-lg text-[var(--landing-text)]/80 leading-relaxed max-w-md">
                   Στρατηγικές SEO που φέρνουν την ιστοσελίδα σας στην πρώτη
                   σελίδα. Αυξήστε την οργανική επισκεψιμότητα και κερδίστε
                   πελάτες χωρίς διαφημίσεις.
                 </p>
               </div>
               <div className="mt-8">
-                <button className="flex items-center gap-2 text-blue-700 font-bold group-hover:gap-4 transition-all">
+                <button className="flex items-center gap-2 text-blue-700 font-bold group-hover:gap-4 transition-all font-mono">
                   Μάθετε περισσότερα <ArrowUpRight size={20} />
                 </button>
               </div>
@@ -114,15 +114,15 @@ export function ServicesBento() {
           </div>
 
           {/* 2. Responsive Design - Tall Card (Top Right) */}
-          <div className="bento-card group col-span-1 md:col-span-1 row-span-2 bg-[#fff1f2] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div className="bento-card group col-span-1 md:col-span-1 row-span-2 bg-[#fff1f2] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-rose-100">
             <div className="relative z-10 h-full flex flex-col">
               <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-rose-500 mb-6">
                 <Smartphone size={28} strokeWidth={2.5} />
               </div>
-              <h3 className="text-2xl font-bold text-(--deep-space-blue-900) mb-4">
+              <h3 className="font-mono text-2xl font-bold text-[var(--landing-text)] mb-4">
                 Responsive & Modern
               </h3>
-              <p className="text-(--deep-space-blue-900) mb-8">
+              <p className="font-sans text-[var(--landing-text)]/80 mb-8">
                 Σχεδιασμός που μαγνητίζει και προσαρμόζεται άψογα σε κινητά,
                 tablets και desktops.
               </p>
@@ -151,15 +151,15 @@ export function ServicesBento() {
           </div>
 
           {/* 3. Speed - Standard Card */}
-          <div className="bento-card group col-span-1 md:col-span-1 bg-[#fefce8] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div className="bento-card group col-span-1 md:col-span-1 bg-[#fefce8] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-yellow-100">
             <div className="relative z-10">
               <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-yellow-600 mb-4">
                 <Zap size={24} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-(--deep-space-blue-900) mb-2">
+              <h3 className="font-mono text-xl font-bold text-[var(--landing-text)] mb-2">
                 Αστραπιαία Ταχύτητα
               </h3>
-              <p className="text-sm text-(--deep-space-blue-900)">
+              <p className="font-sans text-sm text-[var(--landing-text)]/80">
                 Core Web Vitals Optimized. Γιατί κανείς δεν περιμένει.
               </p>
             </div>
@@ -169,15 +169,15 @@ export function ServicesBento() {
           </div>
 
           {/* 4. E-commerce - Standard Card [NEW] */}
-          <div className="bento-card group col-span-1 md:col-span-1 bg-[#fdf2f8] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div className="bento-card group col-span-1 md:col-span-1 bg-[#fdf2f8] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-pink-100">
             <div className="relative z-10">
               <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-pink-600 mb-4">
                 <ShoppingCart size={24} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-(--deep-space-blue-900) mb-2">
+              <h3 className="font-mono text-xl font-bold text-[var(--landing-text)] mb-2">
                 E-shop & Πωλήσεις
               </h3>
-              <p className="text-sm text-(--deep-space-blue-900)">
+              <p className="font-sans text-sm text-[var(--landing-text)]/80">
                 Σύγχρονα ηλεκτρονικά καταστήματα, σχεδιασμένα για μετατροπές.
               </p>
             </div>
@@ -189,15 +189,15 @@ export function ServicesBento() {
           </div>
 
           {/* 5. Support - Standard Card [NEW] */}
-          <div className="bento-card group col-span-1 md:col-span-1 bg-[#f3e8ff] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div className="bento-card group col-span-1 md:col-span-1 bg-[#f3e8ff] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-purple-100">
             <div className="relative z-10">
               <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-purple-600 mb-4">
                 <Headset size={24} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-(--deep-space-blue-900) mb-2">
+              <h3 className="font-mono text-xl font-bold text-[var(--landing-text)] mb-2">
                 Τεχνική Υποστήριξη
               </h3>
-              <p className="text-sm text-(--deep-space-blue-900)">
+              <p className="font-sans text-sm text-[var(--landing-text)]/80">
                 Δίπλα σας και μετά την παράδοση. Ασφάλεια ότι όλα λειτουργούν
                 ρολόι.
               </p>
@@ -206,22 +206,22 @@ export function ServicesBento() {
           </div>
 
           {/* 6. Security - Wide (Bottom) */}
-          <div className="bento-card group col-span-1 md:col-span-2 bg-[#f0fdf4] rounded-[2.5rem] p-8 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div className="bento-card group col-span-1 md:col-span-2 bg-[#f0fdf4] rounded-[2.5rem] p-8 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-green-100">
             <div className="flex-1 relative z-10">
               <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-green-600 mb-4">
                 <ShieldCheck size={24} strokeWidth={2.5} />
               </div>
-              <h3 className="text-2xl font-bold text-(--deep-space-blue-900) mb-2">
+              <h3 className="font-mono text-2xl font-bold text-[var(--landing-text)] mb-2">
                 Ασφάλεια & Hosting
               </h3>
-              <p className="text-(--deep-space-blue-900)">
+              <p className="font-sans text-[var(--landing-text)]/80">
                 Πιστοποιητικά SSL, καθημερινά backups και hosting σε ταχύτατους
                 servers για μέγιστη ασφάλεια και uptime 99.9%.
               </p>
             </div>
             <div className="w-full md:w-1/3 flex justify-center relative z-10">
               <div className="bg-white p-4 rounded-2xl shadow-sm border border-green-100 w-full max-w-[200px]">
-                <div className="flex items-center gap-2 text-green-700 font-bold mb-2 text-sm">
+                <div className="flex items-center gap-2 text-green-700 font-bold mb-2 text-sm font-mono">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />{" "}
                   System Secure
                 </div>
@@ -241,15 +241,15 @@ export function ServicesBento() {
           </div>
 
           {/* 7. Custom Dev - Standard Card [NEW] */}
-          <div className="bento-card group col-span-1 md:col-span-1 bg-[#ecfeff] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div className="bento-card group col-span-1 md:col-span-1 bg-[#ecfeff] rounded-[2.5rem] p-8 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-cyan-100">
             <div className="relative z-10">
               <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-cyan-600 mb-4">
                 <Code2 size={24} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-(--deep-space-blue-900) mb-2">
+              <h3 className="font-mono text-xl font-bold text-[var(--landing-text)] mb-2">
                 Custom Εφαρμογές
               </h3>
-              <p className="text-sm text-(--deep-space-blue-900)">
+              <p className="font-sans text-sm text-[var(--landing-text)]/80">
                 Εξειδικευμένες λύσεις λογισμικού για τις μοναδικές ανάγκες της
                 επιχείρησής σας.
               </p>

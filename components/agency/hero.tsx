@@ -69,25 +69,28 @@ export function Hero() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-10 grayscale"
           >
             <source src="/hero-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         {/* Background Elements */}
-        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_50%_50%,var(--blue-green-200),transparent_70%)] opacity-30"></div>
+        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_50%_50%,var(--landing-secondary),transparent_70%)] opacity-20"></div>
 
         <div className="container relative z-10 flex flex-col items-center gap-6">
+          <div className="font-mono text-sm uppercase tracking-widest text-[var(--landing-primary)] font-semibold mb-4">
+            Για Επιστήμονες & Επαγγελματίες
+          </div>
           <h1
             ref={titleRef}
-            className="text-5xl font-bold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl perspective-[1000px] text-(--deep-space-blue-900) max-w-full"
+            className="font-mono text-5xl font-bold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl perspective-[1000px] text-[var(--landing-text)] max-w-full"
           >
             <span className="block overflow-hidden">
               <span className="block">Εμπιστοσύνη με την πρώτη</span>
             </span>
             <span className="block overflow-hidden">
-              <span className="block bg-linear-to-r from-(--blue-green-500) via-(--deep-space-blue-500) to-(--blue-green-600) bg-clip-text text-transparent break-words">
+              <span className="block bg-linear-to-r from-[var(--landing-primary)] via-[var(--landing-secondary)] to-[var(--landing-primary)] bg-clip-text text-transparent break-words">
                 ματιά.
               </span>
             </span>
@@ -95,11 +98,11 @@ export function Hero() {
 
           <p
             ref={textRef}
-            className="mt-4 text-lg leading-relaxed text-[var(--deep-space-blue-900)] sm:text-2xl"
+            className="font-sans mt-4 text-lg leading-relaxed text-[var(--landing-text)]/80 sm:text-2xl max-w-3xl"
           >
             Εξειδικευμένες ψηφιακές λύσεις για επιστήμονες και επαγγελματίες που
             δεν συμβιβάζονται
-            <span className="text-[var(--deep-space-blue-900)] font-medium">
+            <span className="text-[var(--landing-text)] font-semibold">
               {" "}
               με τίποτα λιγότερο
             </span>{" "}
@@ -108,12 +111,12 @@ export function Hero() {
 
           <div
             ref={buttonsRef}
-            className="flex flex-col sm:flex-row gap-6 mt-8"
+            className="flex flex-col items-center gap-6 mt-8"
           >
             <Magnetic strength={0.2}>
               <Button
                 size="xl"
-                className="h-14 px-10 text-lg rounded-full shadow-2xl bg-[var(--blue-green-500)] hover:bg-[var(--blue-green-600)] text-white shadow-[var(--blue-green-500)]/20 group"
+                className="font-sans h-14 px-10 text-lg rounded-full shadow-2xl bg-[var(--landing-cta)] hover:bg-[var(--landing-cta)]/90 text-white shadow-[var(--landing-cta)]/20 group transition-all duration-300"
                 asChild
               >
                 <Link href="#contact">
@@ -122,16 +125,19 @@ export function Hero() {
                 </Link>
               </Button>
             </Magnetic>
+            <div className="text-xs text-[var(--landing-text)]/50 mt-4">
+              Μας εμπιστεύονται: [Placeholder for Client Logos]
+            </div>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-70">
-          <span className="text-xs font-semibold tracking-widest uppercase mb-1 text-[var(--deep-space-blue-900)]">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
+          <span className="font-mono text-xs font-semibold tracking-widest uppercase mb-1 text-[var(--landing-text)]">
             Scroll
           </span>
           <svg
-            className="w-5 h-5 text-[var(--deep-space-blue-900)]"
+            className="w-5 h-5 text-[var(--landing-text)]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

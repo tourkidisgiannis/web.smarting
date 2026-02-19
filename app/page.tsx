@@ -11,15 +11,15 @@ import { ServicesBento } from "@/components/agency/services-bento";
 
 export default function Home() {
   return (
-    <main className="grainy-bg flex min-h-screen flex-col items-center bg-gradient-to-br from-[var(--sky-blue-light-100)] via-[var(--sky-blue-light-50)] to-[var(--blue-green-100)]">
+    <main className="grainy-bg flex min-h-screen flex-col items-center bg-gradient-to-br from-[var(--landing-bg)] via-[var(--landing-bg)] to-[var(--landing-primary)/5]">
       <div className="w-full relative overflow-x-hidden">
         <Hero />
         <WhyThisMatters />
         <Services />
         <ServicesBento />
         <UIUXSection />
-        <DemoGrid />
         <WhatOurClientsSee />
+        <DemoGrid />
         <OnboardingTimeline />
         <ContactForm />
       </div>

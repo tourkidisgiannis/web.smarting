@@ -93,7 +93,7 @@ export function UIUXSection() {
       >
         <div className="container ">
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-5xl text-[var(--deep-space-blue-900)]">
+            <h2 className="font-mono text-4xl font-bold tracking-tight sm:text-5xl md:text-5xl text-[var(--landing-text)]">
               Τι αλλάζει όταν η ιστοσελίδα δουλεύει υπέρ σας
             </h2>
           </div>
@@ -108,21 +108,21 @@ export function UIUXSection() {
             {benefits.map((benefit, index) => (
               <div
                 key={index}
-                className="benefit-card group relative bg-white p-6 md:p-8 rounded-2xl shadow-[var(--sky-blue-light-200)]/50 border border-[var(--sky-blue-light-200)] min-w-full md:min-w-[450px] md:max-w-[450px] transition-all duration-300 hover:shadow-xl hover:shadow-[var(--sky-blue-light-300)]/40 hover:-translate-y-1"
+                className="benefit-card group relative bg-[var(--landing-bg)] p-6 md:p-8 rounded-2xl shadow-[var(--landing-secondary)]/50 border border-[var(--landing-secondary)] min-w-full md:min-w-[450px] md:max-w-[450px] transition-all duration-300 hover:shadow-xl hover:shadow-[var(--landing-primary)]/40 hover:-translate-y-1"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--blue-green-50)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--landing-secondary)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
                 <div className="relative z-10">
-                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[var(--blue-green-100)] text-[var(--blue-green-600)] group-hover:bg-[var(--blue-green-500)] group-hover:text-white transition-all duration-300 shadow-sm">
+                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[var(--landing-primary)] text-white group-hover:bg-[var(--landing-cta)] transition-all duration-300 shadow-sm">
                     <benefit.icon className="h-7 w-7" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[var(--deep-space-blue-900)] mb-4 group-hover:text-[var(--blue-green-700)] transition-colors duration-300">
+                  <h3 className="font-mono text-2xl font-bold text-[var(--landing-text)] mb-4 group-hover:text-[var(--landing-primary)] transition-colors duration-300">
                     {benefit.title}
                   </h3>
-                  <p className="text-[var(--deep-space-blue-900)] leading-relaxed mb-6">
+                  <p className="font-sans text-[var(--landing-text)]/80 leading-relaxed mb-6">
                     {benefit.description}
                   </p>
-                  <div className="pt-4 border-t border-[var(--sky-blue-light-100)]">
-                    <span className="inline-flex items-center text-sm font-semibold bg-[var(--blue-green-50)] text-[var(--blue-green-700)] px-3 py-1.5 rounded-full border border-[var(--blue-green-100)]">
+                  <div className="pt-4 border-t border-[var(--landing-secondary)]/50">
+                    <span className="font-sans inline-flex items-center text-sm font-semibold bg-[var(--landing-secondary)]/10 text-[var(--landing-primary)] px-3 py-1.5 rounded-full border border-[var(--landing-secondary)]/20">
                       ✨ {benefit.benefit}
                     </span>
                   </div>
