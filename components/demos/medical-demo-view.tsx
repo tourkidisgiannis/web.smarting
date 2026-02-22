@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import {
+  Home,
   Heart,
   Activity,
   UserPlus,
@@ -111,7 +112,11 @@ export function MedicalDemoView() {
             <span>MediCare</span>
           </div>
 
-          <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+          <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600 items-center">
+            <Link href="/#demos" className="text-blue-600 font-bold hover:underline flex items-center gap-2">
+              <Home className="h-4 w-4" />
+              Πίσω στην Εταιρεία
+            </Link>
             <Link href="#about">Σχετικά</Link>
             <Link href="#services">Υπηρεσίες</Link>
             <Link href="#doctors">Ιατροί</Link>
@@ -130,13 +135,22 @@ export function MedicalDemoView() {
               Κλείστε Ραντεβού
             </Button>
 
-            <button
-              className="md:hidden p-2 text-slate-600"
-              onClick={() => setIsMenuOpen((v) => !v)}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X /> : <Menu />}
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              <Link 
+                href="/#demos" 
+                className="flex items-center justify-center p-2 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                aria-label="Back to Agency"
+              >
+                <Home className="h-6 w-6" />
+              </Link>
+              <button
+                className="flex items-center justify-center p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
+                onClick={() => setIsMenuOpen((v) => !v)}
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -184,15 +198,17 @@ export function MedicalDemoView() {
               <Button
                 size="lg"
                 className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-lg shadow-xl shadow-blue-600/20"
+                asChild
               >
-                Κλείστε Ραντεβού
+                <Link href="#contact">Κλείστε Ραντεβού</Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 className="h-14 px-8 text-lg border-blue-200 text-blue-700 hover:bg-blue-50"
+                asChild
               >
-                Υπηρεσίες
+                <Link href="#services">Υπηρεσίες</Link>
               </Button>
             </div>
             <div className="medical-hero-text pt-8 flex items-center gap-4 text-sm text-slate-500">
@@ -214,6 +230,7 @@ export function MedicalDemoView() {
                 alt="Medical Team"
                 fill
                 priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
@@ -249,6 +266,7 @@ export function MedicalDemoView() {
                 src="/demos/medical/about.png"
                 alt="Caring Doctor"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
@@ -418,12 +436,13 @@ export function MedicalDemoView() {
                 className="animate-card group text-center cursor-pointer"
               >
                 <div
-                  className={`mx-auto mb-8 h-56 w-56 rounded-full ${doc.color} overflow-hidden transition-transform duration-500 group-hover:scale-105 group-hover:shadow-2xl`}
+                  className={`relative mx-auto mb-8 h-56 w-56 rounded-full ${doc.color} overflow-hidden transition-transform duration-500 group-hover:scale-105 group-hover:shadow-2xl`}
                 >
                   <Image
                     src={doc.img}
                     alt={doc.name}
                     fill
+                    sizes="224px"
                     className="object-cover"
                   />
                 </div>
@@ -516,7 +535,7 @@ export function MedicalDemoView() {
               <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl mb-6">
                 Επικοινωνία
               </h2>
-              <p className="text-slate-500 text-lg leading-relaxed">
+              <p className="text-slate-700 text-lg leading-relaxed">
                 Έχετε ερωτήσεις ή θέλετε να προγραμματίσετε μια επίσκεψη;
                 Συμπληρώστε τη φόρμα ή επικοινωνήστε απευθείας μαζί μας.
               </p>
@@ -748,7 +767,7 @@ export function MedicalDemoView() {
           </div>
         </div>
         <div className="container pt-8 border-t border-slate-800 text-center text-sm md:flex md:justify-between md:text-left text-slate-500">
-          <p>&copy; 2024 MediCare Clinic. Με επιφύλαξη παντός δικαιώματος.</p>
+          <p>&copy; 2026 MediCare Clinic. Με επιφύλαξη παντός δικαιώματος.</p>
           <p className="mt-4 md:mt-0">Πολιτική Απορρήτου | Όροι Χρήσης</p>
         </div>
       </footer>

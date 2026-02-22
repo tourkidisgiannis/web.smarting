@@ -1,9 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap-setup";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -11,12 +9,12 @@ import {
   Stethoscope,
   Scale,
   Briefcase,
-  Palette,
   Utensils,
   Dumbbell,
 } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { TextReveal } from "@/components/animations/text-reveal";
+import { SectionReveal } from "@/components/animations/section-reveal";
+import { Magnetic } from "@/components/magnetic";
 
 const demos = [
   {
@@ -68,103 +66,179 @@ const demos = [
 
 export function DemoGrid() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLElement[]>([]);
+  const sectionsRef = useRef<HTMLElement[]>([]);
 
   useGSAP(
     () => {
-      const cards = cardsRef.current;
-      const total = cards.length;
+      const sections = sectionsRef.current;
 
-      cards.forEach((card, index) => {
-        if (index >= total - 1) return;
+      sections.forEach((section, index) => {
+        const bgImage = section.querySelector(".bg-image");
+        const content = section.querySelector(".card-content");
 
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top top",
-          pin: true,
-          pinSpacing: false,
-        });
+        // Pinning and overlap effect
+        // We pin all sections except the last one to allow it to scroll away naturally
+        if (index < sections.length - 1) {
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top top",
+            pin: true,
+            pinSpacing: false,
+          });
+        }
 
-        gsap.to(card, {
-          opacity: 0,
+        // Content Fade and Scale Out
+        if (index < sections.length - 1) {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: sections[index + 1],
+              start: "top bottom",
+              end: "top top",
+              scrub: true,
+            },
+          });
+
+          tl.to(content, {
+            opacity: 0,
+            scale: 0.8,
+            y: -50,
+            filter: "blur(10px)",
+            ease: "none",
+          });
+
+          tl.to(
+            bgImage,
+            {
+              scale: 1.2,
+              opacity: 0.5,
+              filter: "blur(5px)",
+              ease: "none",
+            },
+            0,
+          );
+        }
+
+        // Parallax effect for the background image
+        gsap.to(bgImage, {
+          yPercent: 15,
           ease: "none",
           scrollTrigger: {
-            trigger: cards[index + 1],
+            trigger: section,
             start: "top bottom",
-            end: "top top",
+            end: "bottom top",
             scrub: true,
           },
         });
       });
-
-      return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
-    <div
-      ref={containerRef}
-      className="  relative bg-slate-950 overflow-x-hidden"
-    >
+    <div ref={containerRef} className="relative bg-slate-950 overflow-x-hidden">
       {/* Header */}
       <section
-        className="relative h-[60vh] flex flex-col items-center justify-center text-center px-4"
+        className="relative h-[80vh] flex flex-col items-center justify-center text-center px-4"
         id="demos"
       >
-        <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-          Λύσεις για τον <span className="text-blue-400">Κλάδο σας</span>
-        </h2>
-        <p className="text-slate-400 text-lg md:text-xl max-w-2xl">
-          Εξερευνήστε πώς προσαρμόζουμε την τεχνολογία στις ανάγκες σας.
-        </p>
+        <div className="max-w-4xl mx-auto">
+          <SectionReveal>
+            <span className="font-mono text-xs uppercase tracking-[0.4em] text-blue-400 font-bold mb-6 block">
+              Sector Specific Demos
+            </span>
+          </SectionReveal>
+          <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter">
+            <TextReveal type="words" className="inline-block">
+              Λύσεις για τον
+            </TextReveal>{" "}
+            <br />
+            <TextReveal
+              type="words"
+              className="inline-block bg-gradient-to-r from-blue-200 to-blue-400 bg-clip-text text-transparent"
+            >
+              Κλάδο σας
+            </TextReveal>
+          </h2>
+          <SectionReveal delay={0.4}>
+            <p className="text-slate-400 text-xl md:text-2xl font-medium max-w-2xl mx-auto leading-relaxed">
+              Εξερευνήστε πώς προσαρμόζουμε την τεχνολογία και το design{" "}
+              <br className="hidden md:block" />
+              στις ανάγκες της δικής σας επιχείρησης.
+            </p>
+          </SectionReveal>
+        </div>
+
+        {/* Animated Scroll Line */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-gradient-to-b from-blue-400 to-transparent"></div>
       </section>
 
-      {/* Cards */}
+      {/* Sticky Demo Sections */}
       {demos.map((demo, index) => (
         <section
           key={demo.href}
           ref={(el) => {
-            if (el) cardsRef.current[index] = el;
+            if (el) sectionsRef.current[index] = el;
           }}
           className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-slate-950"
           style={{ zIndex: index + 10 }}
         >
-          {/* Background */}
-          <div className="absolute inset-0 overflow-hidden">
-            <Image
-              src={demo.image}
-              alt={demo.title}
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority={index < 2}
-            />
-            <div
-              className={`absolute inset-0 bg-gradient-to-br ${demo.bgGradient}`}
-            />
-            <div className="absolute inset-0 bg-black/40" />
+          {/* Background Image with Parallax */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="bg-image absolute inset-0">
+              <Image
+                src={demo.image}
+                alt={demo.title}
+                fill
+                sizes="100vw"
+                className="object-cover scale-110"
+                priority={index < 2}
+              />
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${demo.bgGradient}`}
+              />
+              <div className="absolute inset-0 bg-black/40" />
+            </div>
           </div>
 
-          {/* Card */}
-          <div className="relative z-20 px-4">
-            <Link href={demo.href} className="group block max-w-4xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-3xl border border-white/20 p-8 md:p-16 lg:p-24 rounded-3xl transition hover:border-white/40 hover:bg-white/15">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 text-white mb-8">
-                  <demo.icon className="h-8 w-8" />
-                </div>
+          {/* Card Content */}
+          <div className="card-content relative z-20 px-4 w-full max-w-6xl">
+            <Link
+              href={demo.href}
+              className="group block"
+              data-cursor-text="VIEW"
+            >
+              <div className="bg-white/5 backdrop-blur-3xl border border-white/10 p-8 md:p-16 lg:p-20 rounded-[3rem] transition-all duration-500 hover:border-white/30 hover:bg-white/10 shadow-2xl">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-12">
+                  <div className="flex-1">
+                    <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-slate-950 mb-8 shadow-xl group-hover:scale-110 transition-transform">
+                      <demo.icon className="h-8 w-8" />
+                    </div>
 
-                <h3 className="text-4xl md:text-6xl font-black text-white mb-6">
-                  {demo.title}
-                </h3>
+                    <h3 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
+                      {demo.title}
+                    </h3>
 
-                <p className="text-lg md:text-2xl text-white/80 mb-10">
-                  {demo.description}
-                </p>
+                    <p className="text-xl md:text-3xl text-white/70 font-medium mb-12 leading-relaxed">
+                      {demo.description}
+                    </p>
 
-                <div className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-950 font-bold rounded-full group-hover:bg-blue-500 group-hover:text-white">
-                  Εξερεύνηση
-                  <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                    <Magnetic strength={0.2}>
+                      <div className="inline-flex items-center gap-4 px-10 py-5 bg-white text-slate-950 text-lg font-bold rounded-full group-hover:bg-blue-500 group-hover:text-white transition-all shadow-xl">
+                        Εξερεύνηση Demo
+                        <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                      </div>
+                    </Magnetic>
+                  </div>
+
+                  <div className="hidden lg:block w-1/3 aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:scale-105 transition-transform duration-700">
+                    <Image
+                      src={demo.image}
+                      alt={demo.title}
+                      width={600}
+                      height={450}
+                      className="object-cover h-full w-full"
+                    />
+                  </div>
                 </div>
               </div>
             </Link>

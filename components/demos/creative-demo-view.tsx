@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import Link from "next/link"
-import { Menu, X, ArrowUpRight, Palette, Layers, Monitor, Type, Eye, MousePointer2 } from "lucide-react"
+import { Home, Menu, X, ArrowUpRight, Palette, Layers, Monitor, Type, Eye, MousePointer2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
@@ -52,16 +52,31 @@ export function CreativeDemoView() {
   return (
     <div ref={containerRef} className="min-h-screen bg-black text-white font-mono selection:bg-[#ccff00] selection:text-black overflow-x-hidden">
       {/* Navbar overlay */}
-      <nav className="fixed top-14 left-0 w-full p-6 z-40 flex justify-between items-center mix-blend-difference">
-         <div className="text-xl font-black uppercase tracking-widest border-2 border-white px-2 py-1">Studio_X</div>
-         <button onClick={toggleMenu} className="p-2 hover:bg-white hover:text-black transition-colors rounded-full border border-white/20">
-           {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
-         </button>
+      <nav className="sticky top-0 left-0 w-full p-6 z-40 flex justify-between items-center mix-blend-difference bg-black/5 backdrop-blur-sm transition-all duration-300">
+         <div className="flex items-center gap-8">
+           <div className="text-xl font-black uppercase tracking-widest border-2 border-white px-2 py-1">Studio_X</div>
+           <Link href="/#demos" className="text-xs font-bold uppercase tracking-widest hover:text-[#ccff00] transition-colors hidden md:flex items-center gap-2">
+             <Home size={14} />
+             Back to Agency
+           </Link>
+         </div>
+         <div className="flex items-center gap-4">
+           <Link href="/#demos" className="flex items-center justify-center p-2 hover:bg-white hover:text-black transition-colors rounded-full border border-white/20 md:hidden" aria-label="Back to Agency">
+             <Home size={24} />
+           </Link>
+           <button onClick={toggleMenu} className="flex items-center justify-center p-2 hover:bg-white hover:text-black transition-colors rounded-full border border-white/20">
+             {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
+           </button>
+         </div>
       </nav>
 
       {/* Fullscreen Menu */}
       <div className={`fixed inset-0 bg-[#ccff00] text-black z-40 flex flex-col justify-center items-center transition-transform duration-500 ease-expo ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
           <div className="flex flex-col gap-8 text-center">
+              <Link href="/#demos" onClick={toggleMenu} className="text-4xl md:text-6xl font-black uppercase hover:italic transition-all flex items-center justify-center gap-4">
+                  <Home size={48} />
+                  Home
+              </Link>
               {['Εργα', 'Υπηρεσιες', 'Στουντιο', 'Επαφη'].map((item) => (
                   <Link key={item} href={`#${item.toLowerCase()}`} onClick={toggleMenu} className="text-6xl md:text-8xl font-black uppercase hover:italic transition-all hover:tracking-widest">
                       {item}
@@ -191,10 +206,10 @@ export function CreativeDemoView() {
               </div>
               
               <div className="flex flex-col md:flex-row justify-center gap-6 mb-24 reveal-text">
-                  <Button className="bg-[#ccff00] text-black hover:bg-white rounded-none h-16 w-full md:w-auto px-12 text-xl uppercase font-bold">
+                  <Button className="bg-[#ccff00] text-black hover:bg-white rounded-none h-16 w-full md:w-auto px-12 text-xl uppercase font-bold border-none">
                       Start Project
                   </Button>
-                  <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black rounded-none h-16 w-full md:w-auto px-12 text-xl uppercase font-bold">
+                  <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-black rounded-none h-16 w-full md:w-auto px-12 text-xl uppercase font-bold transition-colors">
                       Hello@studiox.gr
                   </Button>
               </div>

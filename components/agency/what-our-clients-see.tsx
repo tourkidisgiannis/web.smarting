@@ -1,11 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap-setup";
+import { TextReveal } from "@/components/animations/text-reveal";
+import { SectionReveal } from "@/components/animations/section-reveal";
 
 const testimonials = [
   {
@@ -30,40 +28,6 @@ const testimonials = [
 
 export function WhatOurClientsSee() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const testimonialsRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      // Header Animation
-      gsap.from(headerRef.current, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: "top 85%",
-        },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
-
-      // Staggered Testimonials Animation
-      if (testimonialsRef.current) {
-        gsap.from(testimonialsRef.current.children, {
-          scrollTrigger: {
-            trigger: testimonialsRef.current,
-            start: "top 80%",
-          },
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power2.out",
-        });
-      }
-    },
-    { scope: containerRef }
-  );
 
   return (
     <section
@@ -74,40 +38,44 @@ export function WhatOurClientsSee() {
       <div className="container px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
-          <div ref={headerRef} className="text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="font-mono text-4xl font-bold tracking-tight sm:text-5xl text-[var(--landing-text)] mb-6">
-              Τι βλέπουν οι πελάτες μας
+              <TextReveal type="words" className="inline-block">Τι βλέπουν οι πελάτες μας</TextReveal>
             </h2>
-            <p className="font-sans text-[var(--landing-text)]/80 text-lg md:text-xl leading-relaxed">
-              Αποτελέσματα που μιλούν από μόνα τους.
-            </p>
+            <SectionReveal delay={0.3}>
+              <p className="font-sans text-[var(--landing-text)]/80 text-lg md:text-xl leading-relaxed">
+                Αποτελέσματα που μιλούν από μόνα τους.
+              </p>
+            </SectionReveal>
           </div>
 
           {/* Testimonials Grid */}
-          <div
-            ref={testimonialsRef}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="relative p-8 bg-white/60 backdrop-blur-md rounded-3xl border border-[var(--landing-secondary)]/50 shadow-lg"
+              <SectionReveal 
+                key={index} 
+                delay={index * 0.1}
+                className="h-full"
               >
-                <span className="absolute -top-6 left-6 text-8xl text-[var(--landing-secondary)]/50 font-serif opacity-50 block h-10 leading-none select-none">
-                  “
-                </span>
-                <p className="font-sans relative z-10 text-lg italic text-[var(--landing-text)] font-medium leading-relaxed">
-                  {testimonial.quote}
-                </p>
-                <div className="mt-6 pt-6 border-t border-[var(--landing-secondary)]/30 text-right">
-                  <p className="font-mono font-semibold text-[var(--landing-text)]">
-                    {testimonial.name}
+                <div
+                  className="relative p-8 bg-white/60 backdrop-blur-md rounded-3xl border border-[var(--landing-secondary)]/50 shadow-lg h-full flex flex-col justify-between hover:shadow-2xl transition-all duration-500"
+                >
+                  <span className="absolute -top-6 left-6 text-8xl text-[var(--landing-secondary)]/50 font-serif opacity-50 block h-10 leading-none select-none">
+                    “
+                  </span>
+                  <p className="font-sans relative z-10 text-lg italic text-[var(--landing-text)] font-medium leading-relaxed mb-6">
+                    {testimonial.quote}
                   </p>
-                  <p className="font-sans text-sm text-[var(--landing-text)]/70">
-                    {testimonial.role}
-                  </p>
+                  <div className="mt-6 pt-6 border-t border-[var(--landing-secondary)]/30 text-right">
+                    <p className="font-mono font-semibold text-[var(--landing-text)]">
+                      {testimonial.name}
+                    </p>
+                    <p className="font-sans text-sm text-[var(--landing-text)]/70">
+                      {testimonial.role}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </SectionReveal>
             ))}
           </div>
         </div>

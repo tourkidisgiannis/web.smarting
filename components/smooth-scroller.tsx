@@ -2,11 +2,7 @@
 
 import { ReactNode, useRef, useEffect } from "react";
 import Lenis from "lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap-setup";
 
 interface SmoothScrollerProps {
   children: ReactNode;
@@ -17,13 +13,13 @@ export function SmoothScroller({ children }: SmoothScrollerProps) {
 
   useGSAP(() => {
     const lenis = new Lenis({
-      duration: 1, // Slightly faster duration
+      duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      touchMultiplier: 1.5, // Reduced from 2 for better touch control
-      lerp: 0.1, // Added lerp for smoother interpolation
+      touchMultiplier: 1.5,
+      lerp: 0.1,
     });
 
     lenisRef.current = lenis;
@@ -47,14 +43,23 @@ export function SmoothScroller({ children }: SmoothScrollerProps) {
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      const anchor = target?.closest<HTMLAnchorElement>('a[href^="#"]');
+      const anchor = target?.closest<HTMLAnchorElement>('a[href*="#"]');
 
       if (!anchor) return;
 
       const href = anchor.getAttribute("href");
-      if (!href || href === "#") return;
+      if (!href) return;
 
-      const targetElement = document.querySelector(href);
+      // Handle both "#section" and "/#section"
+      const isHomePage = window.location.pathname === "/";
+      const isHashLink = href.startsWith("#") || (href.startsWith("/#") && isHomePage);
+
+      if (!isHashLink) return;
+
+      const targetId = href.split("#")[1];
+      if (!targetId) return;
+
+      const targetElement = document.getElementById(targetId);
 
       if (!(targetElement instanceof HTMLElement)) return;
       if (!lenisRef.current) return;
@@ -63,7 +68,8 @@ export function SmoothScroller({ children }: SmoothScrollerProps) {
 
       lenisRef.current.scrollTo(targetElement, {
         offset: -80,
-        duration: 1.2,
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       });
     };
 

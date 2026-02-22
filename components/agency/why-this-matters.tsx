@@ -86,7 +86,7 @@ export function WhyThisMatters() {
               Για επαγγελματίες, η πρώτη εντύπωση δεν επιτρέπει περιθώρια
               σφάλματος.
             </h2>
-            <p className="font-sans text-[var(--landing-text)]/80 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+            <p className="font-sans text-[var(--landing-text)] text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
               Οι πελάτες σας δεν επιλέγουν απλώς μια υπηρεσία· αναζητούν τη
               βεβαιότητα ότι εμπιστεύονται τον κατάλληλο άνθρωπο.
             </p>

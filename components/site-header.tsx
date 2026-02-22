@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { MagneticLink } from "@/components/ui/magnetic-link";
@@ -29,18 +30,24 @@ import {
 const navItems = [
   { href: "/#services", label: "Υπηρεσίες", icon: Wrench },
   { href: "/#ui-ux", label: "Λύσεις", icon: Palette },
-  { href: "/#why-matters", label: "Γιατί", icon: Heart },
-  { href: "/#clients-see", label: "Πελάτες", icon: Users },
   { href: "/#demos", label: "Demos", icon: Monitor },
   { href: "/#contact", label: "Επικοινωνία", icon: Mail },
 ];
 
 export function SiteHeader() {
   const [hasLoaded, setHasLoaded] = useState(false);
+  const pathname = usePathname();
+  const isDemoPage = pathname?.startsWith("/demos");
 
   useEffect(() => {
-    setHasLoaded(true);
+    // Check if component has mounted
+    const timeout = setTimeout(() => {
+      setHasLoaded(true);
+    }, 0);
+    return () => clearTimeout(timeout);
   }, []);
+
+  if (isDemoPage) return null;
 
   return (
     <NavbarHide>

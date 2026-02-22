@@ -5,7 +5,7 @@ import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Link from "next/link"
-import {  ChefHat, Star, MapPin, Phone, Instagram, Facebook, Twitter, Calendar, Menu, X } from "lucide-react"
+import {  Home, ChefHat, Star, MapPin, Phone, Instagram, Facebook, Twitter, Calendar, Menu, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -64,15 +64,19 @@ export function RestaurantDemoView() {
   return (
     <div ref={containerRef} className="min-h-screen bg-[#1c1c1c] text-orange-50 font-serif selection:bg-orange-500 selection:text-white">
       {/* Nav */}
-      <nav className="fixed top-14 left-0 w-full z-40 bg-[#1c1c1c]/90 backdrop-blur-md border-b border-orange-500/20">
-         <div className="container flex items-center justify-between h-20">
+      <nav className="sticky top-0 left-0 w-full z-40 bg-[#1c1c1c]/90 backdrop-blur-md border-b border-orange-500/20">
+         <div className="container flex h-20 items-center justify-between">
             <div className="flex items-center gap-2 font-bold text-2xl tracking-widest uppercase text-orange-400">
                 <ChefHat className="h-8 w-8" />
-                <span>Gusto</span>
+                <span className="leading-none">Gusto</span>
             </div>
             
             {/* Desktop Nav */}
-            <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest text-orange-100/80 font-sans">
+            <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest text-orange-100/80 font-sans items-center">
+                <Link href="/#demos" className="text-orange-400 font-bold border-r border-orange-500/20 pr-8 flex items-center gap-2">
+                  <Home size={18} />
+                  ΠΙΣΩ
+                </Link>
                 <Link href="#about" className="hover:text-orange-400 transition-colors">Φιλοσοφια</Link>
                 <Link href="#menu" className="hover:text-orange-400 transition-colors">Μενού</Link>
                 <Link href="#reviews" className="hover:text-orange-400 transition-colors">Κριτικες</Link>
@@ -85,9 +89,21 @@ export function RestaurantDemoView() {
                 </Button>
 
                 {/* Mobile Menu Toggle */}
-                <button className="md:hidden text-orange-400" onClick={toggleMenu}>
-                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                <div className="flex items-center gap-2 md:hidden">
+                  <Link 
+                    href="/#demos" 
+                    className="flex items-center justify-center p-2 text-orange-400 hover:bg-orange-400/10 rounded-full transition-colors" 
+                    aria-label="Back to Agency"
+                  >
+                    <Home size={24} />
+                  </Link>
+                  <button 
+                    className="flex items-center justify-center p-2 text-orange-400 hover:bg-orange-400/10 rounded-full transition-colors" 
+                    onClick={toggleMenu}
+                  >
+                      {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                  </button>
+                </div>
             </div>
          </div>
 
@@ -126,11 +142,11 @@ export function RestaurantDemoView() {
                Ένα γαστρονομικό ταξίδι στην καρδιά της Ιταλίας, με φρέσκα υλικά, πάθος και σεβασμό στην κληρονομιά μας.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center font-sans">
-               <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-black font-bold uppercase tracking-widest px-10 h-14 rounded-none text-lg">
-                  Δείτε το Μενού
+               <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-black font-black uppercase tracking-widest px-10 h-14 rounded-none text-lg border-none" asChild>
+                  <Link href="#menu">Δείτε το Μενού</Link>
                </Button>
-               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black font-bold uppercase tracking-widest px-10 h-14 rounded-none text-lg">
-                  Κρατησεις
+               <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-black font-black uppercase tracking-widest px-10 h-14 rounded-none text-lg transition-colors" asChild>
+                  <Link href="#reservations">Κρατησεις</Link>
                </Button>
             </div>
          </div>
@@ -217,7 +233,7 @@ export function RestaurantDemoView() {
               </div>
               
               <div className="text-center mt-16 font-sans">
-                  <Button variant="outline" className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-black rounded-none px-8 py-6 h-auto text-lg uppercase tracking-widest">
+                  <Button variant="outline" className="bg-transparent border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-black rounded-none px-8 py-6 h-auto text-lg uppercase tracking-widest transition-colors">
                       Δείτε ολο τον Κατάλογο
                   </Button>
               </div>
@@ -251,38 +267,38 @@ export function RestaurantDemoView() {
       <section id="reservations" className="py-24 bg-orange-500 relative">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           <div className="container relative z-10">
-              <div className="bg-[#1c1c1c] max-w-4xl mx-auto p-8 md:p-16 shadow-2xl">
+              <div className="bg-[#1c1c1c] max-w-4xl mx-auto p-8 md:p-16 shadow-2xl border border-orange-500/10">
                   <div className="text-center mb-12">
                       <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Κάντε Κράτηση</h2>
-                      <p className="text-orange-400 font-sans">Εξασφαλίστε το τραπέζι σας για μια αξέχαστη βραδιά.</p>
+                      <p className="text-orange-200 font-sans text-lg">Εξασφαλίστε το τραπέζι σας για μια αξέχαστη βραδιά.</p>
                   </div>
 
                   <form className="space-y-6 font-sans">
                       <div className="grid md:grid-cols-2 gap-6">
                           <div className="space-y-2">
-                              <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">Ονομα</label>
-                              <Input className="bg-[#232323] border-gray-700 text-white h-12 rounded-none focus:border-orange-500" placeholder="Το όνομά σας" />
+                              <label className="text-sm font-bold text-gray-100 uppercase tracking-wider">Ονομα</label>
+                              <Input className="bg-[#2a2a2a] border-gray-600 text-white h-12 rounded-none focus:border-orange-500 placeholder:text-gray-400" placeholder="Το όνομά σας" />
                           </div>
                           <div className="space-y-2">
-                              <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">Τηλεφωνο</label>
-                              <Input className="bg-[#232323] border-gray-700 text-white h-12 rounded-none focus:border-orange-500" placeholder="6912345678" />
+                              <label className="text-sm font-bold text-gray-100 uppercase tracking-wider">Τηλεφωνο</label>
+                              <Input className="bg-[#2a2a2a] border-gray-600 text-white h-12 rounded-none focus:border-orange-500 placeholder:text-gray-400" placeholder="6912345678" />
                           </div>
                       </div>
                       
                       <div className="grid md:grid-cols-3 gap-6">
                           <div className="space-y-2">
-                               <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">Ημερομηνια</label>
+                               <label className="text-sm font-bold text-gray-100 uppercase tracking-wider">Ημερομηνια</label>
                                <div className="relative">
-                                  <Input type="date" className="bg-[#232323] border-gray-700 text-white h-12 rounded-none focus:border-orange-500" />
+                                  <Input type="date" className="bg-[#2a2a2a] border-gray-600 text-white h-12 rounded-none focus:border-orange-500 color-scheme-dark" />
                                </div>
                           </div>
                           <div className="space-y-2">
-                               <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">Ωρα</label>
+                               <label className="text-sm font-bold text-gray-100 uppercase tracking-wider">Ωρα</label>
                                <Select>
-                                  <SelectTrigger className="bg-[#232323] border-gray-700 text-white h-12 rounded-none w-full">
+                                  <SelectTrigger className="bg-[#2a2a2a] border-gray-600 text-white h-12 rounded-none w-full focus:ring-orange-500">
                                       <SelectValue placeholder="Επιλέξτε ώρα" />
                                   </SelectTrigger>
-                                  <SelectContent className="bg-[#232323] border-gray-700 text-white">
+                                  <SelectContent className="bg-[#1c1c1c] border-gray-700 text-white">
                                       <SelectItem value="19:00">19:00</SelectItem>
                                       <SelectItem value="20:00">20:00</SelectItem>
                                       <SelectItem value="21:00">21:00</SelectItem>
@@ -291,12 +307,12 @@ export function RestaurantDemoView() {
                                </Select>
                           </div>
                           <div className="space-y-2">
-                               <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">Ατομα</label>
+                               <label className="text-sm font-bold text-gray-100 uppercase tracking-wider">Ατομα</label>
                                <Select>
-                                  <SelectTrigger className="bg-[#232323] border-gray-700 text-white h-12 rounded-none w-full">
+                                  <SelectTrigger className="bg-[#2a2a2a] border-gray-600 text-white h-12 rounded-none w-full focus:ring-orange-500">
                                       <SelectValue placeholder="2 Άτομα" />
                                   </SelectTrigger>
-                                  <SelectContent className="bg-[#232323] border-gray-700 text-white">
+                                  <SelectContent className="bg-[#1c1c1c] border-gray-700 text-white">
                                       <SelectItem value="2">2 Άτομα</SelectItem>
                                       <SelectItem value="4">4 Άτομα</SelectItem>
                                       <SelectItem value="6">6 Άτομα</SelectItem>
@@ -307,11 +323,11 @@ export function RestaurantDemoView() {
                       </div>
 
                       <div className="space-y-2">
-                          <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">Ειδικα Αιτηματα</label>
-                          <Textarea className="bg-[#232323] border-gray-700 text-white min-h-[100px] rounded-none focus:border-orange-500" placeholder="Αλλεργίες, γενέθλια, κλπ." />
+                          <label className="text-sm font-bold text-gray-100 uppercase tracking-wider">Ειδικα Αιτηματα</label>
+                          <Textarea className="bg-[#2a2a2a] border-gray-600 text-white min-h-[100px] rounded-none focus:border-orange-500 placeholder:text-gray-400" placeholder="Αλλεργίες, γενέθλια, κλπ." />
                       </div>
 
-                      <Button className="w-full bg-orange-500 hover:bg-orange-600 text-black font-bold h-14 uppercase tracking-widest text-lg rounded-none mt-4">
+                      <Button className="w-full bg-orange-500 hover:bg-orange-600 text-black font-black h-14 uppercase tracking-widest text-lg rounded-none mt-4 transition-colors border-none">
                           Επιβεβαιωση Κρατησης
                       </Button>
                   </form>
@@ -360,12 +376,12 @@ export function RestaurantDemoView() {
                   <p className="mb-4">Μείνετε ενημερωμένοι για τα νέα μενού και τις εκδηλώσεις μας.</p>
                   <div className="flex gap-2">
                        <Input placeholder="Email" className="bg-[#232323] border-gray-700 h-10 rounded-none" />
-                       <Button className="bg-orange-500 hover:bg-orange-600 text-black h-10 rounded-none">OK</Button>
+                       <Button className="bg-orange-500 hover:bg-orange-600 text-black h-10 rounded-none border-none">OK</Button>
                   </div>
               </div>
           </div>
           <div className="container pt-8 border-t border-gray-800 text-center flex flex-col md:flex-row justify-between items-center gap-4">
-               <p>&copy; 2024 Gusto Ristorante. All rights reserved.</p>
+               <p>&copy; 2026 Gusto Ristorante. All rights reserved.</p>
                <div className="flex gap-6">
                    <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
                    <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>

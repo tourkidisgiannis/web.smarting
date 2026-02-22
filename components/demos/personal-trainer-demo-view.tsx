@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Link from "next/link"
 import { 
+  Home,
   Activity, 
   Timer, 
   Trophy, 
@@ -132,13 +133,17 @@ export function PersonalTrainerDemoView() {
     <div ref={containerRef} className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-lime-400 selection:text-black">
       
       {/* Navigation - Sticky below master header */}
-      <nav className="sticky top-14 left-0 w-full z-40 bg-neutral-950/90 backdrop-blur-md border-b border-white/5 py-4">
+      <nav className="sticky top-0 left-0 w-full z-40 bg-neutral-950/90 backdrop-blur-md border-b border-white/5 py-4 transition-all duration-300">
         <div className="container flex justify-between items-center">
             <Link href="#" className="text-xl md:text-2xl font-black tracking-tighter uppercase italic">
                 Iron<span className="text-lime-400">Forge</span>
             </Link>
 
-            <div className="hidden md:flex gap-8 font-bold text-xs tracking-widest uppercase">
+            <div className="hidden md:flex gap-8 font-bold text-xs tracking-widest uppercase items-center">
+                <Link href="/#demos" className="text-lime-400 border-r border-white/10 pr-8 flex items-center gap-2">
+                  <Home size={14} />
+                  BACK
+                </Link>
                 <Link href="#about" className="hover:text-lime-400 transition-colors">Φιλοσοφία</Link>
                 <Link href="#programs" className="hover:text-lime-400 transition-colors">Προγράμματα</Link>
                 <Link href="#pricing" className="hover:text-lime-400 transition-colors">Τιμές</Link>
@@ -147,19 +152,25 @@ export function PersonalTrainerDemoView() {
                 <Link href="#contact" className="hover:text-lime-400 transition-colors">Επικοινωνία</Link>
             </div>
 
-            <Button size="icon" variant="ghost" className="md:hidden text-white hover:text-lime-400" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                {isMenuOpen ? <X /> : <Menu />}
-            </Button>
+            <div className="flex items-center gap-2 md:hidden">
+                <Link href="/#demos" className="flex items-center justify-center text-lime-400 p-2 hover:bg-white/5 rounded-full transition-colors" aria-label="Back to Agency">
+                    <Home size={24} />
+                </Link>
+                <Button 
+                    size="icon" 
+                    variant="ghost" 
+                    className="flex items-center justify-center text-white hover:text-lime-400 hover:bg-white/5 rounded-full transition-colors" 
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </Button>
+            </div>
         </div>
-      </nav>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-            <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-                <Button size="icon" variant="ghost" className="absolute top-6 right-6 text-white" onClick={() => setIsMenuOpen(false)}>
-                    <X size={32} />
-                </Button>
-                <div className="flex flex-col gap-8 text-center text-3xl font-black uppercase italic">
+            <div className="md:hidden absolute top-full left-0 w-full bg-neutral-950 border-b border-white/10 p-8 flex flex-col gap-6 animate-in slide-in-from-top-5 shadow-2xl">
+                <div className="flex flex-col gap-4 text-lg font-bold uppercase italic text-center items-center">
                     <Link href="#about" onClick={() => setIsMenuOpen(false)}>Φιλοσοφία</Link>
                     <Link href="#programs" onClick={() => setIsMenuOpen(false)}>Προγράμματα</Link>
                     <Link href="#pricing" onClick={() => setIsMenuOpen(false)}>Τιμές</Link>
@@ -167,8 +178,10 @@ export function PersonalTrainerDemoView() {
                     <Link href="#faq" onClick={() => setIsMenuOpen(false)}>FAQ</Link>
                     <Link href="#contact" onClick={() => setIsMenuOpen(false)}>Επικοινωνία</Link>
                 </div>
+                <Button className="bg-lime-400 text-black w-full mt-4 font-black uppercase italic border-none">Γίνε Μέλος</Button>
             </div>
         )}
+      </nav>
 
       {/* Hero Section */}
       <section className="relative min-h-[calc(100vh-56px)] flex items-center justify-center overflow-hidden">
@@ -187,11 +200,11 @@ export function PersonalTrainerDemoView() {
                     Elite personal training για όσους αρνούνται τη μετριότητα. Ξεπέρασε τα όριά σου.
                 </p>
                 <div className="hero-sub pt-8 flex flex-col sm:flex-row gap-4">
-                    <Button className="bg-lime-400 text-black hover:bg-lime-500 h-16 px-10 rounded-none font-black uppercase tracking-widest text-lg transition-transform hover:scale-105 active:scale-95">
-                        Ξεκίνησε Τώρα
+                    <Button className="bg-lime-400 text-black hover:bg-lime-500 h-16 px-10 rounded-none font-black uppercase tracking-widest text-lg transition-transform hover:scale-105 active:scale-95" asChild>
+                        <Link href="#contact">Ξεκινήσε Τώρα</Link>
                     </Button>
-                    <Button variant="outline" className="text-white border-white bg-black/40 backdrop-blur-md hover:bg-white hover:text-black h-16 px-10 rounded-none font-black uppercase tracking-widest text-lg transition-all">
-                        Success Stories
+                    <Button variant="outline" className="text-white border-white bg-black/40 backdrop-blur-md hover:bg-white hover:text-black h-16 px-10 rounded-none font-black uppercase tracking-widest text-lg transition-all" asChild>
+                        <Link href="#results">Success Stories</Link>
                     </Button>
                 </div>
             </div>
@@ -259,6 +272,8 @@ export function PersonalTrainerDemoView() {
                        <Image 
                         src="https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=2787&auto=format&fit=crop" 
                         alt="Trainer" 
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-1000"
                        />
                        <div className="absolute inset-0 border-b-[12px] border-r-[12px] border-lime-400 pointer-events-none"></div>
@@ -451,8 +466,12 @@ export function PersonalTrainerDemoView() {
                   {/* Result 1 */}
                   <div className="group relative result-card">
                       <div className="grid grid-cols-2 gap-2 aspect-[16/9] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2940&auto=format&fit=crop" alt="Before" className="w-full h-full object-cover" />
-                          <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2ec617?q=80&w=2940&auto=format&fit=crop" alt="After" className="w-full h-full object-cover" />
+                          <div className="relative w-full h-full">
+                            <Image src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2940&auto=format&fit=crop" alt="Before" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+                          </div>
+                          <div className="relative w-full h-full">
+                            <Image src="https://images.unsplash.com/photo-1583454110551-21f2fa2ec617?q=80&w=2940&auto=format&fit=crop" alt="After" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+                          </div>
                       </div>
                       <div className="mt-8 flex justify-between items-end border-b border-white/10 pb-6">
                           <div>
@@ -466,8 +485,12 @@ export function PersonalTrainerDemoView() {
                    {/* Result 2 */}
                   <div className="group relative md:translate-y-24 result-card">
                       <div className="grid grid-cols-2 gap-2 aspect-[16/9] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                          <img src="https://images.unsplash.com/photo-1548690312-e3b507d17a12?q=80&w=2787&auto=format&fit=crop" alt="Before" className="w-full h-full object-cover" />
-                          <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=2940&auto=format&fit=crop" alt="After" className="w-full h-full object-cover" />
+                          <div className="relative w-full h-full">
+                            <Image src="https://images.unsplash.com/photo-1548690312-e3b507d17a12?q=80&w=2787&auto=format&fit=crop" alt="Before" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+                          </div>
+                          <div className="relative w-full h-full">
+                            <Image src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=2940&auto=format&fit=crop" alt="After" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+                          </div>
                       </div>
                       <div className="mt-8 flex justify-between items-end border-b border-white/10 pb-6">
                           <div>
@@ -552,14 +575,14 @@ export function PersonalTrainerDemoView() {
                     <h2 className="text-6xl md:text-9xl font-black uppercase italic mb-8 leading-[0.8] tracking-tighter">
                         Ετοιμος για <br/> <span className="text-lime-400 underline decoration-[12px] decoration-lime-400/20 underline-offset-8">Μάχη;</span>
                     </h2>
-                    <p className="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
+                    <p className="text-neutral-200 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
                         Οι θέσεις για Personal Coaching είναι εξαιρετικά περιορισμένες. Δουλεύω μόνο με 10 άτομα ταυτόχρονα για να εγγυηθώ την απόλυτη προσοχή μου. Αν είσαι έτοιμος, κάνε την αίτησή σου.
                     </p>
                </div>
                
                <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto" suppressHydrationWarning>
-                   <Input placeholder="ΤΟ ΟΝΟΜΑ ΣΟΥ" className="bg-neutral-900 border-neutral-800 h-16 text-center font-black uppercase tracking-widest text-lg focus:border-lime-400 focus:ring-0 rounded-none border-2 placeholder:text-neutral-700" suppressHydrationWarning />
-                   <Input placeholder="ΤΟ EMAIL ΣΟΥ" className="bg-neutral-900 border-neutral-800 h-16 text-center font-black uppercase tracking-widest text-lg focus:border-lime-400 focus:ring-0 rounded-none border-2 placeholder:text-neutral-700" suppressHydrationWarning />
+                   <Input placeholder="ΤΟ ΟΝΟΜΑ ΣΟΥ" className="bg-neutral-900 border-neutral-800 h-16 text-center font-black uppercase tracking-widest text-lg focus:border-lime-400 focus:ring-0 rounded-none border-2 placeholder:text-neutral-500" suppressHydrationWarning />
+                   <Input placeholder="ΤΟ EMAIL ΣΟΥ" className="bg-neutral-900 border-neutral-800 h-16 text-center font-black uppercase tracking-widest text-lg focus:border-lime-400 focus:ring-0 rounded-none border-2 placeholder:text-neutral-500" suppressHydrationWarning />
                    <div className="md:col-span-2">
                         <Button className="w-full h-20 bg-lime-400 hover:bg-lime-500 text-black font-black text-2xl uppercase italic tracking-[0.2em] rounded-none shadow-[0_20px_40px_rgba(163,230,53,0.2)] transition-all transform hover:-translate-y-1 active:translate-y-0">
                             Υποβολή Αίτησης
@@ -583,7 +606,7 @@ export function PersonalTrainerDemoView() {
       
       <footer className="py-16 bg-black text-center text-neutral-600 border-t border-white/5 uppercase text-xs tracking-[0.4em] font-black">
             <div className="container">
-                <p className="mb-4">&copy; 2025 IronForge Training Systems • Crafted by Smarting</p>
+                <p className="mb-4">&copy; 2026 IronForge Training Systems • Crafted by Smarting</p>
                 <div className="flex justify-center gap-8 text-[10px] text-neutral-700">
                     <a href="#" className="hover:text-lime-400 transition-colors">Privacy Policy</a>
                     <a href="#" className="hover:text-lime-400 transition-colors">Terms of Service</a>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SmoothScroller } from "@/components/smooth-scroller";
+import { CustomCursor } from "@/components/custom-cursor";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
 
@@ -12,12 +13,12 @@ import businessInfo from "./mocks/business-info.json";
 
 const archivo = Archivo({
   variable: "--font-archivo",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 export const metadata: Metadata = {
@@ -154,6 +155,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SmoothScroller>
+            <CustomCursor />
             <SiteHeader />
             {children}
             <Toaster position="top-right" />

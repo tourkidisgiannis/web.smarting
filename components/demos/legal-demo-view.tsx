@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { 
-  Scale, Menu, X, Briefcase, FileText, 
+  Home, Scale, Menu, X, Briefcase, FileText, 
   MapPin, Phone, Mail, ArrowRight, Gavel, 
   Shield, CheckCircle2, Trophy, Linkedin, Twitter, Facebook 
 } from "lucide-react";
@@ -15,23 +15,50 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const practiceAreas = [
+  { 
+    icon: Briefcase, 
+    title: "Εταιρικό Δίκαιο", 
+    desc: "Συγχωνεύσεις, εξαγορές και ολοκληρωμένη εταιρική διακυβέρνηση για παγκόσμιες οντότητες." 
+  },
+  { 
+    icon: Gavel, 
+    title: "Αστικό Δίκαιο", 
+    desc: "Επιθετική επίλυση διαφορών και δικαστική εκπροσώπηση για σύνθετες εμπορικές υποθέσεις." 
+  },
+  { 
+    icon: Shield, 
+    title: "Ποινικό Δίκαιο", 
+    desc: "Προστασία δικαιωμάτων και φήμης σε έρευνες οικονομικού εγκλήματος και σοβαρών κακουργημάτων." 
+  },
+  { 
+    icon: FileText, 
+    title: "Διαχείριση Περιουσίας", 
+    desc: "Στρατηγική διατήρηση πλούτου και σχεδιασμός διαδοχής για άτομα υψηλής καθαρής περιουσίας." 
+  },
+  { 
+    icon: Trophy, 
+    title: "Πνευματική Ιδιοκτησία", 
+    desc: "Διασφάλιση καινοτομιών, εμπορικών σημάτων και δημιουργικών περιουσιακών στοιχείων στον ψηφιακό κόσμο." 
+  },
+  { 
+    icon: Scale, 
+    title: "Εργατικό Δίκαιο", 
+    desc: "Πλοήγηση σε πολύπλοκους κανονισμούς εργασίας και συμβάσεις αποζημίωσης στελεχών." 
+  },
+];
 
 export function LegalDemoView() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useGSAP(
-    (context) => {
-      const q = (selector: string) =>
-        context.selector
-          ? context.selector(selector)
-          : containerRef.current?.querySelectorAll(selector) ?? [];
-
+    () => {
       // Hero Animations
-      const result = gsap.from(q(".hero-animate"), {
+      gsap.from(".hero-animate", {
         y: 60,
         opacity: 0,
         duration: 1.2,
@@ -40,46 +67,34 @@ export function LegalDemoView() {
         delay: 0.2
       });
 
-      // Section Titles
-      gsap.utils.toArray<HTMLElement>(q(".section-header")).forEach((header) => {
+      // Section Titles reveal
+      gsap.utils.toArray<HTMLElement>(".section-header").forEach((header) => {
         gsap.from(header, {
           scrollTrigger: {
             trigger: header,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
+            start: "top 90%",
           },
-          y: 40,
+          y: 30,
           opacity: 0,
           duration: 0.8,
           ease: "power3.out",
         });
       });
 
-      // Staggered Cards (Practice Areas)
-      gsap.from(q(".practice-card"), {
+      // Cards Grid Animation - Disabled for visibility verification
+      /*
+      gsap.from(".practice-card", {
         scrollTrigger: {
-          trigger: q(".practice-section")[0],
-          start: "top 75%",
+          trigger: ".practice-grid",
+          start: "top 95%",
         },
-        y: 60,
+        y: 30,
         opacity: 0,
-        duration: 0.8,
         stagger: 0.1,
-        ease: "power3.out",
+        duration: 1,
+        ease: "power3.out"
       });
-
-      // Feature List
-      gsap.from(q(".feature-item"), {
-        scrollTrigger: {
-          trigger: q(".why-us-section")[0],
-          start: "top 70%",
-        },
-        x: -40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out",
-      });
+      */
     },
     { scope: containerRef }
   );
@@ -96,7 +111,7 @@ export function LegalDemoView() {
     <div ref={containerRef} className="min-h-screen bg-[#0a0f1d] text-white font-sans selection:bg-[#d4af37] selection:text-[#0a0f1d]">
       
       {/* Navigation */}
-      <nav className="fixed w-full top-0 z-50 border-b border-white/5 bg-[#0a0f1d]/80 backdrop-blur-md transition-all duration-300">
+      <nav className="sticky top-0 z-40 w-full border-b border-white/5 bg-[#0a0f1d]/80 backdrop-blur-md transition-all duration-300">
         <div className="container flex items-center justify-between h-24">
           
           {/* Logo */}
@@ -112,6 +127,10 @@ export function LegalDemoView() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-10 text-xs font-medium tracking-widest uppercase text-gray-400">
+            <Link href="/#demos" className="text-[#d4af37] font-bold border-r border-white/10 pr-10 flex items-center gap-2">
+              <Home size={16} />
+              ΠΙΣΩ
+            </Link>
             {[
               { label: 'Τομείς', id: 'expertise' }, 
               { label: 'Δικηγόροι', id: 'attorneys' }, 
@@ -137,23 +156,32 @@ export function LegalDemoView() {
             
             <Button 
               onClick={() => scrollToSection('contact')}
-              className="hidden md:flex bg-[#d4af37] hover:bg-[#b5952f] text-[#0a0f1d] font-medium tracking-wide rounded-none h-12 px-8 uppercase text-xs"
+              className="hidden md:flex bg-[#d4af37] hover:bg-[#b5952f] text-[#0a0f1d] font-medium tracking-wide rounded-none h-12 px-8 uppercase text-xs border-none"
             >
               Αξιολόγηση Υπόθεσης
             </Button>
 
-            <button 
-              className="md:hidden text-[#d4af37] p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X /> : <Menu />}
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              <Link 
+                href="/#demos" 
+                className="flex items-center justify-center p-2 text-[#d4af37] hover:bg-[#d4af37]/10 rounded-sm transition-colors"
+                aria-label="Back to Agency"
+              >
+                <Home size={24} />
+              </Link>
+              <button 
+                className="flex items-center justify-center text-[#d4af37] p-2 hover:bg-[#d4af37]/10 rounded-sm transition-colors"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-24 left-0 w-full bg-[#0a0f1d] border-b border-white/10 p-8 flex flex-col gap-6 animate-in slide-in-from-top-5">
+          <div className="md:hidden absolute top-24 left-0 w-full bg-[#0a0f1d] border-b border-white/10 p-8 flex flex-col gap-6 shadow-xl animate-in slide-in-from-top-5">
             {[
               { label: 'Τομείς', id: 'expertise' }, 
               { label: 'Δικηγόροι', id: 'attorneys' }, 
@@ -168,7 +196,7 @@ export function LegalDemoView() {
                 {item.label}
               </button>
             ))}
-            <Button className="bg-[#d4af37] text-[#0a0f1d] w-full mt-4">Κλείστε Ραντεβού</Button>
+            <Button className="bg-[#d4af37] text-[#0a0f1d] w-full mt-4 border-none">Κλείστε Ραντεβού</Button>
           </div>
         )}
       </nav>
@@ -181,6 +209,7 @@ export function LegalDemoView() {
             src="/demos/legal/hero-bg.png"
             alt="Supreme Court Architecture"
             fill
+            sizes="100vw"
             className="object-cover opacity-20 scale-105"
             priority
           />
@@ -208,7 +237,7 @@ export function LegalDemoView() {
             <div className="hero-animate flex flex-wrap gap-5 pt-4">
               <Button 
                 size="lg" 
-                className="h-14 px-8 bg-[#d4af37] hover:bg-[#e6c248] text-black font-bold tracking-wide rounded-sm uppercase text-xs shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-300"
+                className="h-14 px-8 bg-[#d4af37] hover:bg-[#e6c248] text-black font-bold tracking-wide rounded-sm uppercase text-xs shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-300 border-none"
                 onClick={() => scrollToSection('contact')}
               >
                 Δωρεάν Αξιολόγηση
@@ -256,69 +285,42 @@ export function LegalDemoView() {
       </section>
 
       {/* Expertise / Practice Areas */}
-      <section id="expertise" className="practice-section py-24 lg:py-32 relative">
-        <div className="container">
-          <div className="section-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20 border-b border-white/5 pb-8">
+      <section id="expertise" className="practice-section py-24 lg:py-32 relative bg-[#0a0f1d] border-y border-white/5">
+        <div className="container relative z-10">
+          <div className="section-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20 border-b border-white/5 pb-8 relative z-10">
             <div>
               <span className="text-[#d4af37] uppercase tracking-widest text-xs font-bold mb-3 block">Νομική Εξειδίκευση</span>
-              <h2 className="text-3xl md:text-5xl font-serif font-bold">Τομείς Δικαίου</h2>
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-white">Τομείς Δικαίου</h2>
             </div>
-            <p className="text-gray-400 max-w-md text-sm leading-relaxed">
+            <p className="text-gray-200 max-w-md text-sm leading-relaxed">
               Ειδικευόμαστε σε νομικές υποθέσεις υψηλών απαιτήσεων που απαιτούν εξελιγμένη στρατηγική και αδιάκοπη αφοσίωση.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { 
-                icon: Briefcase, 
-                title: "Εταιρικό Δίκαιο", 
-                desc: "Συγχωνεύσεις, εξαγορές και ολοκληρωμένη εταιρική διακυβέρνηση για παγκόσμιες οντότητες." 
-              },
-              { 
-                icon: Gavel, 
-                title: "Αστικό Δίκαιο", 
-                desc: "Επιθετική επίλυση διαφορών και δικαστική εκπροσώπηση για σύνθετες εμπορικές υποθέσεις." 
-              },
-              { 
-                icon: Shield, 
-                title: "Ποινικό Δίκαιο", 
-                desc: "Προστασία δικαιωμάτων και φήμης σε έρευνες οικονομικού εγκλήματος και σοβαρών κακουργημάτων." 
-              },
-              { 
-                icon: FileText, 
-                title: "Διαχείριση Περιουσίας", 
-                desc: "Στρατηγική διατήρηση πλούτου και σχεδιασμός διαδοχής για άτομα υψηλής καθαρής περιουσίας." 
-              },
-              { 
-                icon: Trophy, 
-                title: "Πνευματική Ιδιοκτησία", 
-                desc: "Διασφάλιση καινοτομιών, εμπορικών σημάτων και δημιουργικών περιουσιακών στοιχείων στον ψηφιακό κόσμο." 
-              },
-              { 
-                icon: Scale, 
-                title: "Εργατικό Δίκαιο", 
-                desc: "Πλοήγηση σε πολύπλοκους κανονισμούς εργασίας και συμβάσεις αποζημίωσης στελεχών." 
-              },
-            ].map((area, i) => (
-              <Card key={i} className="practice-card bg-[#0f1629]/50 border-white/5 hover:bg-[#d4af37] hover:text-[#0a0f1d] transition-all duration-500 group rounded-sm overflow-hidden">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-[#d4af37]/10 group-hover:bg-[#0a0f1d]/10 rounded-sm flex items-center justify-center mb-4 transition-colors">
-                    <area.icon size={24} className="text-[#d4af37] group-hover:text-[#0a0f1d]" />
+          <div className="practice-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+            {practiceAreas.map((area, i) => {
+              const Icon = area.icon;
+              return (
+                <div 
+                  key={i} 
+                  className="practice-card bg-[#0f1629] border border-white/10 p-8 flex flex-col h-full rounded-sm group hover:bg-[#d4af37] transition-colors duration-300"
+                >
+                  <div className="w-12 h-12 bg-[#d4af37]/10 group-hover:bg-[#0a0f1d]/10 rounded-sm flex items-center justify-center mb-6 transition-colors">
+                    <Icon size={24} className="text-[#d4af37] group-hover:text-[#0a0f1d]" />
                   </div>
-                  <CardTitle className="text-xl text-white group-hover:text-[#0a0f1d]/70 font-serif">{area.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-400 group-hover:text-[#0a0f1d]/70 text-sm leading-relaxed mb-6 transition-colors">
+                  <h3 className="text-2xl text-white group-hover:text-[#0a0f1d] font-serif transition-colors leading-tight mb-4">
+                    {area.title}
+                  </h3>
+                  <p className="text-gray-300 group-hover:text-[#0a0f1d]/90 text-base leading-relaxed mb-8 transition-colors">
                     {area.desc}
                   </p>
-                  <div className="flex items-center gap-2 text-[#d4af37] group-hover:text-[#0a0f1d] text-xs font-bold uppercase tracking-wider">
+                  <div className="flex items-center gap-2 text-[#d4af37] group-hover:text-[#0a0f1d] text-xs font-bold uppercase tracking-wider mt-auto">
                     <span>Περισσότερα</span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -332,6 +334,7 @@ export function LegalDemoView() {
                 src="/demos/legal/meeting.png"
                 alt="Lawyers meeting"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
              />
              <div className="absolute inset-0 bg-[#d4af37]/10 mix-blend-overlay" />
@@ -342,7 +345,7 @@ export function LegalDemoView() {
              <div className="section-header mb-12">
                <span className="text-[#d4af37] uppercase tracking-widest text-xs font-bold mb-3 block">Γιατί Εμάς</span>
                <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6">Ανελέητη Δίωξη <br/> της Δικαιοσύνης</h2>
-               <p className="text-gray-400 text-lg leading-relaxed">
+               <p className="text-gray-200 text-lg leading-relaxed">
                  Δεν ερμηνεύουμε απλά το νόμο, τον αξιοποιούμε προς όφελός σας. 
                  Η εταιρεία μας βασίζεται στην αριστεία, την ακεραιότητα και τα νικηφόρα αποτελέσματα.
                </p>
@@ -382,7 +385,7 @@ export function LegalDemoView() {
            <div className="section-header text-center max-w-3xl mx-auto mb-20">
               <span className="text-[#d4af37] uppercase tracking-widest text-xs font-bold mb-3 block">Η Ομάδα Μας</span>
               <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6">Κορυφαίοι Νομικοί</h2>
-              <p className="text-gray-400">
+              <p className="text-gray-300">
                 Οι εταίροι μας φέρνουν δεκαετίες συνδυασμένης εμπειρίας από κορυφαίες δικηγορικές εταιρείες και εισαγγελικά γραφεία.
               </p>
            </div>
@@ -411,11 +414,12 @@ export function LegalDemoView() {
                 },
               ].map((member, i) => (
                 <div key={i} className="group relative">
-                   <div className="aspect-[3/4] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 rounded-sm">
+                   <div className="relative aspect-[3/4] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 rounded-sm">
                       <Image 
                         src={member.img} 
                         alt={member.name}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1d] via-transparent to-transparent opacity-80" />
@@ -443,7 +447,7 @@ export function LegalDemoView() {
               <div className="section-header">
                 <span className="text-[#d4af37] uppercase tracking-widest text-xs font-bold mb-3 block">Επικοινωνία</span>
                 <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6">Ελάτε σε Επαφή</h2>
-                <p className="text-gray-400 leading-relaxed">
+                <p className="text-gray-200 leading-relaxed">
                   Κάθε υπόθεση έχει χρονικά περιθώρια. Μην περιμένετε για να προστατεύσετε τα δικαιώματά σας. 
                   Επικοινωνήστε μαζί μας σήμερα για μια εμπιστευτική συμβουλευτική.
                 </p>
@@ -454,8 +458,8 @@ export function LegalDemoView() {
                     <Phone className="text-[#d4af37] mt-1" />
                     <div>
                       <h4 className="text-lg font-serif font-bold text-white mb-1">Τηλέφωνο</h4>
-                      <p className="text-gray-400">+30 210 123 4567</p>
-                      <p className="text-gray-500 text-xs mt-1">Δευ-Παρ, 9πμ - 6μμ</p>
+                      <p className="text-gray-300">+30 210 123 4567</p>
+                      <p className="text-gray-400 text-xs mt-1">Δευ-Παρ, 9πμ - 6μμ</p>
                     </div>
                  </div>
 
@@ -463,7 +467,7 @@ export function LegalDemoView() {
                     <MapPin className="text-[#d4af37] mt-1" />
                     <div>
                       <h4 className="text-lg font-serif font-bold text-white mb-1">Γραφείο</h4>
-                      <p className="text-gray-400">Λεωφόρος Κηφισίας 100<br/>Αθήνα, 115 26</p>
+                      <p className="text-gray-300">Λεωφόρος Κηφισίας 100<br/>Αθήνα, 115 26</p>
                     </div>
                  </div>
 
@@ -471,7 +475,7 @@ export function LegalDemoView() {
                     <Mail className="text-[#d4af37] mt-1" />
                     <div>
                       <h4 className="text-lg font-serif font-bold text-white mb-1">Email</h4>
-                      <p className="text-gray-400">contact@blackwood.gr</p>
+                      <p className="text-gray-300">contact@blackwood.gr</p>
                     </div>
                  </div>
               </div>
@@ -482,22 +486,22 @@ export function LegalDemoView() {
                <form className="space-y-6">
                  <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                       <label className="text-xs uppercase tracking-widest text-gray-500">Όνομα</label>
+                       <label className="text-xs uppercase tracking-widest text-gray-300">Όνομα</label>
                        <Input className="bg-[#0f1629] border-white/10 h-12 focus:border-[#d4af37] rounded-sm" />
                     </div>
                     <div className="space-y-2">
-                       <label className="text-xs uppercase tracking-widest text-gray-500">Επώνυμο</label>
+                       <label className="text-xs uppercase tracking-widest text-gray-300">Επώνυμο</label>
                        <Input className="bg-[#0f1629] border-white/10 h-12 focus:border-[#d4af37] rounded-sm" />
                     </div>
                  </div>
                  
                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest text-gray-500">Email</label>
+                    <label className="text-xs uppercase tracking-widest text-gray-300">Email</label>
                     <Input className="bg-[#0f1629] border-white/10 h-12 focus:border-[#d4af37] rounded-sm" />
                  </div>
 
                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest text-gray-500">Τύπος Υπόθεσης</label>
+                    <label className="text-xs uppercase tracking-widest text-gray-300">Τύπος Υπόθεσης</label>
                     <select className="w-full bg-[#0f1629] border border-white/10 h-12 px-3 focus:outline-none focus:border-[#d4af37] text-white rounded-sm text-sm">
                        <option>Εταιρικό Δίκαιο</option>
                        <option>Ποινικό Δίκαιο</option>
@@ -507,7 +511,7 @@ export function LegalDemoView() {
                  </div>
 
                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest text-gray-500">Λεπτομέρειες</label>
+                    <label className="text-xs uppercase tracking-widest text-gray-300">Λεπτομέρειες</label>
                     <Textarea className="bg-[#0f1629] border-white/10 min-h-[120px] focus:border-[#d4af37] rounded-sm" placeholder="Περιγράψτε σύντομα το ζήτημα..." />
                  </div>
 
@@ -598,7 +602,7 @@ export function LegalDemoView() {
           
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
              <div className="text-gray-600 text-xs uppercase tracking-wider">
-                © 2025 Blackwood Law. Με επιφύλαξη παντός δικαιώματος.
+                © 2026 Blackwood Law. Με επιφύλαξη παντός δικαιώματος.
              </div>
              
              <div className="flex gap-6">

@@ -61,55 +61,39 @@ export function SiteFooter() {
           {/* Column 2: Quick Links */}
           <div>
             <h3 className="text-[var(--deep-space-blue-900)] font-bold mb-4 md:mb-6 text-base md:text-lg">
-              Υπηρεσίες
+              Γρήγοροι Σύνδεσμοι
             </h3>
             <ul className="space-y-2 md:space-y-3 text-[var(--deep-space-blue-900)] text-sm">
               <li>
                 <Link
-                  href="#services"
+                  href="/#services"
                   className="hover:text-[var(--blue-green-600)] transition-colors block py-1"
                 >
-                  Το Πρόβλημα
+                  Υπηρεσίες
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#ui-ux"
+                  href="/#ui-ux"
                   className="hover:text-[var(--blue-green-600)] transition-colors block py-1"
                 >
-                  Τα Οφέλη
+                  Λύσεις
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#why-matters"
+                  href="/#demos"
                   className="hover:text-[var(--blue-green-600)] transition-colors block py-1"
                 >
-                  Γιατί Είναι Σημαντικό
+                  Demos
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#clients-see"
+                  href="/#contact"
                   className="hover:text-[var(--blue-green-600)] transition-colors block py-1"
                 >
-                  Αποτελέσματα
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#who-we-are"
-                  className="hover:text-[var(--blue-green-600)] transition-colors block py-1"
-                >
-                  Ποιοι Είμαστε
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#demos"
-                  className="hover:text-[var(--blue-green-600)] transition-colors block py-1"
-                >
-                  Παραδείγματα
+                  Επικοινωνία
                 </Link>
               </li>
             </ul>

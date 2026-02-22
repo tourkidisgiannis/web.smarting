@@ -1,9 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap-setup";
 import {
   MessageSquare,
   PenTool,
@@ -12,8 +10,8 @@ import {
   SearchCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-gsap.registerPlugin(ScrollTrigger);
+import { TextReveal } from "@/components/animations/text-reveal";
+import { SectionReveal } from "@/components/animations/section-reveal";
 
 const steps = [
   {
@@ -69,34 +67,6 @@ export function OnboardingTimeline() {
         { height: "0%" },
         { height: "100%", ease: "none", duration: 1 }
       );
-
-      // Animate the cards appearing as the line passes them
-      steps.forEach((_, index) => {
-        gsap.from(`.timeline-step-${index}`, {
-          scrollTrigger: {
-            trigger: `.timeline-step-${index}`,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 0,
-          y: 50,
-          x: index % 2 === 0 ? -30 : 30, // Alternate entry direction
-          duration: 0.6,
-          ease: "power2.out",
-        });
-
-        // Animate the dot popping in
-        gsap.from(`.timeline-dot-${index}`, {
-          scrollTrigger: {
-            trigger: `.timeline-step-${index}`,
-            start: "top 85%",
-          },
-          scale: 0,
-          duration: 0.4,
-          delay: 0.2,
-          ease: "back.out(1.7)",
-        });
-      });
     },
     { scope: containerRef }
   );
@@ -104,17 +74,19 @@ export function OnboardingTimeline() {
   return (
     <section
       ref={containerRef}
-      className="py-32 container px-6 relative overflow-hidden "
+      className="py-32 px-6 relative overflow-hidden bg-white dark:bg-slate-950 z-30"
     >
       <div className="container mx-auto max-w-5xl relative z-10">
         <div className="text-center mb-24">
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4 text-[var(--deep-space-blue-900)]">
-            Πώς Δουλεύουμε
+            <TextReveal type="words" className="inline-block">Πώς Δουλεύουμε</TextReveal>
           </h2>
-          <p className="text-[var(--deep-space-blue-900)] text-lg max-w-2xl mx-auto">
-            Απλά βήματα, χωρίς μπερδεμένους όρους. Από την πρώτη καλημέρα μέχρι
-            το τελικό αποτέλεσμα.
-          </p>
+          <SectionReveal delay={0.3}>
+            <p className="text-[var(--deep-space-blue-900)] text-lg max-w-2xl mx-auto">
+              Απλά βήματα, χωρίς μπερδεμένους όρους. Από την πρώτη καλημέρα μέχρι
+              το τελικό αποτέλεσμα.
+            </p>
+          </SectionReveal>
         </div>
 
         <div className="relative">
@@ -127,7 +99,7 @@ export function OnboardingTimeline() {
             className="absolute left-4 md:left-1/2 top-0 w-[2px] bg-gradient-to-b from-[var(--blue-green-500)] to-[var(--deep-space-blue-500)] md:-translate-x-1/2 origin-top"
           />
 
-          <div className="     space-y-12 md:space-y-24">
+          <div className="space-y-12 md:space-y-24">
             {steps.map((step, index) => (
               <div
                 key={index}
@@ -137,7 +109,9 @@ export function OnboardingTimeline() {
                 )}
               >
                 {/* Content Side */}
-                <div
+                <SectionReveal 
+                  delay={0.1}
+                  y={30}
                   className={cn(
                     "flex-1 w-full md:w-auto pl-12 md:pl-0",
                     `timeline-step-${index}`
@@ -163,16 +137,21 @@ export function OnboardingTimeline() {
                       {step.description}
                     </p>
                   </div>
-                </div>
+                </SectionReveal>
 
                 {/* Center Point */}
                 <div className="absolute left-4 md:left-1/2 -translate-x-1/2 flex items-center justify-center">
-                  <div
+                  <SectionReveal
+                    trigger="onScroll"
+                    scale={0}
+                    y={0}
                     className={cn(
                       `timeline-dot-${index}`,
                       "w-8 h-8 rounded-full bg-white border-4 border-[var(--blue-green-500)] z-10 shadow-lg shadow-[var(--blue-green-500)]/50"
                     )}
-                  />
+                  >
+                    <div className="w-full h-full" />
+                  </SectionReveal>
                 </div>
 
                 {/* Empty Side for Grid Balance */}

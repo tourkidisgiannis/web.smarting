@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import {
+  Home,
   TrendingUp,
   Users,
   PieChart,
@@ -24,13 +25,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
-// ... (inside the component return)
-
-<p className="text-slate-300 leading-relaxed">
-  &quot;Η συνεργασία με τη StratEx ήταν καθοριστική. Μέσα σε 12 μήνες, αυξήσαμε
-  την κερδοφορία μας κατά 40% και μειώσαμε τα λειτουργικά έξοδα κατά 25%.&quot;
-</p>;
 
 export function ConsultantDemoView() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -71,16 +65,20 @@ export function ConsultantDemoView() {
       className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-emerald-200 selection:text-emerald-900"
     >
       {/* Nav */}
-      <nav className="bg-white/90 border-b border-slate-200 sticky top-14 z-40 backdrop-blur-md">
+      <nav className="bg-white/90 border-b border-slate-200 sticky top-0 z-40 backdrop-blur-md">
         <div className="container flex h-20 items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-2xl text-emerald-800 tracking-tight">
             <TrendingUp className="h-8 w-8" />
-            <span className="hidden sm:inline">StratEx Partners</span>
-            <span className="sm:hidden">StratEx</span>
+            <span className="hidden sm:inline leading-none">StratEx Partners</span>
+            <span className="sm:hidden leading-none">StratEx</span>
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex gap-8 font-medium text-slate-600">
+          <div className="hidden md:flex gap-8 font-medium text-slate-600 items-center">
+            <Link href="/#demos" className="text-emerald-700 font-bold border-r border-slate-200 pr-8 flex items-center gap-2">
+              <Home className="h-4 w-4" />
+              ΠΙΣΩ
+            </Link>
             <Link
               href="#services"
               className="hover:text-emerald-700 transition-colors"
@@ -108,20 +106,32 @@ export function ConsultantDemoView() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Button className="hidden md:flex bg-emerald-800 hover:bg-emerald-900 text-white rounded-none px-6 font-bold">
+            <Button className="hidden md:flex bg-emerald-800 hover:bg-emerald-900 text-white rounded-none px-6 font-bold border-none">
               Δωρεάν Ανάλυση
             </Button>
 
             {/* Mobile Menu Toggle */}
-            <button className="md:hidden text-slate-900" onClick={toggleMenu}>
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              <Link 
+                href="/#demos" 
+                className="flex items-center justify-center p-2 text-emerald-700 hover:bg-emerald-50 rounded-full transition-colors" 
+                aria-label="Back to Agency"
+              >
+                <Home size={24} />
+              </Link>
+              <button 
+                className="flex items-center justify-center p-2 text-slate-900 hover:bg-slate-100 rounded-full transition-colors" 
+                onClick={toggleMenu}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 py-8 px-6 flex flex-col gap-6 shadow-xl animate-in slide-in-from-top-5">
+          <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 py-8 px-6 flex flex-col gap-6 shadow-xl animate-in slide-in-from-top-5">
             <div className="flex flex-col gap-4 font-medium text-slate-600">
               <Link
                 href="#services"
@@ -168,7 +178,7 @@ export function ConsultantDemoView() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
               </span>
-              Διαθέσιμοι για νέα projects Q1 2025
+              Διαθέσιμοι για νέα projects Q1 2026
             </div>
             <h1 className="consult-hero text-5xl lg:text-7xl font-bold tracking-tighter text-slate-900 leading-[1.1]">
               Οδηγούμε την <span className="text-emerald-700">Ανάπτυξη</span>{" "}
@@ -182,16 +192,18 @@ export function ConsultantDemoView() {
             <div className="consult-hero flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                className="rounded-none bg-slate-900 text-white hover:bg-slate-800 h-14 px-8 text-lg"
+                className="rounded-none bg-slate-900 text-white hover:bg-slate-800 h-14 px-8 text-lg border-none"
+                asChild
               >
-                Οι Υπηρεσίες μας
+                <Link href="#services">Οι Υπηρεσίες μας</Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-none border-slate-300 h-14 px-8 text-lg hover:bg-slate-50 text-slate-900"
+                className="rounded-none border-slate-300 h-14 px-8 text-lg hover:bg-slate-50 text-slate-900 bg-transparent transition-colors"
+                asChild
               >
-                Case Studies
+                <Link href="#process">Case Studies</Link>
               </Button>
             </div>
 
@@ -737,7 +749,7 @@ export function ConsultantDemoView() {
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p>
-              &copy; 2024 StratEx Partners. Με επιφύλαξη παντός δικαιώματος.
+              &copy; 2026 StratEx Partners. Με επιφύλαξη παντός δικαιώματος.
             </p>
             <p className="text-slate-600">Designed for Excellence.</p>
           </div>
