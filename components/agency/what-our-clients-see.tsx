@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap-setup";
 import { TextReveal } from "@/components/animations/text-reveal";
 import { SectionReveal } from "@/components/animations/section-reveal";
 
@@ -40,7 +39,9 @@ export function WhatOurClientsSee() {
           {/* Header Section */}
           <div className="text-center mb-16">
             <h2 className="font-mono text-4xl font-bold tracking-tight sm:text-5xl text-[var(--landing-text)] mb-6">
-              <TextReveal type="words" className="inline-block">Τι βλέπουν οι πελάτες μας</TextReveal>
+              <TextReveal type="words" className="inline-block">
+                Τι βλέπουν οι πελάτες μας
+              </TextReveal>
             </h2>
             <SectionReveal delay={0.3}>
               <p className="font-sans text-[var(--landing-text)]/80 text-lg md:text-xl leading-relaxed">
@@ -52,14 +53,8 @@ export function WhatOurClientsSee() {
           {/* Testimonials Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <SectionReveal 
-                key={index} 
-                delay={index * 0.1}
-                className="h-full"
-              >
-                <div
-                  className="relative p-8 bg-white/60 backdrop-blur-md rounded-3xl border border-[var(--landing-secondary)]/50 shadow-lg h-full flex flex-col justify-between hover:shadow-2xl transition-all duration-500"
-                >
+              <SectionReveal key={index} delay={index * 0.1} className="h-full">
+                <div className="relative p-8 bg-white/60 backdrop-blur-md rounded-3xl border border-[var(--landing-secondary)]/50 shadow-lg h-full flex flex-col justify-between hover:shadow-2xl transition-all duration-500">
                   <span className="absolute -top-6 left-6 text-8xl text-[var(--landing-secondary)]/50 font-serif opacity-50 block h-10 leading-none select-none">
                     “
                   </span>

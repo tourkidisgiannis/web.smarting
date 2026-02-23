@@ -150,8 +150,8 @@ export default function RootLayout({
         <div className="noise" />
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
+          defaultTheme="light" // Explicitly set default theme to light
+          enableSystem={false} // Disable system theme detection
           disableTransitionOnChange
         >
           <SmoothScroller>

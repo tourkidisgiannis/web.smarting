@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap-setup";
+import { gsap, useGSAP } from "@/lib/gsap-setup";
 import {
   MessageSquare,
   PenTool,
@@ -65,26 +65,28 @@ export function OnboardingTimeline() {
       tl.fromTo(
         lineRef.current,
         { height: "0%" },
-        { height: "100%", ease: "none", duration: 1 }
+        { height: "100%", ease: "none", duration: 1 },
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
     <section
       ref={containerRef}
-      className="py-32 px-6 relative overflow-hidden bg-white dark:bg-slate-950 z-30"
+      className="py-32 px-6 relative overflow-hidden bg-white  z-30"
     >
       <div className="container mx-auto max-w-5xl relative z-10">
         <div className="text-center mb-24">
-          <h2 className="text-4xl md:text-5xl tracking-tight mb-4 text-[var(--deep-space-blue-900)]">
-            <TextReveal type="words" className="inline-block">Πώς Δουλεύουμε</TextReveal>
+          <h2 className="font-mono text-4xl md:text-5xl tracking-tight mb-4 text-[var(--deep-space-blue-900)]">
+            <TextReveal type="words" className="inline-block">
+              Πώς Δουλεύουμε
+            </TextReveal>
           </h2>
           <SectionReveal delay={0.3}>
-            <p className="text-[var(--deep-space-blue-900)] text-lg max-w-2xl mx-auto">
-              Απλά βήματα, χωρίς μπερδεμένους όρους. Από την πρώτη καλημέρα μέχρι
-              το τελικό αποτέλεσμα.
+            <p className="font-sans text-[var(--deep-space-blue-900)] text-lg max-w-2xl mx-auto">
+              Απλά βήματα, χωρίς μπερδεμένους όρους. Από την πρώτη καλημέρα
+              μέχρι το τελικό αποτέλεσμα.
             </p>
           </SectionReveal>
         </div>
@@ -105,35 +107,35 @@ export function OnboardingTimeline() {
                 key={index}
                 className={cn(
                   "timeline-step relative flex flex-col md:flex-row items-center gap-8 md:gap-16",
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                  index % 2 === 0 ? "md:flex-row-reverse" : "",
                 )}
               >
                 {/* Content Side */}
-                <SectionReveal 
+                <SectionReveal
                   delay={0.1}
                   y={30}
                   className={cn(
                     "flex-1 w-full md:w-auto pl-12 md:pl-0",
-                    `timeline-step-${index}`
+                    `timeline-step-${index}`,
                   )}
                 >
                   <div
                     className={cn(
                       "p-8 rounded-3xl border border-[var(--sky-blue-light-200)] bg-white/40 backdrop-blur-md shadow-xl hover:border-[var(--blue-green-500)]/[0.3] transition-colors",
-                      index % 2 === 0 ? "md:text-left" : "md:text-right"
+                      index % 2 === 0 ? "md:text-left" : "md:text-right",
                     )}
                   >
-                    <h3 className="text-2xl mb-3 flex items-center md:inline-flex gap-3">
+                    <h3 className="font-mono text-2xl mb-3 flex items-center md:inline-flex gap-3">
                       <span
                         className={cn(
-                          "inline-flex items-center justify-center w-8 h-8 rounded-full bg-[var(--blue-green-100)] text-[var(--blue-green-600)]"
+                          "inline-flex items-center justify-center w-8 h-8 rounded-full bg-[var(--blue-green-100)] text-[var(--blue-green-600)]",
                         )}
                       >
                         <step.icon size={16} />
                       </span>
                       {step.title}
                     </h3>
-                    <p className="text-[var(--deep-space-blue-900)] leading-relaxed">
+                    <p className="font-sans text-[var(--deep-space-blue-900)] leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -147,7 +149,7 @@ export function OnboardingTimeline() {
                     y={0}
                     className={cn(
                       `timeline-dot-${index}`,
-                      "w-8 h-8 rounded-full bg-white border-4 border-[var(--blue-green-500)] z-10 shadow-lg shadow-[var(--blue-green-500)]/50"
+                      "w-8 h-8 rounded-full bg-white border-4 border-[var(--blue-green-500)] z-10 shadow-lg shadow-[var(--blue-green-500)]/50",
                     )}
                   >
                     <div className="w-full h-full" />

@@ -12,7 +12,7 @@ import { OnboardingTimeline } from "@/components/agency/OnboardingTimeline";
 
 export default function Home() {
   return (
-    <main className="grainy-bg flex min-h-screen flex-col items-center bg-white dark:bg-slate-950">
+    <main className="grainy-bg flex min-h-screen flex-col items-center bg-white">
       <div className="w-full relative overflow-x-hidden">
         <Hero />
         <WhyThisMatters />

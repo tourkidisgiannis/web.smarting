@@ -147,7 +147,7 @@ export function DemoGrid() {
               Sector Specific Demos
             </span>
           </SectionReveal>
-          <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter">
+          <h2 className="font-mono text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter">
             <TextReveal type="words" className="inline-block">
               Λύσεις για τον
             </TextReveal>{" "}
@@ -160,7 +160,7 @@ export function DemoGrid() {
             </TextReveal>
           </h2>
           <SectionReveal delay={0.4}>
-            <p className="text-slate-400 text-xl md:text-2xl font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="font-sans text-slate-400 text-xl md:text-2xl font-medium max-w-2xl mx-auto leading-relaxed">
               Εξερευνήστε πώς προσαρμόζουμε την τεχνολογία και το design{" "}
               <br className="hidden md:block" />
               στις ανάγκες της δικής σας επιχείρησης.
@@ -214,11 +214,11 @@ export function DemoGrid() {
                       <demo.icon className="h-8 w-8" />
                     </div>
 
-                    <h3 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
+                    <h3 className="font-mono text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
                       {demo.title}
                     </h3>
 
-                    <p className="text-xl md:text-3xl text-white/70 font-medium mb-12 leading-relaxed">
+                    <p className="font-sans text-xl md:text-3xl text-white/70 font-medium mb-12 leading-relaxed">
                       {demo.description}
                     </p>
 

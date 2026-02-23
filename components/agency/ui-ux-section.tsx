@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap-setup";
+import { gsap, useGSAP } from "@/lib/gsap-setup";
 import { Eye, Heart, Zap, Users } from "lucide-react";
 import { TextReveal } from "@/components/animations/text-reveal";
 import { SectionReveal } from "@/components/animations/section-reveal";
@@ -77,10 +77,14 @@ export function UIUXSection() {
         });
 
         if (progressBar) {
-          tl.to(progressBar, {
-            scaleX: 1,
-            ease: "none",
-          }, 0);
+          tl.to(
+            progressBar,
+            {
+              scaleX: 1,
+              ease: "none",
+            },
+            0,
+          );
         }
 
         // Staggered entrance for cards inside the horizontal scroll
@@ -117,11 +121,15 @@ export function UIUXSection() {
 
       return () => mm.revert();
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   return (
-    <section id="ui-ux" ref={sectionRef} className="relative overflow-hidden py-32 bg-slate-50/30">
+    <section
+      id="ui-ux"
+      ref={sectionRef}
+      className="relative overflow-hidden py-32 bg-slate-50/30"
+    >
       <div
         ref={triggerRef}
         className="md:h-screen flex flex-col justify-center"
@@ -134,15 +142,23 @@ export function UIUXSection() {
               </span>
             </SectionReveal>
             <h2 className="font-mono text-4xl font-bold tracking-tight sm:text-6xl md:text-7xl text-[var(--landing-text)]">
-              <TextReveal type="words" className="inline-block">Τι αλλάζει όταν η ιστοσελίδα</TextReveal> <br />
-              <TextReveal type="words" className="inline-block text-[var(--landing-primary)]">δουλεύει υπέρ σας</TextReveal>
+              <TextReveal type="words" className="inline-block">
+                Τι αλλάζει όταν η ιστοσελίδα
+              </TextReveal>{" "}
+              <br />
+              <TextReveal
+                type="words"
+                className="inline-block text-[var(--landing-primary)]"
+              >
+                δουλεύει υπέρ σας
+              </TextReveal>
             </h2>
           </div>
         </div>
 
         {/* Progress Bar (Desktop only) */}
         <div className="hidden md:block fixed bottom-12 left-1/2 -translate-x-1/2 w-64 h-1 bg-slate-200 rounded-full overflow-hidden z-20">
-          <div 
+          <div
             ref={progressBarRef}
             className="h-full bg-[var(--landing-primary)] origin-left scale-x-0"
           />
@@ -164,20 +180,20 @@ export function UIUXSection() {
                   <div className="absolute top-0 right-0 p-8 opacity-5 text-8xl font-black font-mono select-none">
                     0{index + 1}
                   </div>
-                  
+
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="mb-8 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--landing-primary)]/5 text-[var(--landing-primary)] group-hover:bg-[var(--landing-primary)] group-hover:text-white transition-all duration-500">
                       <benefit.icon className="h-8 w-8" strokeWidth={1.5} />
                     </div>
-                    
+
                     <h3 className="font-mono text-3xl font-bold text-[var(--landing-text)] mb-6 group-hover:text-[var(--landing-primary)] transition-colors duration-300">
                       {benefit.title}
                     </h3>
-                    
+
                     <p className="font-sans text-xl text-[var(--landing-text)] leading-relaxed mb-10 flex-grow">
                       {benefit.description}
                     </p>
-                    
+
                     <div className="pt-8 border-t border-slate-50 mt-auto">
                       <span className="font-sans inline-flex items-center text-sm font-bold text-[var(--landing-primary)] bg-[var(--landing-primary)]/5 px-4 py-2 rounded-full border border-[var(--landing-primary)]/10">
                         ✨ {benefit.benefit}

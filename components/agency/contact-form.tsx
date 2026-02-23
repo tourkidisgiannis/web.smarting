@@ -93,7 +93,7 @@ export function ContactForm() {
 
       return () => mm.revert();
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -122,21 +122,24 @@ export function ContactForm() {
         throw new Error(data.error || data.message || "Something went wrong");
       }
 
-      toast.success("Το μήνυμα στάλθηκε επιτυχώς!\nΘα επικοινωνήσουμε μαζί σας σύντομα.");
-      form.reset();
-    } catch (error: any) {
-      console.error("Submission error:", error);
-      toast.error(
-        error.message ||
-        "Υπήρξε πρόβλημα κατά την αποστολή του μηνύματος. Παρακαλώ δοκιμάστε ξανά."
+      toast.success(
+        "Το μήνυμα στάλθηκε επιτυχώς!\nΘα επικοινωνήσουμε μαζί σας σύντομα.",
       );
+      form.reset();
+    } catch (error: unknown) {
+      console.error("Submission error:", error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Υπήρξε πρόβλημα κατά την αποστολή του μηνύματος. Παρακαλώ δοκιμάστε ξανά.";
+      toast.error(errorMessage);
     }
   }
 
   const typewriterText = useTypewriter(
     "Ξεκινήστε χωρίς ρίσκο",
     70,
-    startTyping
+    startTyping,
   );
 
   return (
@@ -168,14 +171,14 @@ export function ContactForm() {
                 Ζητήστε Ιδιωτική Αξιολόγηση
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--deep-space-blue-900)] mb-4 min-h-[1.2em]">
+              <h2 className="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--deep-space-blue-900)] mb-4 min-h-[1.2em]">
                 {typewriterText}
                 <span className="animate-pulse text-[var(--blue-green-500)]">
                   |
                 </span>
               </h2>
 
-              <p className="text-[var(--deep-space-blue-900)] text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
+              <p className="font-sans text-[var(--deep-space-blue-900)] text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
                 Μια σύντομη, ιδιωτική αξιολόγηση της ιστοσελίδας σας. Χωρίς
                 δεσμεύσεις. Χωρίς περίπλοκες διαδικασίες.
               </p>

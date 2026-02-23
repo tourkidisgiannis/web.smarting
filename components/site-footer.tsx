@@ -1,29 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Github,
-  Twitter,
-  Linkedin,
-  Facebook,
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  Instagram,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/ui/logo";
 import businessInfo from "@/app/mocks/business-info.json";
 import { Card } from "./ui/card";
 
 export function SiteFooter() {
+  const serviceLinks = [
+    { href: "/services/seo", label: "Κυριαρχία SEO" },
+    { href: "/services/mobile-first", label: "Mobile First" },
+    { href: "/services/performance", label: "Performance" },
+    { href: "/services/ecommerce", label: "E-commerce" },
+    { href: "/services/custom-dev", label: "Custom Dev" },
+    { href: "/services/security", label: "Security" },
+  ];
+
   return (
     <footer className="relative z-50 border-t border-(--sky-blue-light-200) pb-8 pt-12 md:pb-12 md:pt-16">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 mb-8 md:mb-16">
           {/* Column 1: Company info */}
           <div className="space-y-6">
             <Logo
@@ -56,6 +54,25 @@ export function SiteFooter() {
                 </Link>
               </Button>
             </div>
+          </div>
+
+          {/* Column 2: Services */}
+          <div>
+            <h3 className="text-[var(--deep-space-blue-900)] font-bold mb-4 md:mb-6 text-base md:text-lg">
+              Υπηρεσίες
+            </h3>
+            <ul className="space-y-2 md:space-y-3 text-[var(--deep-space-blue-900)] text-sm">
+              {serviceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="hover:text-[var(--blue-green-600)] transition-colors block py-1"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Column 2: Quick Links */}
@@ -142,7 +159,7 @@ export function SiteFooter() {
                       ", " +
                       businessInfo?.address?.postalCode +
                       ", " +
-                      businessInfo?.address?.country
+                      businessInfo?.address?.country,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
