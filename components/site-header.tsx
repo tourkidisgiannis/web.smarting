@@ -15,12 +15,17 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 import { Menu, Palette, Monitor, Mail } from "lucide-react";
 
 const navItems = [
   { href: "/#ui-ux", label: "Λύσεις", icon: Palette },
-  { href: "/#demos", label: "Demos", icon: Monitor },
   { href: "/#contact", label: "Επικοινωνία", icon: Mail },
 ];
 
@@ -31,6 +36,15 @@ const serviceLinks = [
   { href: "/services/ecommerce", label: "E-commerce" },
   { href: "/services/custom-dev", label: "Custom Dev" },
   { href: "/services/security", label: "Security" },
+];
+
+const demoLinks = [
+  { href: "/demos/consultant", label: "Σύμβουλος" },
+  { href: "/demos/medical", label: "Ιατρικό" },
+  { href: "/demos/legal", label: "Νομικό" },
+  { href: "/demos/restaurant", label: "Εστιατόριο" },
+  { href: "/demos/personal-trainer", label: "Personal Trainer" },
+  { href: "/demos/creative", label: "Creative" },
 ];
 
 export function SiteHeader() {
@@ -106,6 +120,42 @@ export function SiteHeader() {
               </div>
             </div>
 
+            <div className="relative group">
+              <Link
+                href="/#demos"
+                className="relative group inline-flex items-center gap-2 cursor-pointer text-(--deep-space-blue-700) transition-colors hover:text-(--blue-green-700)"
+              >
+                <span className="relative z-10 text-(--deep-space-blue-900)">
+                  Demos
+                </span>
+                <span
+                  className="
+    absolute -inset-x-3 -inset-y-2
+    rounded-full
+    bg-[var(--blue-green-500)]
+    opacity-0 scale-75
+    transition-all duration-500
+    group-hover:opacity-100
+    group-hover:scale-100
+   
+  "
+                />
+              </Link>
+              <div className="pointer-events-none absolute left-1/2 top-full mt-4 w-[420px] -translate-x-1/2 rounded-[2rem] border border-(--sky-blue-light-200) bg-white/95 p-4 opacity-0 shadow-[0_20px_50px_rgba(12,26,75,0.18)] backdrop-blur-md transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 before:content-[''] before:absolute before:-top-6 before:left-0 before:right-0 before:h-6">
+                <div className="grid grid-cols-2 gap-2">
+                  {demoLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="rounded-2xl border border-(--sky-blue-light-200) bg-white/80 px-4 py-3 text-xs font-black uppercase tracking-[0.2em] text-(--deep-space-blue-900) transition-all hover:-translate-y-0.5 hover:border-(--blue-green-200) hover:text-(--blue-green-700) hover:shadow-[0_10px_24px_rgba(12,26,75,0.12)]"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {navItems.map((item) => (
               <MagneticLink
                 key={item.href}
@@ -148,39 +198,82 @@ export function SiteHeader() {
                 className="m-4 w-[calc(100%-2rem)] max-w-sm rounded-3xl border border-(--sky-blue-light-200) bg-white/90 p-0 shadow-[0_20px_60px_rgba(12,26,75,0.18)] backdrop-blur-md"
               >
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                <div className="p-6 pt-14">
+                <div className="p-6 pt-14 max-h-[calc(100dvh-7rem)] overflow-y-auto">
                   <nav className="flex flex-col gap-4">
-                    <div className="text-xs font-black uppercase tracking-[0.35em] text-(--deep-space-blue-700) text-center">
-                      Υπηρεσίες
-                    </div>
-                    {serviceLinks.map((link) => (
-                      <SheetClose asChild key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="cursor-pointer rounded-full border border-(--sky-blue-light-200) bg-white/80 px-6 py-3 text-lg font-black text-(--deep-space-blue-900) transition-all hover:-translate-y-0.5 hover:border-(--blue-green-200) hover:text-(--blue-green-700) hover:shadow-[0_10px_24px_rgba(12,26,75,0.12)] text-center tracking-tight"
-                        >
-                          {link.label}
-                        </Link>
-                      </SheetClose>
-                    ))}
+                    <Accordion type="multiple" className="w-full">
+                      <AccordionItem
+                        value="services"
+                        className="border-(--sky-blue-light-200)"
+                      >
+                        <AccordionTrigger className="text-sm font-black uppercase tracking-[0.35em] text-(--deep-space-blue-700) hover:no-underline">
+                          Υπηρεσίες
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col gap-3 pt-2">
+                            {serviceLinks.map((link) => (
+                              <SheetClose asChild key={link.href}>
+                                <Link
+                                  href={link.href}
+                                  className="cursor-pointer rounded-full border border-(--sky-blue-light-200) bg-white/80 px-5 py-3 text-base font-black text-(--deep-space-blue-900) transition-all hover:-translate-y-0.5 hover:border-(--blue-green-200) hover:text-(--blue-green-700) hover:shadow-[0_10px_24px_rgba(12,26,75,0.12)] text-center tracking-tight"
+                                >
+                                  {link.label}
+                                </Link>
+                              </SheetClose>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
 
-                    <div className="mt-4 text-xs font-black uppercase tracking-[0.35em] text-(--deep-space-blue-700) text-center">
-                      Πλοήγηση
-                    </div>
-                    {navItems.map((item) => {
-                      const IconComponent = item.icon;
-                      return (
-                        <SheetClose asChild key={item.href}>
-                          <Link
-                            href={item.href}
-                            className="cursor-pointer rounded-full border border-(--sky-blue-light-200) bg-white/80 px-6 py-4 text-2xl font-black text-(--deep-space-blue-900) transition-all hover:-translate-y-0.5 hover:border-(--blue-green-200) hover:text-(--blue-green-700) hover:shadow-[0_10px_24px_rgba(12,26,75,0.12)] text-center tracking-tight flex items-center justify-center gap-4"
-                          >
-                            <IconComponent className="h-8 w-8 text-(--blue-green-600)" />
-                            <span>{item.label}</span>
-                          </Link>
-                        </SheetClose>
-                      );
-                    })}
+                      <AccordionItem
+                        value="navigation"
+                        className="border-(--sky-blue-light-200)"
+                      >
+                        <AccordionTrigger className="text-sm font-black uppercase tracking-[0.35em] text-(--deep-space-blue-700) hover:no-underline">
+                          Πλοήγηση
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col gap-3 pt-2">
+                            {navItems.map((item) => {
+                              const IconComponent = item.icon;
+                              return (
+                                <SheetClose asChild key={item.href}>
+                                  <Link
+                                    href={item.href}
+                                    className="cursor-pointer rounded-full border border-(--sky-blue-light-200) bg-white/80 px-5 py-3 text-lg font-black text-(--deep-space-blue-900) transition-all hover:-translate-y-0.5 hover:border-(--blue-green-200) hover:text-(--blue-green-700) hover:shadow-[0_10px_24px_rgba(12,26,75,0.12)] text-center tracking-tight flex items-center justify-center gap-3"
+                                  >
+                                    <IconComponent className="h-6 w-6 text-(--blue-green-600)" />
+                                    <span>{item.label}</span>
+                                  </Link>
+                                </SheetClose>
+                              );
+                            })}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem
+                        value="demos"
+                        className="border-(--sky-blue-light-200)"
+                      >
+                        <AccordionTrigger className="text-sm font-black uppercase tracking-[0.35em] text-(--deep-space-blue-700) hover:no-underline">
+                          Demos
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col gap-3 pt-2">
+                            {demoLinks.map((link) => (
+                              <SheetClose asChild key={link.href}>
+                                <Link
+                                  href={link.href}
+                                  className="cursor-pointer rounded-full border border-(--sky-blue-light-200) bg-white/80 px-5 py-3 text-base font-black text-(--deep-space-blue-900) transition-all hover:-translate-y-0.5 hover:border-(--blue-green-200) hover:text-(--blue-green-700) hover:shadow-[0_10px_24px_rgba(12,26,75,0.12)] text-center tracking-tight"
+                                >
+                                  {link.label}
+                                </Link>
+                              </SheetClose>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
                   </nav>
                 </div>
               </SheetContent>

@@ -9,6 +9,7 @@ import { DemoGrid } from "@/components/agency/demo-grid";
 import { ContactForm } from "@/components/agency/contact-form";
 import { SiteFooter } from "@/components/site-footer";
 import { OnboardingTimeline } from "@/components/agency/OnboardingTimeline";
+import { MobileCtaBar } from "@/components/agency/mobile-cta-bar";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <OnboardingTimeline />
         <ContactForm />
       </div>
+      <MobileCtaBar />
       <SiteFooter />
     </main>
   );
